@@ -18,10 +18,16 @@ import {
   Sparkles,
   ShieldCheck,
   Award,
+  ExternalLink,
+  CalendarPlus,
+  Printer,
+  Copy,
+  MessageCircle,
 } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import VolunteerCertificateModal from '@/components/VolunteerCertificateModal';
 
 export default function EventDetailsPage() {
   const params = useParams();
@@ -33,6 +39,8 @@ export default function EventDetailsPage() {
   const [isJoined, setIsJoined] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showCertModal, setShowCertModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -102,10 +110,44 @@ export default function EventDetailsPage() {
   };
 
   const handleShare = () => {
+    if (typeof navigator !== 'undefined' && navigator.share && event) {
+      navigator
+        .share({
+          title: event.title,
+          text: `Join "${event.title}" on CareSphere - Community Social Development Platform!`,
+          url: window.location.href,
+        })
+        .catch(() => {
+          setShowShareModal(true);
+        });
+    } else {
+      setShowShareModal(true);
+    }
+  };
+
+  const copyToClipboard = () => {
     if (typeof window !== 'undefined') {
       navigator.clipboard.writeText(window.location.href);
       toast.success('Event link copied to clipboard!');
+      setShowShareModal(false);
     }
+  };
+
+  // Google Calendar Link Builder
+  const getGoogleCalendarUrl = (ev: IEvent) => {
+    const startDate = new Date(ev.eventDate);
+    const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3 hours duration
+
+    const formatGDate = (d: Date) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
+
+    const title = encodeURIComponent(ev.title);
+    const details = encodeURIComponent(
+      `${ev.description}\n\nOrganized by: ${ev.organizerName}\nPlatform: CareSphere Community Events`
+    );
+    const location = encodeURIComponent(ev.location);
+    const dates = `${formatGDate(startDate)}/${formatGDate(endDate)}`;
+
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
   };
 
   if (isLoading) {
@@ -291,11 +333,22 @@ export default function EventDetailsPage() {
 
                 {/* Join Action Button */}
                 {isJoined ? (
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 flex items-center justify-center gap-2">
                       <CheckCircle className="w-4 h-4 text-emerald-600" />
                       <span>You&apos;re Registered!</span>
                     </div>
+
+                    {/* Certificate Generator Button */}
+                    <button
+                      type="button"
+                      onClick={() => setShowCertModal(true)}
+                      className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 hover:bg-amber-200 border border-amber-300 dark:border-amber-800 flex items-center justify-center gap-2 transition-all shadow-sm"
+                    >
+                      <Award className="w-4 h-4 text-amber-600" />
+                      <span>View Volunteer Certificate</span>
+                    </button>
+
                     <p className="text-center text-[11px] text-slate-400">
                       View all your registrations in{' '}
                       <Link href="/joined-events" className="text-emerald-600 underline font-semibold">
@@ -315,6 +368,18 @@ export default function EventDetailsPage() {
                   </button>
                 )}
 
+                {/* Add to Google Calendar Action */}
+                <a
+                  href={getGoogleCalendarUrl(event)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-300 dark:border-slate-600 flex items-center justify-center gap-2 transition-colors shadow-sm"
+                >
+                  <CalendarPlus className="w-4 h-4 text-emerald-500" />
+                  <span>Add to Google Calendar</span>
+                  <ExternalLink className="w-3 h-3 text-slate-400" />
+                </a>
+
                 {!user && (
                   <p className="text-[11px] text-center text-slate-500 dark:text-slate-400">
                     Signing in is required to register as an active volunteer.
@@ -325,7 +390,75 @@ export default function EventDetailsPage() {
           </div>
         </div>
       </div>
+
+      {/* Volunteer Certificate Modal */}
+      {showCertModal && (
+        <VolunteerCertificateModal
+          event={event}
+          userName={user?.name || 'Dedicated Volunteer'}
+          onClose={() => setShowCertModal(false)}
+        />
+      )}
+
+      {/* Social Share Modal Fallback */}
+      {showShareModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Share2 className="w-4 h-4 text-emerald-500" />
+                Share Event with Community
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowShareModal(false)}
+                className="p-1 rounded-full text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Spread the word about &ldquo;{event.title}&rdquo; to gather more volunteers!
+            </p>
+
+            <div className="space-y-2">
+              <a
+                href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
+                  `Check out this community volunteer drive: ${event.title} - ${typeof window !== 'undefined' ? window.location.href : ''}`
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full flex items-center gap-2.5 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-800 dark:text-emerald-300 text-xs font-bold transition-colors"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-600" />
+                <span>Share via WhatsApp</span>
+              </a>
+
+              <a
+                href={`https://x.com/intent/tweet?text=${encodeURIComponent(
+                  `Volunteering for "${event.title}" on CareSphere! Join us to make a difference:`
+                )}&url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full flex items-center gap-2.5 p-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-bold transition-colors"
+              >
+                <span className="w-4 h-4 font-black text-center">𝕏</span>
+                <span>Broadcast on X</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={copyToClipboard}
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300"
+              >
+                <Copy className="w-3.5 h-3.5" />
+                <span>Copy Direct Link</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-

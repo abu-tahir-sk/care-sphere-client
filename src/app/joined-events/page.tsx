@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useAuth } from '@/context/AuthContext';
-import { IJoinedEventItem, ApiResponse } from '@/types';
+import { IJoinedEventItem, IEvent, ApiResponse } from '@/types';
 import { apiRequest } from '@/lib/api';
 import { format } from 'date-fns';
 import {
@@ -15,15 +15,18 @@ import {
   HeartHandshake,
   Clock,
   Sparkles,
+  Award,
 } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
+import VolunteerCertificateModal from '@/components/VolunteerCertificateModal';
 
 function JoinedEventsContent() {
   const { user } = useAuth();
   const [joinedItems, setJoinedItems] = useState<IJoinedEventItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedEventForCert, setSelectedEventForCert] = useState<IEvent | null>(null);
 
   const fetchJoinedEvents = async () => {
     try {
@@ -134,7 +137,7 @@ function JoinedEventsContent() {
               try {
                 formattedDate = format(new Date(event.eventDate), 'MMM d, yyyy • h:mm a');
                 joinedDateFormatted = format(new Date(joinedAt), 'MMM d, yyyy');
-              } catch (e) { }
+              } catch (e) {}
 
               return (
                 <div
@@ -189,7 +192,7 @@ function JoinedEventsContent() {
                   </div>
 
                   {/* Actions footer */}
-                  <div className="p-5 pt-0 border-t border-slate-100 dark:border-slate-800/80 mt-2 space-y-2">
+                  <div className="p-5 pt-0 border-t border-slate-100 dark:border-slate-800/80 mt-2 space-y-2.5">
                     <div className="flex items-center justify-between text-[11px] text-slate-400 pt-3">
                       <span>Registered on {joinedDateFormatted}</span>
                       <button
@@ -201,13 +204,24 @@ function JoinedEventsContent() {
                       </button>
                     </div>
 
-                    <Link
-                      href={`/events/${event._id}`}
-                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-sm"
-                    >
-                      <span>View Event Details</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </Link>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedEventForCert(event)}
+                        className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 hover:bg-amber-200 border border-amber-300 dark:border-amber-800 transition-colors"
+                      >
+                        <Award className="w-3.5 h-3.5 text-amber-600" />
+                        <span>Certificate</span>
+                      </button>
+
+                      <Link
+                        href={`/events/${event._id}`}
+                        className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-sm"
+                      >
+                        <span>Details</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );
@@ -215,6 +229,15 @@ function JoinedEventsContent() {
           </div>
         )}
       </div>
+
+      {/* Volunteer Certificate Modal */}
+      {selectedEventForCert && (
+        <VolunteerCertificateModal
+          event={selectedEventForCert}
+          userName={user?.name || 'Dedicated Volunteer'}
+          onClose={() => setSelectedEventForCert(null)}
+        />
+      )}
     </div>
   );
 }
@@ -226,4 +249,3 @@ export default function JoinedEventsPage() {
     </ProtectedRoute>
   );
 }
-

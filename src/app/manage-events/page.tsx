@@ -183,6 +183,33 @@ function ManageEventsContent() {
     }
   };
 
+  const handleExportCSV = () => {
+    if (events.length === 0) {
+      toast.error('No events available to export.');
+      return;
+    }
+
+    const headers = ['Title', 'Category', 'Scheduled Date', 'Location', 'Registered Volunteers', 'Organizer Email'];
+    const rows = events.map((ev) => [
+      `"${ev.title.replace(/"/g, '""')}"`,
+      `"${ev.eventType}"`,
+      `"${new Date(ev.eventDate).toISOString()}"`,
+      `"${ev.location.replace(/"/g, '""')}"`,
+      ev.participantsCount || 0,
+      `"${ev.organizerEmail}"`,
+    ]);
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `CareSphere_My_Events_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success('Events exported to CSV successfully!');
+  };
+
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -198,13 +225,25 @@ function ManageEventsContent() {
             </p>
           </div>
 
-          <Link
-            href="/create-event"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-500/20 shrink-0 self-start"
-          >
-            <PlusCircle className="w-4 h-4" />
-            <span>Host New Event</span>
-          </Link>
+          <div className="flex items-center gap-3 self-start">
+            {events.length > 0 && (
+              <button
+                type="button"
+                onClick={handleExportCSV}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all"
+                title="Download CSV spreadsheet of all your organized events"
+              >
+                <span>Export CSV</span>
+              </button>
+            )}
+            <Link
+              href="/create-event"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-emerald-600 hover:bg-emerald-500 shadow-md shadow-emerald-500/20 shrink-0"
+            >
+              <PlusCircle className="w-4 h-4" />
+              <span>Host New Event</span>
+            </Link>
+          </div>
         </div>
 
         {/* Events Table or Empty State */}

@@ -4,6 +4,8 @@ import FeatureSection from '@/components/home/FeatureSection';
 import RecentEventsSection from '@/components/home/RecentEventsSection';
 import ImpactStatsSection from '@/components/home/ImpactStatsSection';
 import GallerySection from '@/components/home/GallerySection';
+import TestimonialsSection from '@/components/home/TestimonialsSection';
+import FaqSection from '@/components/home/FaqSection';
 import NewsletterSection from '@/components/home/NewsletterSection';
 
 export default function HomePage() {
@@ -18,15 +20,20 @@ export default function HomePage() {
       {/* 3. Recent Upcoming Events Section (Dynamic - 6 events with MongoDB .limit()) */}
       <RecentEventsSection />
 
-      {/* Bonus Impact Stats */}
+      {/* Impact Stats Counter */}
       <ImpactStatsSection />
 
       {/* 4. Gallery Section (Static photos of social drives) */}
       <GallerySection />
+
+      {/* Community Testimonials & Volunteer Stories */}
+      <TestimonialsSection />
+
+      {/* Interactive FAQ Accordion */}
+      <FaqSection />
 
       {/* 5. Newsletter Section (Subscription design) */}
       <NewsletterSection />
     </div>
   );
 }
-
