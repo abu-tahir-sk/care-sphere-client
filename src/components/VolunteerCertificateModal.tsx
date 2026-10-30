@@ -27,7 +27,7 @@ export default function VolunteerCertificateModal({
   let formattedDate = 'November 2026';
   try {
     formattedDate = format(new Date(event.eventDate), 'MMMM d, yyyy');
-  } catch (e) {}
+  } catch (e) { }
 
   const certId = `CS-VOL-${event._id.slice(-6).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
@@ -143,3 +143,4 @@ export default function VolunteerCertificateModal({
     </div>
   );
 }
+

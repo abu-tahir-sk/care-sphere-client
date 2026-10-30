@@ -70,9 +70,8 @@ export default function FaqSection() {
                 >
                   <span>{item.q}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-emerald-600' : ''
-                    }`}
+                    className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-emerald-600' : ''
+                      }`}
                   />
                 </button>
                 {isOpen && (
@@ -88,3 +87,4 @@ export default function FaqSection() {
     </section>
   );
 }
+

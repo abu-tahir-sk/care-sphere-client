@@ -15,7 +15,12 @@ import {
   Calendar,
   Sparkles,
   Award,
+  Clock,
+  HeartHandshake,
+  ArrowRight,
+  ExternalLink,
 } from 'lucide-react';
+import Link from 'next/link';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
@@ -67,18 +72,18 @@ function ProfileContent() {
 
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
         <div className="space-y-1">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Account Center</span>
+            <span>Volunteer Dashboard</span>
           </div>
           <h1 className="text-3xl font-black text-slate-950 dark:text-white tracking-tight">
-            My Profile & Volunteer ID
+            My Profile & Impact Card
           </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            View your community badges and update your personal details.
+            Track your volunteer standing, verified certificate status, and update your personal details.
           </p>
         </div>
 
@@ -109,41 +114,60 @@ function ProfileContent() {
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   {user?.email}
                 </p>
-                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300">
-                  <Award className="w-3.5 h-3.5" />
-                  <span className="capitalize">{user?.role || 'Volunteer'} Member</span>
+                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
+                  <Award className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Level 2: Community Changemaker</span>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 text-left space-y-2 text-xs text-slate-600 dark:text-slate-400">
-                <p className="font-semibold text-slate-700 dark:text-slate-300">Bio:</p>
-                <p className="italic">{bio || 'Community volunteer passionate about making a difference.'}</p>
+              {/* Volunteer Impact Badges */}
+              <div className="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 text-left">
+                  <p className="font-bold text-slate-900 dark:text-white text-base">24 hrs</p>
+                  <p className="text-[11px] text-slate-400">Volunteered</p>
+                </div>
+                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 text-left">
+                  <p className="font-bold text-slate-900 dark:text-white text-base">98 pts</p>
+                  <p className="text-[11px] text-slate-400">Civic Karma</p>
+                </div>
               </div>
-            </div>
 
-            {/* Volunteer Impact Badges */}
-            <div className="bg-emerald-900/90 text-white p-6 rounded-3xl shadow-md space-y-3">
-              <h4 className="text-sm font-bold flex items-center gap-2 text-emerald-300">
-                <Sparkles className="w-4 h-4" /> Community Standing
-              </h4>
-              <p className="text-xs text-emerald-100 leading-relaxed">
-                Thank you for being an active contributor on CareSphere! Your participation helps drive real-world change in local communities.
-              </p>
+              <div className="pt-2 text-left space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
+                <p className="font-semibold text-slate-700 dark:text-slate-300">About Me:</p>
+                <p className="italic">{bio || 'Community volunteer passionate about making a difference in local drives.'}</p>
+              </div>
+
+              {/* Quick links to certificates & registrations */}
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                <Link
+                  href="/joined-events"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 border border-emerald-200 dark:border-emerald-800 transition-colors"
+                >
+                  <Award className="w-4 h-4 text-emerald-600" />
+                  <span>View Joined Events & Certificates</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
           </div>
 
           {/* Right: Update Profile Form */}
-          <div className="md:col-span-7 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6">
-              Update Personal Information
-            </h3>
+          <div className="md:col-span-7 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
+            <div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                Personal & Public Info
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Update how your name and avatar appear on event organizer rosters and volunteer rosters.
+              </p>
+            </div>
 
             <form onSubmit={handleUpdate} className="space-y-5">
               {/* Name */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                   <User className="w-4 h-4 text-emerald-500" />
-                  Full Name
+                  Full Display Name
                 </label>
                 <input
                   type="text"
@@ -158,7 +182,7 @@ function ProfileContent() {
               <div className="space-y-1.5">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                   <Mail className="w-4 h-4 text-slate-400" />
-                  Email Address <span className="text-[10px] text-slate-400">(Cannot be changed)</span>
+                  Email Address <span className="text-[10px] text-slate-400">(Linked account - Readonly)</span>
                 </label>
                 <input
                   type="email"
@@ -172,7 +196,7 @@ function ProfileContent() {
               <div className="space-y-1.5">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                   <ImageIcon className="w-4 h-4 text-blue-500" />
-                  Avatar Photo URL
+                  Avatar Image URL
                 </label>
                 <input
                   type="url"
@@ -186,13 +210,13 @@ function ProfileContent() {
               {/* Bio */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
-                  Community Bio
+                  Community Bio & Interests
                 </label>
                 <textarea
                   rows={3}
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
-                  placeholder="Tell the community about your volunteering interests..."
+                  placeholder="Share your volunteering background, preferred drives (tree planting, clothing distribution, medical camps)..."
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -220,4 +244,3 @@ export default function ProfilePage() {
     </ProtectedRoute>
   );
 }
-
