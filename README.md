@@ -76,3 +76,4 @@ npm run dev
 ## Demo Credentials
 - **Organizer:** `organizer@caresphere.org` / `CareSphere@2026`
 - **Volunteer:** `volunteer@caresphere.org` / `CareSphere@2026`
+

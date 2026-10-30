@@ -247,7 +247,7 @@ function ManageEventsContent() {
                     let formatted = event.eventDate;
                     try {
                       formatted = format(new Date(event.eventDate), 'MMM d, yyyy • h:mm a');
-                    } catch (e) {}
+                    } catch (e) { }
 
                     return (
                       <tr
@@ -472,3 +472,4 @@ export default function ManageEventsPage() {
     </ProtectedRoute>
   );
 }
+

@@ -43,3 +43,4 @@ export function EventGridSkeleton({ count = 6 }: { count?: number }) {
     </div>
   );
 }
+

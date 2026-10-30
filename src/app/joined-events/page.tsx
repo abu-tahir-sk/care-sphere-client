@@ -134,7 +134,7 @@ function JoinedEventsContent() {
               try {
                 formattedDate = format(new Date(event.eventDate), 'MMM d, yyyy • h:mm a');
                 joinedDateFormatted = format(new Date(joinedAt), 'MMM d, yyyy');
-              } catch (e) {}
+              } catch (e) { }
 
               return (
                 <div
@@ -226,3 +226,4 @@ export default function JoinedEventsPage() {
     </ProtectedRoute>
   );
 }
+

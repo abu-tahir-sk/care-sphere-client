@@ -116,13 +116,14 @@ export default function Navbar() {
                     <img
                       src={user.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
                       alt={user.name}
+                      title={user.name}
                       className="w-10 h-10 rounded-full object-cover shadow"
                     />
                     <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 mr-1" />
                   </button>
 
-                  {/* Hover tooltip displaying user's name */}
-                  <div className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-1 text-xs font-semibold text-white bg-slate-900 dark:bg-slate-800 rounded-md shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-50">
+                  {/* Hover tooltip displaying user's display name */}
+                  <div className="pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 text-xs font-bold text-white bg-slate-950 dark:bg-slate-800 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 z-50 border border-slate-700/50">
                     {user.name}
                   </div>
                 </div>
@@ -193,7 +194,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="hidden lg:flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/60 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/60 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 Logout
@@ -314,3 +315,4 @@ export default function Navbar() {
     </header>
   );
 }
+
