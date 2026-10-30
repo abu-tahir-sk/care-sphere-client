@@ -112,11 +112,10 @@ export default function DistrictExplorerSection() {
               key={hub.id}
               type="button"
               onClick={() => setActiveHub(hub)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all shadow-sm ${
-                activeHub.id === hub.id
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all shadow-sm ${activeHub.id === hub.id
                   ? 'bg-emerald-600 text-white shadow-emerald-500/25 scale-105'
                   : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
-              }`}
+                }`}
             >
               <MapPin className="w-3.5 h-3.5 text-rose-500" />
               <span>{hub.name}</span>
@@ -205,3 +204,4 @@ export default function DistrictExplorerSection() {
     </section>
   );
 }
+

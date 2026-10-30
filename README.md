@@ -23,6 +23,7 @@
 
 ### Frontend (Client)
 - **Framework:** Next.js 15 (App Router, Server & Client Components)
+- **Authentication:** **Better Auth (`better-auth`)** with MongoDB Atlas adapter, JWT/Bearer plugins, and Google & GitHub social providers
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS (Custom Color Palette, Dark Mode via class strategy)
 - **Theming:** `next-themes`

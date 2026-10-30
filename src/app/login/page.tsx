@@ -127,7 +127,7 @@ function LoginForm() {
             ) : (
               <>
                 <LogIn className="w-4 h-4" />
-                <span>Log In</span>
+                <span>Log In with Better Auth</span>
               </>
             )}
           </button>
