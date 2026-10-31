@@ -8,9 +8,8 @@ import {
   FileCheck2,
   ShieldCheck,
   Printer,
-  ExternalLink,
   ArrowRight,
-  Download,
+  Heart,
 } from 'lucide-react';
 
 export default function CertificateShowcaseSection() {
@@ -21,27 +20,27 @@ export default function CertificateShowcaseSection() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Explanatory Copy & Key Features */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold uppercase tracking-wider">
-                <Award className="w-3.5 h-3.5 text-amber-500" />
-                <span>Verifiable Volunteer Recognition</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/80 dark:bg-amber-950/70 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-300 text-xs font-bold uppercase tracking-wider">
+                <Award className="w-4 h-4 text-amber-600" />
+                <span>নিঃস্বার্থ সমাজসেবার স্বীকৃতি</span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
-                Authentic Single-Page A4 Certificates for Every Dedicated Volunteer.
+                সমাজের মানুষের জন্য আপনার ভালোবাসার আনুষ্ঠানিক স্বীকৃতি
               </h2>
 
               <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-                Volunteering requires time, empathy, and sweat. CareSphere honors your contribution by generating an official, single-page A4 landscape certificate of community service for every drive you join.
+                স্বেচ্ছাসেবকদের সময় ও সহানুভূতি অমূল্য। ছিন্নমূল মানুষকে সাহায্য করা, গাছ লাগানো কিংবা রক্তদানে আপনার শ্রমকে সম্মান জানাতে CareSphere প্রতিটি কার্যক্রমের পর ভেরিফাইড A4 ল্যান্ডস্কেপ সেবা সনদ প্রদান করে।
               </p>
 
               {/* Bullet Features */}
-              <div className="space-y-3 pt-2 text-sm text-slate-700 dark:text-slate-300">
+              <div className="space-y-3 pt-1 text-sm text-slate-700 dark:text-slate-300">
                 <div className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <strong className="text-slate-900 dark:text-white font-bold">100% Guaranteed 1-Page A4 Printout:</strong> CSS print rules engineered to prevent awkward 2nd and 3rd page spillover in browser print dialogs.
+                    <strong className="text-slate-900 dark:text-white font-bold">একক পৃষ্ঠার নিখুঁত প্রিন্ট (1/1 Single Page):</strong> প্রিন্ট করার সময় যেন অপ্রয়োজনীয় একাধিক পৃষ্ঠা না আসে, সেজন্য বিশেষভাবে তৈরি।
                   </div>
                 </div>
 
@@ -50,7 +49,7 @@ export default function CertificateShowcaseSection() {
                     <CheckCircle2 className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <strong className="text-slate-900 dark:text-white font-bold">Unique Verifiable Identifier:</strong> Each certificate receives a cryptographic tracking code (e.g. <span className="font-mono text-emerald-700 dark:text-emerald-400 text-xs font-semibold">CS-VOL-8996</span>) suitable for college and job resumes.
+                    <strong className="text-slate-900 dark:text-white font-bold">অনন্য সনদ ট্র্যাকিং আইডি:</strong> প্রতিটি সার্টিফিকেটে রয়েছে নিজস্ব ট্র্যাকিং কোড (যেমন: <span className="font-mono text-emerald-700 dark:text-emerald-400 text-xs font-bold">CS-VOL-8996</span>), যা সিভি ও উচ্চশিক্ষার আবেদনে যুক্ত করা যায়।
                   </div>
                 </div>
 
@@ -59,7 +58,7 @@ export default function CertificateShowcaseSection() {
                     <CheckCircle2 className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <strong className="text-slate-900 dark:text-white font-bold">Instant 1-Click Print & PDF Save:</strong> Accessible anytime from your &ldquo;Joined Events&rdquo; dashboard.
+                    <strong className="text-slate-900 dark:text-white font-bold">আজীবন সংরক্ষিত পোর্টফোলিও:</strong> আপনার প্রোফাইল থেকে যেকোনো সময় আগের সব সেবামূলক কাজের সার্টিফিকেট দেখতে ও প্রিন্ট করতে পারবেন।
                   </div>
                 </div>
               </div>
@@ -68,17 +67,18 @@ export default function CertificateShowcaseSection() {
               <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
                 <Link
                   href="/events"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-sm transition-colors"
                 >
-                  <span>Join a Drive & Earn Certificate</span>
+                  <Heart className="w-4 h-4 text-rose-300 fill-rose-300" />
+                  <span>কাজে যোগ দিন ও সনদ অর্জন করুন</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/joined-events"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
                 >
                   <Printer className="w-4 h-4 text-slate-500" />
-                  <span>My Certificates</span>
+                  <span>আমার সনদসমূহ</span>
                 </Link>
               </div>
             </div>
@@ -86,9 +86,6 @@ export default function CertificateShowcaseSection() {
             {/* Right Column: Visual Certificate Mockup */}
             <div className="lg:col-span-6 relative">
               <div className="relative rounded-2xl bg-white dark:bg-slate-950 p-6 sm:p-8 border-4 border-amber-300 dark:border-amber-600/60 shadow-2xl space-y-5 text-center">
-                {/* Subtle Watermark Seal */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-emerald-500/5 rounded-full blur-xl pointer-events-none" />
-
                 {/* Header */}
                 <div className="space-y-1">
                   <p className="text-[10px] font-black tracking-widest uppercase text-emerald-700 dark:text-emerald-400">
@@ -153,4 +150,3 @@ export default function CertificateShowcaseSection() {
     </section>
   );
 }
-

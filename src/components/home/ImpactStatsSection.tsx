@@ -1,36 +1,36 @@
 'use client';
 
 import React from 'react';
-import { Award, Users, HeartHandshake, Trees, TrendingUp, ShieldCheck } from 'lucide-react';
+import { Award, Users, HeartHandshake, Trees, Heart, ShieldCheck } from 'lucide-react';
 
 const stats = [
   {
-    icon: Users,
-    value: '5,420+',
-    label: 'Registered Volunteers',
-    detail: 'Field-verified members active across all 8 divisions',
-    metric: '+24% YoY',
+    icon: HeartHandshake,
+    value: '১৮,৫০০+',
+    label: 'শীতবস্ত্র ও খাদ্য সহায়তা পৌঁছে দেওয়া হয়েছে',
+    detail: 'তীব্র শীতে অসহায় পরিবারের মাঝে কম্বল, জ্যাকেট ও পুষ্টিকর খাবার',
+    badge: 'মানবিক সেবা',
   },
   {
-    icon: HeartHandshake,
-    value: '18,500+',
-    label: 'Relief Packages Distributed',
-    detail: 'Insulated blankets, jackets, and emergency dry food rations',
-    metric: '100% Grassroots',
+    icon: Users,
+    value: '৫,৪২০+',
+    label: 'নিবেদিতপ্রাণ তরুণ সমাজসেবী',
+    detail: 'দেশের ৮টি প্রশাসনিক বিভাগ জুড়ে মাঠে সক্রিয় মানবিক সদস্য',
+    badge: 'স্বেচ্ছাসেবক পরিবার',
   },
   {
     icon: Trees,
-    value: '6,200+',
-    label: 'Urban Saplings Rooted',
-    detail: 'Lakeside reforestation and walkway canopy protection',
-    metric: 'Verified Living',
+    value: '৬,২০০+',
+    label: 'সবুজ চারা রোপণ ও পরিচর্যা',
+    detail: 'লেকপার ও উন্মুক্ত ফুটপাতে ফলজ ও বনজ বৃক্ষ রোপণ কর্মসূচি',
+    badge: 'পরিবেশ রক্ষা',
   },
   {
     icon: Award,
-    value: '350+',
-    label: 'Completed Operations',
-    detail: 'Organized and executed with zero platform intermediary fees',
-    metric: 'Zero Fees',
+    value: '৩৫০+',
+    label: 'সফল সামাজিক কার্যক্রম সম্পন্ন',
+    detail: 'কোনো বাণিজ্যিক ফি ছাড়া শতভাগ স্থানীয় মানুষের ভালোবাসায় আয়োজিত',
+    badge: '১০০% অলাভজনক',
   },
 ];
 
@@ -42,14 +42,14 @@ export default function ImpactStatsSection() {
           {stats.map((stat, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl bg-slate-50/70 dark:bg-slate-850 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-200 flex flex-col justify-between space-y-4"
+              className="p-6 rounded-3xl bg-slate-50/70 dark:bg-slate-850 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:border-emerald-500/40 transition-all duration-200 flex flex-col justify-between space-y-4"
             >
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center">
+                <div className="w-11 h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 flex items-center justify-center">
                   <stat.icon className="w-5 h-5" />
                 </div>
-                <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-100/70 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
-                  <TrendingUp className="w-3 h-3" /> {stat.metric}
+                <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100/70 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
+                  <Heart className="w-3 h-3 text-rose-500 fill-rose-500" /> {stat.badge}
                 </span>
               </div>
 
@@ -57,10 +57,10 @@ export default function ImpactStatsSection() {
                 <p className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 dark:text-white">
                   {stat.value}
                 </p>
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 mt-1">
+                <p className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-1">
                   {stat.label}
                 </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-relaxed">
                   {stat.detail}
                 </p>
               </div>

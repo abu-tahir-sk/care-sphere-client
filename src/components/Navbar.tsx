@@ -48,7 +48,7 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: 'Explore Initiatives', href: '/events', icon: Calendar },
+    { label: 'সেবামূলক উদ্যোগসমূহ (Drives)', href: '/events', icon: Calendar },
   ];
 
   return (
@@ -64,8 +64,8 @@ export default function Navbar() {
               Care<span className="text-emerald-700 dark:text-emerald-400">Sphere</span>
             </span>
             <span className="hidden sm:inline-block text-slate-300 dark:text-slate-700 font-light">|</span>
-            <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">
-              Civic Operations
+            <span className="hidden sm:inline-block text-[11px] font-semibold text-emerald-800 dark:text-emerald-300">
+              সামাজিক সেবা প্ল্যাটফর্ম
             </span>
           </div>
         </Link>
@@ -106,7 +106,7 @@ export default function Navbar() {
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                My Schedule
+                আমার অংশগ্রহণ
               </Link>
               <Link
                 href="/manage-events"
@@ -116,7 +116,7 @@ export default function Navbar() {
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                Organizer Console
+                আমার আয়োজিত উদ্যোগ
               </Link>
             </>
           )}

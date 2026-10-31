@@ -43,14 +43,14 @@ export default function Footer() {
                 <span className="text-xl font-bold tracking-tight text-white">
                   Care<span className="text-emerald-400">Sphere</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
-                  Civic Platform
+                <span className="text-[10px] font-semibold text-emerald-400">
+                  সামাজিক সেবা প্ল্যাটফর্ম
                 </span>
               </div>
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed">
-              Open digital infrastructure for grassroots community welfare and volunteer coordination across Dhaka and all regional divisions of Bangladesh.
+              মানুষের সেবায় নিবেদিত একটি সম্পূর্ণ অলাভজনক সামাজিক প্ল্যাটফর্ম। ছিন্নমূল মানুষদের পাশে দাঁড়ানো এবং সবুজ বাংলাদেশ গড়াই আমাদের মূল লক্ষ্য।
             </p>
 
             {/* Social media links */}
