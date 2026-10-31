@@ -1,10 +1,11 @@
 import React from 'react';
 import WeatherAdvisoryBanner from '@/components/home/WeatherAdvisoryBanner';
 import BannerSection from '@/components/home/BannerSection';
-import DistrictExplorerSection from '@/components/home/DistrictExplorerSection';
+import ImpactStatsSection from '@/components/home/ImpactStatsSection';
 import FeatureSection from '@/components/home/FeatureSection';
 import RecentEventsSection from '@/components/home/RecentEventsSection';
-import ImpactStatsSection from '@/components/home/ImpactStatsSection';
+import CertificateShowcaseSection from '@/components/home/CertificateShowcaseSection';
+import DistrictExplorerSection from '@/components/home/DistrictExplorerSection';
 import GallerySection from '@/components/home/GallerySection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import FaqSection from '@/components/home/FaqSection';
@@ -16,31 +17,34 @@ export default function HomePage() {
       {/* Seasonal Community Bulletin */}
       <WeatherAdvisoryBanner />
 
-      {/* 1. Hero Banner with Quick Search */}
+      {/* 1. Hero Banner with Quick Search & Interactive Operations Console */}
       <BannerSection />
 
-      {/* Interactive Hyperlocal Hub Explorer */}
-      <DistrictExplorerSection />
-
-      {/* 2. Platform Capabilities */}
-      <FeatureSection />
-
-      {/* 3. Recent Upcoming Events (Dynamic with MongoDB .limit(6)) */}
-      <RecentEventsSection />
-
-      {/* Live Impact Stats Counter */}
+      {/* 2. Live Impact Stats Metric Ribbon */}
       <ImpactStatsSection />
 
-      {/* 4. Photo Gallery */}
+      {/* 3. Platform Capabilities Bento Grid */}
+      <FeatureSection />
+
+      {/* 4. Recent Upcoming Events (Dynamic with MongoDB .limit(6)) */}
+      <RecentEventsSection />
+
+      {/* 5. Dedicated Verifiable A4 Certificate Showcase */}
+      <CertificateShowcaseSection />
+
+      {/* 6. Interactive Hyperlocal District Hub Explorer */}
+      <DistrictExplorerSection />
+
+      {/* 7. Photo Gallery of Documented Field Initiatives */}
       <GallerySection />
 
-      {/* Community Testimonials & Volunteer Stories */}
+      {/* 8. Community Testimonials & Volunteer Endorsements */}
       <TestimonialsSection />
 
-      {/* Frequently Asked Questions */}
+      {/* 9. Operating Guidelines & Frequently Asked Questions */}
       <FaqSection />
 
-      {/* 5. Newsletter Subscription */}
+      {/* 10. Civic Dispatch Bulletin Subscription */}
       <NewsletterSection />
     </div>
   );

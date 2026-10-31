@@ -361,10 +361,10 @@ export default function EventDetailsPage() {
                     type="button"
                     onClick={handleJoinEvent}
                     disabled={isSubmitting}
-                    className="w-full py-3.5 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all transform active:scale-95 disabled:opacity-50"
+                    className="w-full py-3 px-4 rounded-xl font-semibold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
                   >
                     <HeartHandshake className="w-5 h-5" />
-                    <span>{isSubmitting ? 'Registering...' : 'Join Event'}</span>
+                    <span>{isSubmitting ? 'Registering...' : 'Confirm RSVP & Join'}</span>
                   </button>
                 )}
 
