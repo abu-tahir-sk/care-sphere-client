@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import ThemeToggle from '@/components/ThemeToggle';
+import UserAvatar from '@/components/UserAvatar';
 import {
   HeartHandshake,
   Calendar,
@@ -109,15 +110,14 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => setDropdownOpen((prev) => !prev)}
-                    className="flex items-center gap-2 p-1 rounded-full border-2 border-emerald-500/40 hover:border-emerald-500 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="flex items-center gap-1.5 p-1 rounded-full border-2 border-emerald-500/40 hover:border-emerald-500 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     aria-label="User Menu"
                     title={user.name}
                   >
-                    <img
-                      src={user.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
-                      alt={user.name}
-                      title={user.name}
-                      className="w-10 h-10 rounded-full object-cover shadow"
+                    <UserAvatar
+                      src={user.photoURL}
+                      name={user.name}
+                      size="md"
                     />
                     <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 mr-1" />
                   </button>
@@ -131,14 +131,16 @@ export default function Navbar() {
                 {/* Dropdown Menu */}
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-3 w-60 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700/60">
-                      <p className="text-xs text-slate-400 dark:text-slate-400">Signed in as</p>
-                      <p className="text-sm font-bold text-slate-800 dark:text-white truncate">
-                        {user.name}
-                      </p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
-                        {user.email}
-                      </p>
+                    <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700/60 flex items-center gap-3">
+                      <UserAvatar src={user.photoURL} name={user.name} size="sm" />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold text-slate-800 dark:text-white truncate">
+                          {user.name}
+                        </p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                          {user.email}
+                        </p>
+                      </div>
                     </div>
 
                     <div className="py-1">
@@ -246,11 +248,7 @@ export default function Navbar() {
           {user ? (
             <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
               <div className="flex items-center gap-3 px-3 py-2">
-                <img
-                  src={user.photoURL}
-                  alt={user.name}
-                  className="w-10 h-10 rounded-full object-cover"
-                />
+                <UserAvatar src={user.photoURL} name={user.name} size="md" />
                 <div>
                   <p className="font-bold text-slate-900 dark:text-white">{user.name}</p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">{user.email}</p>

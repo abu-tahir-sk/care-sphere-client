@@ -55,15 +55,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const storedUser = localStorage.getItem('caresphere_user');
 
         if (storedToken && storedUser) {
+          const parsed = JSON.parse(storedUser);
+          if (!parsed.photoURL || typeof parsed.photoURL !== 'string' || !parsed.photoURL.trim()) {
+            parsed.photoURL = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80';
+          }
           setToken(storedToken);
-          setUser(JSON.parse(storedUser));
+          setUser((prev) => (prev ? { ...parsed, photoURL: prev.photoURL || parsed.photoURL } : parsed));
 
           // Silently re-verify token with backend
           try {
             const res = await apiRequest<ApiResponse<{ user: IUser }>>('/auth/me');
             if (res.success && res.user) {
-              setUser(res.user);
-              localStorage.setItem('caresphere_user', JSON.stringify(res.user));
+              const freshUser = {
+                ...res.user,
+                photoURL: res.user.photoURL || parsed.photoURL,
+              };
+              setUser(freshUser);
+              localStorage.setItem('caresphere_user', JSON.stringify(freshUser));
             }
           } catch (err) {
             console.warn('Session verification fallback to stored user:', err);

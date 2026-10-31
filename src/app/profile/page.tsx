@@ -95,7 +95,8 @@ function ProfileContent() {
               <div className="relative inline-block mx-auto">
                 <img
                   src={photoURL || user?.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'}
-                  alt={user?.name}
+                  alt={user?.name || 'User Profile'}
+                  referrerPolicy="no-referrer"
                   className="w-28 h-28 rounded-3xl object-cover shadow-lg border-4 border-emerald-500/20"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
