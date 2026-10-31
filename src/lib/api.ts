@@ -20,20 +20,29 @@ export async function apiRequest<T = any>(
     headers.set('Authorization', `Bearer ${token}`);
   }
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    ...options,
-    headers,
-  });
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      ...options,
+      headers,
+    });
 
-  const data = await response.json().catch(() => ({
-    success: false,
-    message: 'Invalid response from server',
-  }));
+    const data = await response.json().catch(() => ({
+      success: false,
+      message: 'Invalid response from server',
+    }));
 
-  if (!response.ok) {
-    throw new Error(data.message || `HTTP Error ${response.status}`);
+    if (!response.ok) {
+      throw new Error(data.message || `HTTP Error ${response.status}`);
+    }
+
+    return data as T;
+  } catch (err: any) {
+    if (err.name === 'TypeError' && err.message?.includes('Failed to fetch')) {
+      throw new Error(
+        `Unable to reach backend server at ${API_BASE_URL}. Please ensure the server is active on port 5000.`
+      );
+    }
+    throw err;
   }
-
-  return data as T;
 }
 
