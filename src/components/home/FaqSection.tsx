@@ -13,8 +13,8 @@ const faqs = [
     a: 'No. CareSphere is an open-access civic technology initiative. Volunteers never pay fees to enroll in relief distributions, environmental restoration, or community health drives.',
   },
   {
-    q: 'How does the system enforce that drives are scheduled in the future?',
-    a: 'Both client-side calendar validation and server-side MongoDB pipeline business rules strictly mandate that event timestamps must be greater than current server time (Date.now()). Expired entries cannot be saved or edited to past dates.',
+    q: 'Can I schedule events for upcoming dates only?',
+    a: 'Yes. To ensure that all drives listed on CareSphere are active and actionable, initiatives can only be scheduled for upcoming future dates. Organizers can easily plan relief distributions and camps ahead of time.',
   },
   {
     q: 'How does RSVP capacity tracking operate when volunteer quotas fill up?',
@@ -43,13 +43,13 @@ export default function FaqSection() {
         {/* Section Header */}
         <div className="max-w-3xl mb-10 space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Platform Guidance
+            Community Guidance
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
-            Operating Guidelines & Frequently Asked Questions
+            Frequently Asked Questions
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300">
-            Guidance for field organizers, community volunteers, and institutional partners using CareSphere.
+            Everything you need to know about joining community drives, volunteering, and organizing causes.
           </p>
         </div>
 

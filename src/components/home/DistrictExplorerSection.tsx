@@ -101,13 +101,13 @@ export default function DistrictExplorerSection() {
         {/* Section Header */}
         <div className="max-w-3xl mb-10 space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Regional Hubs & Civic Corridors
+            Neighborhood Chapters
           </p>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
-            Explore Active Grassroots Initiatives by District
+            Explore Community Initiatives by Neighborhood
           </h2>
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            Select a community hub below to view verified field volunteer counts, ongoing relief drives, and operational milestones.
+            Select a community chapter below to discover active volunteer teams, emergency relief drives, and local impact milestones.
           </p>
         </div>
 
@@ -141,11 +141,11 @@ export default function DistrictExplorerSection() {
                 </span>
                 <span className="text-xs text-slate-400 dark:text-slate-500">•</span>
                 <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Verified Civic Zone
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Active Volunteer Chapter
                 </span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-                {activeHub.name} Community Operations
+                {activeHub.name} Community Chapter
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 {activeHub.description}

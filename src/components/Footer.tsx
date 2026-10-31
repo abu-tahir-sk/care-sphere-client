@@ -43,14 +43,14 @@ export default function Footer() {
                 <span className="text-xl font-bold tracking-tight text-white">
                   Care<span className="text-emerald-400">Sphere</span>
                 </span>
-                <span className="text-[10px] font-semibold text-emerald-400">
-                  সামাজিক সেবা প্ল্যাটফর্ম
+                <span className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                  Community Platform
                 </span>
               </div>
             </Link>
 
             <p className="text-xs text-slate-400 leading-relaxed">
-              মানুষের সেবায় নিবেদিত একটি সম্পূর্ণ অলাভজনক সামাজিক প্ল্যাটফর্ম। ছিন্নমূল মানুষদের পাশে দাঁড়ানো এবং সবুজ বাংলাদেশ গড়াই আমাদের মূল লক্ষ্য।
+              Open digital platform for grassroots community welfare and volunteer coordination across Dhaka and all regional divisions of Bangladesh.
             </p>
 
             {/* Social media links */}
@@ -168,7 +168,7 @@ export default function Footer() {
           {/* Institutional Contact & Verification */}
           <div className="space-y-3">
             <h4 className="font-semibold text-white tracking-wider uppercase text-[11px]">
-              Coordination Desk
+              Community Desk
             </h4>
             <div className="space-y-2 text-xs text-slate-400">
               <div className="flex items-start gap-2">
@@ -189,7 +189,7 @@ export default function Footer() {
             <div className="pt-2">
               <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] text-slate-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span>All Operational Systems Live</span>
+                <span>Active Volunteer Network</span>
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
-          <p>© {new Date().getFullYear()} CareSphere Civic Operations Platform. All verified records reserved.</p>
+          <p>© {new Date().getFullYear()} CareSphere Community Social Welfare Platform. All rights reserved.</p>
           <div className="flex items-center gap-4 text-slate-500 text-[11px]">
             <span>Open Source Civic Initiative</span>
             <span>•</span>

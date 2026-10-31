@@ -55,13 +55,13 @@ export default function GallerySection() {
         {/* Section Header */}
         <div className="max-w-3xl mb-10 space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Field Documentation
+            Moments of Kindness
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
-            Verified Field Operations Photo Archive
+            Stories & Photographs from the Field
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300">
-            Documented visual records from volunteer initiatives across Dhaka and regional corridors.
+            Real moments of hope, empathy, and community service captured during recent volunteer relief drives.
           </p>
         </div>
 

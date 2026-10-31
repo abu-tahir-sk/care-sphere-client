@@ -46,13 +46,13 @@ export default function TestimonialsSection() {
         {/* Section Header */}
         <div className="max-w-3xl mb-12 space-y-2">
           <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Field Testimonials
+            Volunteer Voices
           </p>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
-            Endorsements from Grassroots Organizers
+            Loved by Volunteers & Community Leaders
           </h2>
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
-            Insights from doctors, student coordinators, and volunteer leads deploying social initiatives via CareSphere.
+            Hear from volunteer doctors, university students, and neighborhood organizers bringing care to their communities.
           </p>
         </div>
 

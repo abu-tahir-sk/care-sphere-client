@@ -48,15 +48,15 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: 'সেবামূলক উদ্যোগসমূহ (Drives)', href: '/events', icon: Calendar },
+    { label: 'Explore Initiatives', href: '/events', icon: Calendar },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* App Logo & Name (Microsoft / Fluent enterprise style) */}
+        {/* App Logo & Name */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-lg bg-emerald-700 dark:bg-emerald-600 flex items-center justify-center text-white shadow-xs group-hover:bg-emerald-800 transition-colors">
+          <div className="w-9 h-9 rounded-xl bg-emerald-700 dark:bg-emerald-600 flex items-center justify-center text-white shadow-xs group-hover:bg-emerald-800 transition-colors">
             <HeartHandshake className="w-5 h-5" />
           </div>
           <div className="flex items-baseline gap-2">
@@ -64,8 +64,8 @@ export default function Navbar() {
               Care<span className="text-emerald-700 dark:text-emerald-400">Sphere</span>
             </span>
             <span className="hidden sm:inline-block text-slate-300 dark:text-slate-700 font-light">|</span>
-            <span className="hidden sm:inline-block text-[11px] font-semibold text-emerald-800 dark:text-emerald-300">
-              সামাজিক সেবা প্ল্যাটফর্ম
+            <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+              Community Platform
             </span>
           </div>
         </Link>
@@ -80,7 +80,7 @@ export default function Navbar() {
                 : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            Overview
+            Home
           </Link>
           {navLinks.map((item) => (
             <Link
@@ -106,7 +106,7 @@ export default function Navbar() {
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                আমার অংশগ্রহণ
+                My Schedule
               </Link>
               <Link
                 href="/manage-events"
@@ -116,7 +116,7 @@ export default function Navbar() {
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
-                আমার আয়োজিত উদ্যোগ
+                Organizer Space
               </Link>
             </>
           )}

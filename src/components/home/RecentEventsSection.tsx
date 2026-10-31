@@ -40,13 +40,13 @@ export default function RecentEventsSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
           <div className="space-y-2 max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-              Active Operations Schedule
+              Community Calendar
             </p>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
-              Upcoming Community Initiatives & Relief Drives
+              Upcoming Volunteer Drives & Relief Work
             </h2>
             <p className="text-sm text-slate-600 dark:text-slate-300">
-              Review the next 6 scheduled community events added by verified organizers. Step forward and reserve your spot.
+              Explore upcoming grassroots initiatives in your area. Step forward and join fellow volunteers in making an immediate, heartwarming difference.
             </p>
           </div>
 

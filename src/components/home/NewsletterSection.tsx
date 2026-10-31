@@ -34,17 +34,17 @@ export default function NewsletterSection() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-xl bg-slate-900 text-white p-8 sm:p-12 border border-slate-800 shadow-sm">
           <div className="max-w-2xl space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-emerald-400 border border-slate-700 text-[11px] font-semibold uppercase tracking-wider">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Civic Dispatch Service</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800 text-emerald-400 border border-slate-700 text-xs font-semibold uppercase tracking-wider">
+              <Mail className="w-3.5 h-3.5" />
+              <span>Community Bulletin</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-              Stay Informed on Regional Volunteer Operations & Emergency Drives
+              Stay Connected with Relief Drives in Your Neighborhood
             </h2>
 
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Subscribe to the CareSphere community bulletin. Receive verified notices about severe winter weather drives, tree plantation weekends, and emergency relief camps in your zone.
+              Subscribe to the CareSphere community newsletter. Receive timely updates about winter blanket distribution, tree planting weekends, and free health camps in your area.
             </p>
 
             {/* Subscription Form */}
