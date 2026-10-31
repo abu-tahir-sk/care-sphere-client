@@ -3,7 +3,7 @@
 import React, { useRef } from 'react';
 import { IEvent } from '@/types';
 import { format } from 'date-fns';
-import { Award, Printer, X, HeartHandshake, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Award, Printer, X, HeartHandshake, ShieldCheck } from 'lucide-react';
 
 interface VolunteerCertificateModalProps {
   event: IEvent;
@@ -20,21 +20,26 @@ export default function VolunteerCertificateModal({
 
   const handlePrint = () => {
     if (typeof window !== 'undefined') {
+      const prevTitle = document.title;
+      document.title = `CareSphere_Certificate_${userName.replace(/\s+/g, '_')}`;
       window.print();
+      setTimeout(() => {
+        document.title = prevTitle;
+      }, 1000);
     }
   };
 
   let formattedDate = 'November 2026';
   try {
     formattedDate = format(new Date(event.eventDate), 'MMMM d, yyyy');
-  } catch (e) { }
+  } catch (e) {}
 
   const certId = `CS-VOL-${event._id.slice(-6).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[95vh] overflow-y-auto space-y-6">
-        {/* Modal Controls */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in print:p-0 print:bg-white print:backdrop-blur-none print:static">
+      <div className="bg-white dark:bg-slate-900 w-full max-w-4xl rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[95vh] overflow-y-auto space-y-6 print:border-none print:shadow-none print:p-0 print:max-h-none print:overflow-visible print:bg-transparent print:space-y-0">
+        {/* Modal Controls (Hidden in Print) */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 print:hidden">
           <div className="flex items-center gap-2">
             <Award className="w-5 h-5 text-amber-500" />
@@ -62,17 +67,18 @@ export default function VolunteerCertificateModal({
           </div>
         </div>
 
-        {/* Printable Certificate Canvas */}
+        {/* Printable Certificate Canvas (Fits exactly 1 Page A4 Landscape) */}
         <div
+          id="printable-certificate"
           ref={certificateRef}
-          className="relative bg-gradient-to-br from-amber-50/40 via-white to-emerald-50/30 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 p-8 sm:p-12 rounded-2xl border-8 border-double border-amber-500/30 text-center space-y-6 shadow-inner print:border-4 print:border-amber-600 print:p-8"
+          className="relative bg-gradient-to-br from-amber-50/40 via-white to-emerald-50/30 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 p-6 sm:p-10 rounded-2xl border-8 border-double border-amber-500/40 text-center space-y-4 shadow-inner print:border-4 print:border-amber-600 print:p-6 print:bg-white print:text-slate-900 print:shadow-none print:space-y-3 print:m-0"
         >
           {/* Header watermark/emblem */}
-          <div className="flex flex-col items-center space-y-2">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/20">
-              <HeartHandshake className="w-8 h-8" />
+          <div className="flex flex-col items-center space-y-1.5">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/20">
+              <HeartHandshake className="w-7 h-7" />
             </div>
-            <p className="text-xs uppercase tracking-widest font-extrabold text-emerald-700 dark:text-emerald-400">
+            <p className="text-[11px] uppercase tracking-widest font-extrabold text-emerald-700 dark:text-emerald-400">
               CareSphere Social Development Platform
             </p>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
@@ -84,29 +90,37 @@ export default function VolunteerCertificateModal({
           </div>
 
           {/* Presentation line */}
-          <div className="space-y-1 pt-2">
-            <p className="text-xs uppercase font-semibold text-slate-400">This certificate is proudly presented to</p>
+          <div className="space-y-1 pt-1">
+            <p className="text-xs uppercase font-semibold text-slate-400">
+              This certificate is proudly presented to
+            </p>
             <h2 className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 underline decoration-amber-400 decoration-2 underline-offset-8">
               {userName}
             </h2>
           </div>
 
           {/* Contribution description */}
-          <div className="max-w-xl mx-auto space-y-2 text-sm text-slate-600 dark:text-slate-300">
+          <div className="max-w-xl mx-auto space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
             <p className="leading-relaxed">
               For active participation and volunteer service during the community initiative:
             </p>
-            <p className="text-base font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800/80 py-2 px-4 rounded-xl inline-block border border-slate-200 dark:border-slate-700">
+            <p className="text-sm sm:text-base font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800/80 py-1.5 px-4 rounded-xl inline-block border border-slate-200 dark:border-slate-700">
               &ldquo;{event.title}&rdquo;
             </p>
-            <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
-              Held at <span className="font-semibold text-slate-700 dark:text-slate-300">{event.location}</span> on{' '}
-              <span className="font-semibold text-slate-700 dark:text-slate-300">{formattedDate}</span>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Held at{' '}
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
+                {event.location}
+              </span>{' '}
+              on{' '}
+              <span className="font-semibold text-slate-700 dark:text-slate-300">
+                {formattedDate}
+              </span>
             </p>
           </div>
 
           {/* Bottom signatures and verification seal */}
-          <div className="pt-8 border-t border-slate-200 dark:border-slate-800 grid grid-cols-3 items-end gap-4 text-xs">
+          <div className="pt-6 border-t border-slate-200 dark:border-slate-800 grid grid-cols-3 items-end gap-4 text-xs">
             {/* Signature 1 */}
             <div className="text-center space-y-1">
               <div className="font-serif italic text-base text-slate-800 dark:text-slate-200 border-b border-slate-300 dark:border-slate-700 pb-1">
@@ -118,9 +132,9 @@ export default function VolunteerCertificateModal({
 
             {/* Gold Seal / Badge */}
             <div className="flex flex-col items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-400 to-amber-600 text-slate-950 flex flex-col items-center justify-center shadow-lg font-bold border-2 border-amber-200">
-                <ShieldCheck className="w-6 h-6 text-slate-950" />
-                <span className="text-[9px] uppercase tracking-wider font-extrabold">Verified</span>
+              <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-400 to-amber-600 text-slate-950 flex flex-col items-center justify-center shadow-lg font-bold border-2 border-amber-200">
+                <ShieldCheck className="w-5 h-5 text-slate-950" />
+                <span className="text-[8px] uppercase tracking-wider font-extrabold">Verified</span>
               </div>
             </div>
 
@@ -143,4 +157,3 @@ export default function VolunteerCertificateModal({
     </div>
   );
 }
-
