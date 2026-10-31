@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { MapPin, Users, HeartHandshake, ArrowRight, Sparkles, Compass } from 'lucide-react';
+import { MapPin, Users, HeartHandshake, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 interface DistrictHub {
   id: string;
@@ -23,9 +23,9 @@ const hubs: DistrictHub[] = [
     zone: 'Dhaka North',
     activeDrives: 8,
     volunteersEnrolled: 420,
-    featuredInitiative: 'Winter Clothes Distribution & Hot Khichuri Distribution',
+    featuredInitiative: 'Winter Clothes Distribution & Hot Meal Packaging Drive',
     description: 'Supporting daily-wage rickshaw pullers, garment workers, and underprivileged families near the Mirpur 10 roundabout.',
-    highlightStat: '1,400+ Warm Sweaters Delivered',
+    highlightStat: '1,400+ Warm Sweaters & Jackets Delivered',
     queryParam: 'Mirpur',
   },
   {
@@ -34,9 +34,9 @@ const hubs: DistrictHub[] = [
     zone: 'Dhaka West',
     activeDrives: 6,
     volunteersEnrolled: 380,
-    featuredInitiative: 'Blanket Distribution for the Needy & Town Hall Food Drive',
-    description: 'Mobilizing emergency insulated fleece blankets and nutritious meals for elderly citizens living in temporary shelters.',
-    highlightStat: '500+ Thermal Blankets Distributed',
+    featuredInitiative: 'Blanket Distribution & Community Kitchen Aid at Town Hall',
+    description: 'Mobilizing emergency insulated fleece blankets and nutritious meals for elderly citizens in temporary informal shelters.',
+    highlightStat: '500+ Thermal Fleece Blankets Handed Out',
     queryParam: 'Mohammadpur',
   },
   {
@@ -46,7 +46,7 @@ const hubs: DistrictHub[] = [
     activeDrives: 5,
     volunteersEnrolled: 610,
     featuredInitiative: 'Lakeside Urban Tree Plantation & Environmental Walkway Care',
-    description: 'Restoring green tree canopy and fruit saplings with protective bamboo enclosures along the pedestrian walkways.',
+    description: 'Restoring green tree canopy and fruit saplings with protective bamboo enclosures along pedestrian walkways.',
     highlightStat: '850+ Indigenous Saplings Planted',
     queryParam: 'Dhanmondi',
   },
@@ -69,7 +69,7 @@ const hubs: DistrictHub[] = [
     volunteersEnrolled: 230,
     featuredInitiative: 'Education for All: Children Storybook & Stationery Giveaway',
     description: 'Supplying notebooks, school bags, and primary readers to underprivileged children attending open-air street schools.',
-    highlightStat: '1,100+ Books & Geometry Sets Handed Out',
+    highlightStat: '1,100+ Books & Geometry Sets Distributed',
     queryParam: 'Farmgate',
   },
   {
@@ -89,73 +89,79 @@ export default function DistrictExplorerSection() {
   const [activeHub, setActiveHub] = useState<DistrictHub>(hubs[0]);
 
   return (
-    <section className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <section className="py-16 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-            <Compass className="w-3.5 h-3.5" />
-            <span>Hyperlocal Impact Zones</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white tracking-tight">
-            Explore Active Grassroots Hubs in Your District
+        <div className="max-w-3xl mb-8 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            Regional Hubs & Civic Corridors
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
+            Explore Active Grassroots Initiatives by District
           </h2>
-          <p className="text-base text-slate-600 dark:text-slate-300">
-            CareSphere connects neighborhoods across Dhaka and beyond. Click through local zones to discover active relief efforts and volunteer statistics.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+            Select a community hub below to view verified field volunteer counts, ongoing relief drives, and operational milestones.
           </p>
         </div>
 
-        {/* District Selector Tabs */}
-        <div className="flex items-center justify-center gap-2 flex-wrap mb-10">
+        {/* Microsoft Fluent-style Segmented Filter Bar */}
+        <div className="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex-wrap gap-1 mb-8 max-w-full">
           {hubs.map((hub) => (
             <button
               key={hub.id}
               type="button"
               onClick={() => setActiveHub(hub)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all shadow-sm ${activeHub.id === hub.id
-                  ? 'bg-emerald-600 text-white shadow-emerald-500/25 scale-105'
-                  : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
-                }`}
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                activeHub.id === hub.id
+                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-semibold shadow-xs border border-slate-200/60 dark:border-slate-700'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
             >
-              <MapPin className="w-3.5 h-3.5 text-rose-500" />
+              <MapPin className="w-3.5 h-3.5 text-slate-400" />
               <span>{hub.name}</span>
             </button>
           ))}
         </div>
 
         {/* Selected Hub Interactive Showcase Card */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="bg-slate-50/70 dark:bg-slate-950/60 rounded-xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Column: Details */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-5">
             <div className="space-y-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300">
-                {activeHub.zone} Region
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white">
-                {activeHub.name} Community Hub
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+                  {activeHub.zone} Division
+                </span>
+                <span className="text-xs text-slate-400 dark:text-slate-500">•</span>
+                <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Verified Civic Zone
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+                {activeHub.name} Community Operations
               </h3>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
                 {activeHub.description}
               </p>
             </div>
 
-            {/* Featured Drive Card */}
-            <div className="p-5 rounded-2xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/60 space-y-2">
-              <p className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Flagship Initiative
+            {/* Featured Drive Information */}
+            <div className="p-4 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Current Priority Initiative
               </p>
-              <p className="font-bold text-sm text-slate-900 dark:text-white">
+              <p className="font-semibold text-sm text-slate-900 dark:text-white">
                 {activeHub.featuredInitiative}
               </p>
             </div>
 
             {/* CTA to view events in this hub */}
-            <div className="pt-2">
+            <div className="pt-1">
               <Link
                 href={`/events?search=${encodeURIComponent(activeHub.queryParam)}`}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-500/25 transition-all transform active:scale-95"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-800 transition-colors shadow-xs"
               >
-                <span>View All Drives in {activeHub.name}</span>
+                <span>View All Initiatives in {activeHub.name}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -163,39 +169,38 @@ export default function DistrictExplorerSection() {
 
           {/* Right Column: Live Hub Metrics */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                <Users className="w-5 h-5" />
+            <div className="p-5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1 shadow-2xs">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Enrolled Volunteers</p>
+                <Users className="w-4 h-4 text-slate-400" />
               </div>
-              <p className="text-3xl font-black text-slate-900 dark:text-white">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {activeHub.volunteersEnrolled}+
               </p>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                Active Local Volunteers
-              </p>
+              <p className="text-[11px] text-slate-400">Active community members</p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 space-y-2">
-              <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
-                <HeartHandshake className="w-5 h-5" />
+            <div className="p-5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1 shadow-2xs">
+              <div className="flex items-center justify-between">
+                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Scheduled Drives</p>
+                <HeartHandshake className="w-4 h-4 text-slate-400" />
               </div>
-              <p className="text-3xl font-black text-slate-900 dark:text-white">
+              <p className="text-2xl font-bold text-slate-900 dark:text-white">
                 {activeHub.activeDrives}
               </p>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">
-                Scheduled Drives
-              </p>
+              <p className="text-[11px] text-slate-400">Open for public RSVP</p>
             </div>
 
-            <div className="sm:col-span-2 p-6 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-md space-y-1">
-              <p className="text-xs font-bold uppercase tracking-wider text-emerald-200">
-                Demonstrated Community Milestone
-              </p>
-              <p className="text-xl font-black text-white">
+            <div className="sm:col-span-2 p-5 rounded-lg bg-slate-900 text-white border border-slate-800 space-y-1">
+              <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span className="font-semibold uppercase tracking-wider text-[10px]">Verified Field Milestone</span>
+              </div>
+              <p className="text-lg font-bold text-white">
                 {activeHub.highlightStat}
               </p>
-              <p className="text-[11px] text-emerald-100">
-                Audited & verified by CareSphere field monitors.
+              <p className="text-xs text-slate-400">
+                Monitored and confirmed by CareSphere regional coordinators.
               </p>
             </div>
           </div>
@@ -204,4 +209,3 @@ export default function DistrictExplorerSection() {
     </section>
   );
 }
-

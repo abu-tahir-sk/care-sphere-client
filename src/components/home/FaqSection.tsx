@@ -1,32 +1,32 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, Sparkles } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const faqs = [
   {
-    q: 'Who can create and host an event on CareSphere?',
-    a: 'Any logged-in community volunteer, youth group leader, or welfare organizer can host an event. All you need is a valid CareSphere account, event details, future date, and location coordinates.',
+    q: 'Who is eligible to organize an initiative on CareSphere?',
+    a: 'Any verified user, youth society lead, or community group coordinator can publish an initiative. A valid account, verified location coordinates, future timestamp, and descriptive relief scope are required.',
   },
   {
-    q: 'Is participation in CareSphere volunteer events free?',
-    a: 'Yes, 100% free! CareSphere is a non-profit, community-powered platform. Volunteers never pay fees to join drives, cleanups, plantation campaigns, or relief distributions.',
+    q: 'Are there any platform charges or volunteer enrollment fees?',
+    a: 'No. CareSphere is an open-access civic technology initiative. Volunteers never pay fees to enroll in relief distributions, environmental restoration, or community health drives.',
   },
   {
-    q: 'How does the platform ensure events are scheduled in the future?',
-    a: 'Both client-side calendar validation and server-side business rules strictly enforce that event dates cannot be in the past. Expired dates are automatically prevented during creation and editing.',
+    q: 'How does the system enforce that drives are scheduled in the future?',
+    a: 'Both client-side calendar validation and server-side MongoDB pipeline business rules strictly mandate that event timestamps must be greater than current server time (Date.now()). Expired entries cannot be saved or edited to past dates.',
   },
   {
-    q: 'Can I cancel my registration if my schedule changes?',
-    a: 'Yes. Simply navigate to your "Joined Events" page from the profile dropdown and click "Cancel RSVP" on the corresponding card to free up your spot for another volunteer.',
+    q: 'How does RSVP capacity tracking operate when volunteer quotas fill up?',
+    a: 'Each initiative specifies a volunteer capacity. Once reached, the quota indicator displays 100% capacity and updates in real time to prevent logistical oversubscription at field sites.',
   },
   {
-    q: 'How do I download my Volunteer Community Service Certificate?',
-    a: 'Once you join any community initiative, open the event details page or your joined portfolio and click "View Volunteer Certificate". You can instantly download or print your customized PDF certificate with a verifiable ID.',
+    q: 'How are official Volunteer Service Certificates generated?',
+    a: 'Upon enrolling in a confirmed initiative, volunteers can access the "Print Service Certificate" option. The system formats a single-page A4 landscape certificate with a cryptographic identifier (e.g. CS-VOL-XXXX) suitable for academic or civic portfolios.',
   },
   {
-    q: 'Can I host drives outside of Dhaka?',
-    a: 'Absolutely! CareSphere supports initiatives across all divisions of Bangladesh including Chattogram, Sylhet, Rajshahi, Khulna, and beyond.',
+    q: 'Can civic initiatives be created outside Dhaka metropolitan area?',
+    a: 'Yes. CareSphere supports drives across all 8 administrative divisions of Bangladesh, including Chattogram, Sylhet, Rajshahi, Khulna, Barishal, Rangpur, and Mymensingh.',
   },
 ];
 
@@ -38,45 +38,46 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <section className="py-16 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-            <HelpCircle className="w-3.5 h-3.5" />
-            <span>Frequently Asked Questions</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white tracking-tight">
-            Everything You Need to Know About CareSphere
+        <div className="max-w-3xl mb-10 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            Platform Guidance
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
+            Operating Guidelines & Frequently Asked Questions
           </h2>
-          <p className="text-base text-slate-600 dark:text-slate-300">
-            Answers to common questions regarding hosting volunteer drives, event participation, and platform safety.
+          <p className="text-sm text-slate-600 dark:text-slate-300">
+            Guidance for field organizers, community volunteers, and institutional partners using CareSphere.
           </p>
         </div>
 
         {/* Accordion list */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqs.map((item, idx) => {
             const isOpen = openIdx === idx;
             return (
               <div
                 key={idx}
-                className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm transition-all"
+                className="bg-slate-50/70 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-colors"
               >
                 <button
                   type="button"
                   onClick={() => toggle(idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-white text-base hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  className="w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-semibold text-slate-900 dark:text-white text-sm hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"
                 >
                   <span>{item.q}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-emerald-600' : ''
-                      }`}
+                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-emerald-700 dark:text-emerald-400' : ''
+                    }`}
                   />
                 </button>
+
                 {isOpen && (
-                  <div className="px-6 pb-6 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/80 pt-4 animate-in fade-in duration-200">
-                    {item.a}
+                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200/60 dark:border-slate-800/60">
+                    <p>{item.a}</p>
                   </div>
                 )}
               </div>
@@ -87,4 +88,3 @@ export default function FaqSection() {
     </section>
   );
 }
-

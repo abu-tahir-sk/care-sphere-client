@@ -6,108 +6,102 @@ import {
   CalendarCheck,
   UsersRound,
   ShieldCheck,
-  Sparkles,
-  BarChart3,
+  FileCheck2,
+  SlidersHorizontal,
 } from 'lucide-react';
 
 const features = [
   {
     icon: Compass,
-    title: 'Hyperlocal Event Discovery',
+    title: 'Hyperlocal Geofiltering & Discovery',
     description:
-      'Search and filter social service drives happening directly in your neighborhood, from Mirpur to Mohammadpur and across all major divisions.',
-    badge: 'Discovery',
-    color: 'from-blue-500 to-indigo-600',
+      'Locate and participate in neighborhood relief drives and civic cleanups across Mirpur, Mohammadpur, Dhanmondi, and nationwide divisions.',
+    category: 'Discovery',
   },
   {
     icon: CalendarCheck,
-    title: 'Seamless Event Creation',
+    title: 'Validated Initiative Publishing',
     description:
-      'Publish volunteer drives in under two minutes with intuitive date validation, categorized tags, location pins, and custom event descriptions.',
-    badge: 'Organization',
-    color: 'from-emerald-500 to-teal-600',
+      'Organizers publish drives with future-date constraints, volunteer quotas, categorical tagging, and explicit venue coordinates.',
+    category: 'Coordination',
   },
   {
     icon: UsersRound,
-    title: 'One-Click Volunteer Participation',
+    title: 'Real-Time RSVP & Capacity Tracking',
     description:
-      'Register for upcoming causes with a single click. Keep track of all joined events in your personal schedule sorted chronologically.',
-    badge: 'Engagement',
-    color: 'from-amber-500 to-orange-600',
+      'Community members enroll in a single click. Automated quota meters prevent oversubscription and sync to personal schedules.',
+    category: 'Engagement',
   },
   {
-    icon: BarChart3,
-    title: 'Organizer Event Management',
+    icon: SlidersHorizontal,
+    title: 'Organizer Management Console',
     description:
-      'Take complete control over your initiatives. Safely modify event dates, descriptions, and details, or remove obsolete listings with full ownership checks.',
-    badge: 'Control',
-    color: 'from-purple-500 to-pink-600',
+      'Complete administrative controls for initiative hosts to update drive details, adjust dates, and manage listings securely.',
+    category: 'Management',
+  },
+  {
+    icon: FileCheck2,
+    title: 'Official Community Service Certificates',
+    description:
+      'Volunteers print verified single-page A4 landscape service records with unique tracking IDs to substantiate civic hours.',
+    category: 'Verification',
   },
   {
     icon: ShieldCheck,
-    title: 'Verified Grassroots Impact',
+    title: 'High-Contrast Multi-Theme Standard',
     description:
-      'Ensure high transparency. Only legitimate community volunteers and verified local organizers host events focused on authentic social welfare.',
-    badge: 'Trust',
-    color: 'from-teal-500 to-emerald-700',
-  },
-  {
-    icon: Sparkles,
-    title: 'Adaptive Light & Dark Theme',
-    description:
-      'Comfortable browsing day or night with a seamless theme toggler designed with high-contrast accessibility standards.',
-    badge: 'Accessibility',
-    color: 'from-rose-500 to-red-600',
+      'Accessible, WCAG-compliant design with high-contrast light and dark modes optimized for outdoor mobile use and desktop consoles.',
+    category: 'Standards',
   },
 ];
 
 export default function FeatureSection() {
   return (
-    <section className="py-20 bg-white dark:bg-slate-900/60 border-y border-slate-100 dark:border-slate-800 transition-colors">
+    <section className="py-16 bg-slate-50/70 dark:bg-slate-950/40 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <p className="text-xs font-black uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+        <div className="max-w-3xl mb-12 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
             Platform Capabilities
           </p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white tracking-tight">
-            Built for Grassroots Action and Measurable Social Good
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
+            Engineered for Civic Action & Transparent Field Operations
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300">
-            CareSphere equips every volunteer and organizer with the essential digital tools needed to turn community empathy into tangible, real-world impact.
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+            CareSphere equips grassroots organizers and active citizens with reliable digital workflows to turn community empathy into verifiable social good.
           </p>
         </div>
 
-        {/* Feature Cards Grid (Equal height and width) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Feature Cards Grid (Microsoft Fluent clean cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col justify-between p-7 rounded-3xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/60 hover:shadow-xl hover:border-emerald-500/40 transition-all duration-300 group"
+              className="flex flex-col justify-between p-6 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs transition-all duration-200 group"
             >
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div
-                    className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${item.color} text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}
-                  >
-                    <item.icon className="w-6 h-6" />
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center">
+                    <item.icon className="w-5 h-5" />
                   </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
-                    {item.badge}
+                  <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                    {item.category}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                  {item.title}
-                </h3>
-
-                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {item.description}
-                </p>
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-1.5">
+                    {item.description}
+                  </p>
+                </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                <span>Empowering Change</span>
+              <div className="mt-6 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+                <span className="font-mono">Module 0{index + 1}</span>
+                <span className="font-medium text-emerald-700 dark:text-emerald-400">Operational</span>
               </div>
             </div>
           ))}
@@ -116,4 +110,3 @@ export default function FeatureSection() {
     </section>
   );
 }
-

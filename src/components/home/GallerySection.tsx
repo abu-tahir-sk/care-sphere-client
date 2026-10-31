@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Camera, MapPin, Tag } from 'lucide-react';
+import { Camera, MapPin } from 'lucide-react';
 
 const galleryPhotos = [
   {
@@ -9,97 +9,96 @@ const galleryPhotos = [
     location: 'Mirpur 10, Dhaka',
     category: 'Winter Relief',
     image: 'https://images.unsplash.com/photo-1578357078586-491adf1aa5ba?w=800&auto=format&fit=crop&q=80',
-    description: 'Volunteers distributing warm jackets and blankets to street children and night rickshaw pullers.',
+    description: 'Volunteers distributing warm jackets and blankets to street workers and families during cold spells.',
   },
   {
     title: 'Blanket Distribution for the Needy',
     location: 'Mohammadpur Town Hall, Dhaka',
-    category: 'Donation',
+    category: 'Relief Aid',
     image: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&auto=format&fit=crop&q=80',
-    description: 'Handing over insulated fleece blankets to elderly community members in cold spells.',
+    description: 'Handing over insulated fleece blankets to elderly community members in temporary shelters.',
   },
   {
     title: 'Lakeside Urban Tree Plantation Drive',
     location: 'Dhanmondi Lake, Dhaka',
-    category: 'Plantation',
+    category: 'Environment',
     image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80',
-    description: 'Youth volunteers planting indigenous fruit-bearing trees along public recreation walkways.',
+    description: 'Youth volunteers planting indigenous fruit-bearing saplings with protective enclosures.',
   },
   {
     title: 'Clean Dhaka Plastic Cleanup Drive',
     location: 'Gulshan 2 Lake Park, Dhaka',
-    category: 'Cleanup',
+    category: 'Sanitation',
     image: 'https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?w=800&auto=format&fit=crop&q=80',
-    description: 'Collecting and segregating single-use beverage bottles and waste wrappers from public spots.',
+    description: 'Collecting and segregating single-use beverage containers and non-biodegradable waste.',
   },
   {
     title: 'Free Community Health & Eye Screening Camp',
     location: 'Uttara Sector 4, Dhaka',
     category: 'Healthcare',
     image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=800&auto=format&fit=crop&q=80',
-    description: 'Volunteer doctors offering preventative health consultations and medicines to day laborers.',
+    description: 'Volunteer physicians offering preventative health consultations and essential medicines.',
   },
   {
     title: 'Education for All: Children Book Fair',
     location: 'Farmgate Plaza, Dhaka',
     category: 'Education',
     image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&auto=format&fit=crop&q=80',
-    description: 'Providing illustrated storybooks and school supplies to students from underserved schools.',
+    description: 'Providing illustrated storybooks and learning stationery kits to informal street schools.',
   },
 ];
 
 export default function GallerySection() {
   return (
-    <section className="py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 transition-colors">
+    <section className="py-16 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-            <Camera className="w-3.5 h-3.5" />
-            <span>Moments of Compassion</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 dark:text-white tracking-tight">
-            Capturing Grassroots Social Service in Action
+        <div className="max-w-3xl mb-10 space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+            Field Documentation
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
+            Verified Field Operations Photo Archive
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300">
-            A glimpse into the heartfelt efforts of volunteers dedicating their weekends to uplifting disadvantaged communities across Bangladesh.
+          <p className="text-sm text-slate-600 dark:text-slate-300">
+            Documented visual records from volunteer initiatives across Dhaka and regional corridors.
           </p>
         </div>
 
-        {/* Gallery Grid (Equal height and width cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {galleryPhotos.map((item, index) => (
             <div
               key={index}
-              className="group relative rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-slate-200 dark:border-slate-800 transition-all duration-300 flex flex-col h-[380px] bg-slate-900"
+              className="group relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col h-72 bg-slate-900 shadow-2xs"
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent" />
 
               {/* Top Tag */}
-              <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 text-xs font-bold rounded-full bg-emerald-500/90 text-slate-950 backdrop-blur-md shadow-md">
+              <div className="absolute top-3 left-3">
+                <span className="px-2 py-0.5 text-[11px] font-semibold rounded bg-slate-900/85 backdrop-blur-sm text-emerald-300 border border-emerald-500/30">
                   {item.category}
                 </span>
               </div>
 
               {/* Bottom Details */}
-              <div className="absolute bottom-0 inset-x-0 p-6 space-y-2 text-white">
-                <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
-                  <MapPin className="w-3.5 h-3.5" />
+              <div className="absolute bottom-0 inset-x-0 p-4 space-y-1 text-white">
+                <div className="flex items-center gap-1.5 text-xs text-slate-300">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                   <span>{item.location}</span>
                 </div>
-                <h3 className="text-lg font-bold leading-snug">
+                <h3 className="text-sm font-bold leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-slate-400 line-clamp-1">
                   {item.description}
                 </p>
               </div>
@@ -110,4 +109,3 @@ export default function GallerySection() {
     </section>
   );
 }
-

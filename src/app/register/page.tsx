@@ -86,18 +86,18 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
-      <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800">
+    <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-slate-50/60 dark:bg-slate-950/40 transition-colors">
+      <div className="max-w-md w-full space-y-6 bg-white dark:bg-slate-900 p-8 sm:p-10 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
         {/* Header */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white mx-auto shadow-md shadow-emerald-500/20">
-            <HeartHandshake className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-lg bg-emerald-700 flex items-center justify-center text-white mx-auto shadow-xs">
+            <HeartHandshake className="w-5 h-5" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-950 dark:text-white tracking-tight">
             Create Your Account
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-            Join CareSphere to organize drives and create community impact.
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Join CareSphere to coordinate drives and mobilize community action.
           </p>
         </div>
 
@@ -218,7 +218,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all disabled:opacity-50 mt-2"
+            className="w-full py-2.5 px-4 rounded-lg font-medium text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-2xs flex items-center justify-center gap-2 transition-colors disabled:opacity-50 mt-2"
           >
             {isSubmitting ? (
               <span className="text-sm">Creating Account...</span>

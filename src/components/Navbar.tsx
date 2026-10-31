@@ -18,6 +18,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  ShieldCheck,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -47,94 +48,114 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: 'Upcoming Events', href: '/events', icon: Calendar },
+    { label: 'Explore Initiatives', href: '/events', icon: Calendar },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* App Logo & Name */}
+    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        {/* App Logo & Name (Microsoft / Fluent enterprise style) */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-            <HeartHandshake className="w-6 h-6" />
+          <div className="w-9 h-9 rounded-lg bg-emerald-700 dark:bg-emerald-600 flex items-center justify-center text-white shadow-xs group-hover:bg-emerald-800 transition-colors">
+            <HeartHandshake className="w-5 h-5" />
           </div>
-          <div>
-            <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white flex items-center gap-1">
-              Care<span className="text-emerald-600 dark:text-emerald-400">Sphere</span>
+          <div className="flex items-baseline gap-2">
+            <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Care<span className="text-emerald-700 dark:text-emerald-400">Sphere</span>
             </span>
-            <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400 dark:text-slate-500 -mt-1">
-              Community Service
-            </p>
+            <span className="hidden sm:inline-block text-slate-300 dark:text-slate-700 font-light">|</span>
+            <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-medium">
+              Civic Operations
+            </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/"
-            className={`text-sm font-semibold transition-colors ${
+            className={`text-sm font-medium transition-colors ${
               pathname === '/'
-                ? 'text-emerald-600 dark:text-emerald-400'
-                : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400'
+                ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
+                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
-            Home
+            Overview
           </Link>
           {navLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+              className={`text-sm font-medium transition-colors flex items-center gap-1.5 ${
                 pathname === item.href
-                  ? 'text-emerald-600 dark:text-emerald-400'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400'
+                  ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              <item.icon className="w-4 h-4" />
+              <item.icon className="w-4 h-4 text-slate-400" />
               {item.label}
             </Link>
           ))}
+          {user && (
+            <>
+              <Link
+                href="/joined-events"
+                className={`text-sm font-medium transition-colors ${
+                  pathname === '/joined-events'
+                    ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                My Schedule
+              </Link>
+              <Link
+                href="/manage-events"
+                className={`text-sm font-medium transition-colors ${
+                  pathname === '/manage-events'
+                    ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                Organizer Console
+              </Link>
+            </>
+          )}
         </nav>
 
         {/* Right Section: Theme Toggle + Auth Controls */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
 
           {isLoading ? (
-            <div className="w-24 h-9 bg-slate-100 dark:bg-slate-800 rounded-xl animate-pulse" />
+            <div className="w-20 h-8 bg-slate-100 dark:bg-slate-800 rounded-md animate-pulse" />
           ) : user ? (
             <div className="flex items-center gap-3">
-              {/* Profile Picture with Hover Tooltip + Dropdown */}
+              {/* Profile Menu Trigger */}
               <div className="relative" ref={dropdownRef}>
-                <div className="relative group">
-                  <button
-                    type="button"
-                    onClick={() => setDropdownOpen((prev) => !prev)}
-                    className="flex items-center gap-1.5 p-1 rounded-full border-2 border-emerald-500/40 hover:border-emerald-500 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    aria-label="User Menu"
-                    title={user.name}
-                  >
-                    <UserAvatar
-                      src={user.photoURL}
-                      name={user.name}
-                      size="md"
-                    />
-                    <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 mr-1" />
-                  </button>
-
-                  {/* Hover tooltip displaying user's display name */}
-                  <div className="pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 text-xs font-bold text-white bg-slate-950 dark:bg-slate-800 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-200 z-50 border border-slate-700/50">
+                <button
+                  type="button"
+                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  className="flex items-center gap-2 py-1 px-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors focus:outline-none"
+                  aria-label="User Account"
+                >
+                  <UserAvatar
+                    src={user.photoURL}
+                    name={user.name}
+                    size="sm"
+                  />
+                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 max-w-[120px] truncate">
                     {user.name}
-                  </div>
-                </div>
+                  </span>
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                </button>
 
-                {/* Dropdown Menu */}
+                {/* Dropdown Menu (Fluent Clean Card) */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-3 w-60 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-700/60 flex items-center gap-3">
+                  <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 py-1.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                    <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
                       <UserAvatar src={user.photoURL} name={user.name} size="sm" />
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold text-slate-800 dark:text-white truncate">
+                        <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                           {user.name}
                         </p>
                         <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
@@ -143,73 +164,79 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    <div className="py-1">
+                    <div className="py-1 text-xs">
                       <Link
                         href="/create-event"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700/60 hover:text-emerald-600 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                       >
-                        <PlusCircle className="w-4 h-4 text-emerald-500" />
-                        Create Event
+                        <PlusCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                        Create New Drive
                       </Link>
                       <Link
                         href="/manage-events"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700/60 hover:text-emerald-600 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                       >
-                        <FolderKanban className="w-4 h-4 text-teal-500" />
-                        Manage Events
+                        <FolderKanban className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                        Manage My Drives
                       </Link>
                       <Link
                         href="/joined-events"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700/60 hover:text-emerald-600 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-blue-500" />
-                        Joined Events
+                        <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                        Joined Events & Certificates
                       </Link>
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-slate-700/60 hover:text-emerald-600 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                       >
-                        <User className="w-4 h-4 text-purple-500" />
-                        My Profile
+                        <User className="w-4 h-4 text-slate-500" />
+                        Profile Settings
                       </Link>
                     </div>
 
-                    <div className="border-t border-slate-100 dark:border-slate-700/60 pt-1">
+                    <div className="border-t border-slate-100 dark:border-slate-800 pt-1">
                       <button
                         type="button"
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
+                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
                       >
                         <LogOut className="w-4 h-4" />
-                        Logout
+                        Sign Out
                       </button>
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Direct Logout Button */}
-              <button
-                type="button"
-                onClick={handleLogout}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/60 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+              {/* Direct Post Button */}
+              <Link
+                href="/create-event"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 transition-colors shadow-xs"
               >
-                <LogOut className="w-4 h-4" />
-                Logout
-              </button>
+                <PlusCircle className="w-3.5 h-3.5" />
+                <span>Host Drive</span>
+              </Link>
             </div>
           ) : (
-            <Link
-              href="/login"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-500/25 transition-all transform active:scale-95"
-            >
-              <LogIn className="w-4 h-4" />
-              Login
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs transition-colors"
+              >
+                Get Started
+              </Link>
+            </div>
           )}
         </div>
 
@@ -219,92 +246,93 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="p-1.5 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
             aria-label="Toggle navigation"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-3 animate-in fade-in slide-in-from-top-2">
+        <div className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-1">
           <Link
             href="/"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="block px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            Home
+            Overview
           </Link>
           <Link
             href="/events"
             onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-lg text-base font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="block px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            Upcoming Events
+            Explore Initiatives
           </Link>
 
           {user ? (
-            <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
-              <div className="flex items-center gap-3 px-3 py-2">
-                <UserAvatar src={user.photoURL} name={user.name} size="md" />
-                <div>
-                  <p className="font-bold text-slate-900 dark:text-white">{user.name}</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{user.email}</p>
-                </div>
+            <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-1">
+              <div className="px-3 py-2 text-xs text-slate-500 font-semibold uppercase tracking-wider">
+                My Workspace
               </div>
-
               <Link
                 href="/create-event"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
-                <PlusCircle className="w-4 h-4 text-emerald-500" />
-                Create Event
+                <PlusCircle className="w-4 h-4 text-emerald-600" />
+                Create Drive
               </Link>
               <Link
                 href="/manage-events"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
-                <FolderKanban className="w-4 h-4 text-teal-500" />
-                Manage Events
+                <FolderKanban className="w-4 h-4 text-teal-600" />
+                Manage Drives
               </Link>
               <Link
                 href="/joined-events"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
-                <CheckCircle2 className="w-4 h-4 text-blue-500" />
+                <CheckCircle2 className="w-4 h-4 text-blue-600" />
                 Joined Events
               </Link>
               <Link
                 href="/profile"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
-                <User className="w-4 h-4 text-purple-500" />
-                My Profile
+                <User className="w-4 h-4 text-slate-500" />
+                Profile
               </Link>
-
               <button
                 type="button"
                 onClick={handleLogout}
-                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30"
+                className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30"
               >
                 <LogOut className="w-4 h-4" />
-                Logout
+                Sign Out
               </button>
             </div>
           ) : (
-            <div className="pt-3 border-t border-slate-200 dark:border-slate-800">
+            <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex gap-2">
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-center py-2.5 px-4 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500"
+                className="flex-1 text-center py-2 rounded-md text-sm font-semibold border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200"
               >
-                Login
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex-1 text-center py-2 rounded-md text-sm font-semibold bg-emerald-700 text-white"
+              >
+                Register
               </Link>
             </div>
           )}
@@ -313,4 +341,3 @@ export default function Navbar() {
     </header>
   );
 }
-

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Send, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, ShieldCheck, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
@@ -17,12 +17,12 @@ export default function NewsletterSection() {
 
     Swal.fire({
       icon: 'success',
-      title: 'Subscribed Successfully!',
-      text: `Thank you! You will now receive monthly highlights of upcoming volunteer drives at ${email}.`,
+      title: 'Subscription Confirmed',
+      text: `You will receive monthly field dispatches and emergency drive notices at ${email}.`,
       timer: 2800,
       showConfirmButton: false,
       customClass: {
-        popup: 'rounded-2xl dark:bg-slate-900 dark:text-white',
+        popup: 'rounded-xl dark:bg-slate-900 dark:text-white',
       },
     });
 
@@ -30,57 +30,53 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <section className="py-16 bg-slate-50/70 dark:bg-slate-950/40 transition-colors">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-900 text-white p-8 sm:p-12 lg:p-16 shadow-2xl">
-          {/* Ambient graphic circles */}
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-emerald-400/20 rounded-full blur-2xl pointer-events-none" />
-
-          <div className="relative z-10 max-w-2xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-wider text-emerald-100">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>Stay Informed & Inspired</span>
+        <div className="rounded-xl bg-slate-900 text-white p-8 sm:p-12 border border-slate-800 shadow-sm">
+          <div className="max-w-2xl space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 text-emerald-400 border border-slate-700 text-[11px] font-semibold uppercase tracking-wider">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Civic Dispatch Service</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
-              Get Notified of Upcoming Community Relief Drives in Your City
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              Stay Informed on Regional Volunteer Operations & Emergency Drives
             </h2>
 
-            <p className="text-base text-emerald-100 leading-relaxed">
-              Subscribe to the CareSphere community dispatch. Receive urgent alerts about emergency winter drives, tree plantation weekends, and blood donation camps near you.
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Subscribe to the CareSphere community bulletin. Receive verified notices about severe winter weather drives, tree plantation weekends, and emergency relief camps in your zone.
             </p>
 
             {/* Subscription Form */}
-            <form onSubmit={handleSubmit} className="pt-2 flex flex-col sm:flex-row items-center gap-3">
+            <form onSubmit={handleSubmit} className="pt-2 flex flex-col sm:flex-row items-center gap-2 max-w-lg">
               <div className="relative w-full">
-                <Mail className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address..."
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white text-slate-900 placeholder:text-slate-400 font-medium focus:outline-none focus:ring-4 focus:ring-emerald-300/40 shadow-inner"
+                  placeholder="name@organization.org or personal email"
+                  className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-slate-800/90 border border-slate-700 text-white placeholder:text-slate-500 text-xs sm:text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                 />
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-slate-950 bg-amber-400 hover:bg-amber-300 shadow-lg shadow-black/20 flex items-center justify-center gap-2 shrink-0 transition-transform active:scale-95"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-lg font-medium text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-600 shrink-0 transition-colors flex items-center justify-center gap-1.5"
               >
                 <span>Subscribe</span>
-                <Send className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </form>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-emerald-100/90 pt-2 font-medium">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300" /> No spam guarantee
+            <div className="flex flex-wrap items-center gap-5 text-[11px] text-slate-400 pt-1">
+              <span className="flex items-center gap-1">
+                <Check className="w-3.5 h-3.5 text-emerald-400" /> Verified civic dispatches only
               </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300" /> Monthly impact digest
+              <span className="flex items-center gap-1">
+                <Check className="w-3.5 h-3.5 text-emerald-400" /> Zero spam commitment
               </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-300" /> Unsubscribe at any time
+              <span className="flex items-center gap-1">
+                <Check className="w-3.5 h-3.5 text-emerald-400" /> One-click unsubscribe
               </span>
             </div>
           </div>
@@ -89,4 +85,3 @@ export default function NewsletterSection() {
     </section>
   );
 }
-
