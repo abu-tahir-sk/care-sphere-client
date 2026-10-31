@@ -30,6 +30,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const initAuth = async () => {
       try {
         // 1. Check Better Auth active session
+        let activeToken = localStorage.getItem('caresphere_token');
+
         try {
           const session = await authClient.getSession();
           if (session?.data?.user) {
@@ -46,12 +48,37 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             };
             setUser(appUser);
             localStorage.setItem('caresphere_user', JSON.stringify(appUser));
+
+            // Synchronize JWT token with backend if not already stored
+            if (!activeToken && baUser.email) {
+              try {
+                const res = await apiRequest<ApiResponse<{ token: string; user: IUser }>>('/auth/social', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    name: baUser.name,
+                    email: baUser.email,
+                    photoURL: baUser.image || undefined,
+                  }),
+                });
+                if (res.success && res.token) {
+                  activeToken = res.token;
+                  setToken(res.token);
+                  localStorage.setItem('caresphere_token', res.token);
+                  if (res.user) {
+                    setUser(res.user);
+                    localStorage.setItem('caresphere_user', JSON.stringify(res.user));
+                  }
+                }
+              } catch (syncErr) {
+                console.warn('Backend session token sync notice:', syncErr);
+              }
+            }
           }
         } catch (baErr) {
           // Fallback to local storage
         }
 
-        const storedToken = localStorage.getItem('caresphere_token');
+        const storedToken = activeToken || localStorage.getItem('caresphere_token');
         const storedUser = localStorage.getItem('caresphere_user');
 
         if (storedToken && storedUser) {

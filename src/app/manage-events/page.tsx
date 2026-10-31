@@ -36,7 +36,7 @@ const eventCategories: EventType[] = [
 ];
 
 function ManageEventsContent() {
-  const { user } = useAuth();
+  const { user, token, isLoading: authLoading } = useAuth();
   const [events, setEvents] = useState<IEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -66,8 +66,10 @@ function ManageEventsContent() {
   };
 
   useEffect(() => {
-    fetchMyEvents();
-  }, []);
+    if (!authLoading && user && token) {
+      fetchMyEvents();
+    }
+  }, [authLoading, user, token]);
 
   const openEditModal = (event: IEvent) => {
     setEditingEvent(event);

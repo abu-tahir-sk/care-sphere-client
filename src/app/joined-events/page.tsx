@@ -23,7 +23,7 @@ import Swal from 'sweetalert2';
 import VolunteerCertificateModal from '@/components/VolunteerCertificateModal';
 
 function JoinedEventsContent() {
-  const { user } = useAuth();
+  const { user, token, isLoading: authLoading } = useAuth();
   const [joinedItems, setJoinedItems] = useState<IJoinedEventItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedEventForCert, setSelectedEventForCert] = useState<IEvent | null>(null);
@@ -45,8 +45,10 @@ function JoinedEventsContent() {
   };
 
   useEffect(() => {
-    fetchJoinedEvents();
-  }, []);
+    if (!authLoading && user && token) {
+      fetchJoinedEvents();
+    }
+  }, [authLoading, user, token]);
 
   const handleLeaveEvent = async (eventId: string, title: string) => {
     const result = await Swal.fire({
