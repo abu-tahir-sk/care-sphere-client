@@ -1,224 +1,135 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import {
   Heart,
-  Search,
   ArrowRight,
-  MapPin,
-  Users,
   HeartHandshake,
   ShieldCheck,
-  CheckCircle2,
   Sparkles,
-  Calendar,
 } from 'lucide-react';
 
 export default function BannerSection() {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/events?search=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      router.push('/events');
-    }
-  };
-
-  const causeCategories = [
-    { label: 'Winter Blankets', query: 'Winter', icon: '🧥' },
-    { label: 'Hot Food Relief', query: 'Food', icon: '🍲' },
-    { label: 'Tree Planting', query: 'Plantation', icon: '🌳' },
-    { label: 'Free Health Camps', query: 'Health', icon: '🩺' },
-    { label: 'Clean Cities', query: 'Cleanup', icon: '🧹' },
-  ];
-
   return (
-    <section className="relative overflow-hidden pt-12 pb-16 lg:pt-16 lg:pb-24 bg-gradient-to-b from-emerald-50/50 via-teal-50/20 to-white dark:from-slate-950 dark:via-emerald-950/20 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-      {/* Ambient Lighting Orbs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400/10 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-24 right-10 w-80 h-80 bg-teal-400/10 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden bg-[#F7F8F0] dark:bg-[#0A130E] border-b border-[#14532D]/10 dark:border-white/10 pt-14 pb-16 lg:pt-20 lg:pb-24 transition-colors">
+      {/* Nature-inspired Scandinavian Decorative Blur */}
+      <div className="w-96 h-96 bg-[#D9F3E5]/60 dark:bg-[#14532D]/20 rounded-full blur-3xl absolute -top-16 -left-16 pointer-events-none" />
+      <div className="w-80 h-80 bg-[#159A70]/10 dark:bg-[#159A70]/10 rounded-full blur-3xl absolute bottom-0 right-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-          {/* Left Column: Mission, Search & Causes */}
+          {/* LEFT COLUMN: Editorial Mission, Typography & CTAs */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            {/* Live Community Beacon Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-emerald-500/30 dark:border-emerald-500/30 shadow-xs text-xs text-slate-700 dark:text-slate-200">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <span className="font-semibold text-emerald-800 dark:text-emerald-300">
-                100% Non-Profit Community Platform
-              </span>
-              <span className="text-slate-300 dark:text-slate-700">•</span>
-              <span className="text-slate-600 dark:text-slate-400">
-                18,500+ Lives Touched
-              </span>
+            {/* Small Elegant Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D9F3E5] dark:bg-[#14532D]/50 border border-[#159A70]/30 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#14532D] dark:text-[#D9F3E5] shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#159A70]" />
+              <span>TOGETHER FOR A BETTER TOMORROW</span>
             </div>
 
-            {/* Inspiring Headline with Gradient Accent */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 dark:text-white tracking-tight leading-[1.12]">
-              Small acts of kindness.{' '}
-              <span className="block mt-1 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 dark:from-emerald-400 dark:via-teal-300 dark:to-emerald-200 bg-clip-text text-transparent">
-                Deep community impact.
+            {/* Large Bold Headline */}
+            <h1 className="font-manrope text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08] text-[#101B17] dark:text-white">
+              Small Acts of Kindness.{' '}
+              <span className="block text-[#159A70] dark:text-emerald-400 mt-1 sm:mt-2">
+                Create a World of Impact.
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
-              CareSphere brings volunteers, students, and neighborhood organizers together across Bangladesh. Join hands to distribute winter blankets, share meals with the hungry, plant trees, and run free medical camps.
+            {/* Short Emotional Description */}
+            <p className="text-base sm:text-lg text-[#101B17]/80 dark:text-slate-300 max-w-xl font-normal leading-relaxed">
+              CareSphere empowers everyday citizens and youth coalitions across Bangladesh to bring immediate warmth and relief to vulnerable communities. Join local winter blanket distributions, emergency food relief drives, and urban tree planting initiatives.
             </p>
 
-            {/* Interactive Search Bar */}
-            <div className="pt-1 max-w-xl space-y-3">
-              <form
-                onSubmit={handleSearch}
-                className="p-1.5 rounded-2xl bg-white dark:bg-slate-900 border-2 border-emerald-500/40 dark:border-emerald-500/30 focus-within:border-emerald-600 shadow-md shadow-emerald-950/5 flex items-center gap-2 transition-all"
-              >
-                <div className="relative flex-1 flex items-center pl-3">
-                  <Search className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search drives by neighborhood or cause (e.g. Mirpur, Winter, Food)..."
-                    className="w-full pl-2.5 pr-2 py-2 text-xs sm:text-sm bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shrink-0 shadow-xs transition-all"
-                >
-                  Find Drives
-                </button>
-              </form>
-
-              {/* Quick Causes Pills */}
-              <div className="flex items-center gap-1.5 flex-wrap text-xs pt-1">
-                <span className="font-semibold text-slate-400 text-[11px]">Primary Causes:</span>
-                {causeCategories.map((c) => (
-                  <button
-                    key={c.query}
-                    type="button"
-                    onClick={() => router.push(`/events?search=${encodeURIComponent(c.query)}`)}
-                    className="px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors shadow-2xs flex items-center gap-1"
-                  >
-                    <span>{c.icon}</span>
-                    <span>{c.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Primary Action Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center gap-3.5">
+            {/* Two Beautiful CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
               <Link
                 href="/events"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-md shadow-emerald-600/20 transition-all hover:translate-y-[-1px]"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl font-bold text-sm text-white bg-[#14532D] hover:bg-[#0f3f22] dark:bg-[#159A70] dark:hover:bg-[#12825e] shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-1px] group"
               >
-                <HeartHandshake className="w-4 h-4" />
-                <span>Join an Upcoming Drive</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Explore Events</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link
                 href="/create-event"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-2xs"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl font-bold text-sm text-[#101B17] dark:text-white bg-white dark:bg-slate-900 border border-[#14532D]/20 dark:border-slate-700 hover:bg-[#D9F3E5]/40 dark:hover:bg-slate-800 transition-all duration-300 shadow-2xs hover:translate-y-[-1px]"
               >
-                <span>Start a Community Drive</span>
+                <HeartHandshake className="w-4 h-4 text-[#159A70]" />
+                <span>Host a Drive</span>
               </Link>
+            </div>
+
+            {/* Small Trust Indicator */}
+            <div className="flex items-center gap-3 pt-4 text-xs text-[#101B17]/70 dark:text-slate-400 font-medium">
+              <div className="flex -space-x-2 overflow-hidden shrink-0">
+                <span className="inline-flex h-7 w-7 rounded-full ring-2 ring-[#F7F8F0] dark:ring-[#0A130E] bg-[#14532D] text-[10px] font-bold text-white items-center justify-center shadow-2xs">
+                  AT
+                </span>
+                <span className="inline-flex h-7 w-7 rounded-full ring-2 ring-[#F7F8F0] dark:ring-[#0A130E] bg-[#159A70] text-[10px] font-bold text-white items-center justify-center shadow-2xs">
+                  MR
+                </span>
+                <span className="inline-flex h-7 w-7 rounded-full ring-2 ring-[#F7F8F0] dark:ring-[#0A130E] bg-teal-600 text-[10px] font-bold text-white items-center justify-center shadow-2xs">
+                  FH
+                </span>
+                <span className="inline-flex h-7 w-7 rounded-full ring-2 ring-[#F7F8F0] dark:ring-[#0A130E] bg-emerald-700 text-[10px] font-bold text-white items-center justify-center shadow-2xs">
+                  SK
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="font-bold text-[#101B17] dark:text-slate-200">5,420+ volunteers</span>
+                <span>active across Dhaka and 8 regional divisions</span>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Layered Community Story Showcase */}
+          {/* RIGHT COLUMN: Editorial Photography with Subtle Decorative Shape & Floating Cards */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-slate-900">
+            {/* Subtle Decorative Shapes Behind Image */}
+            <div className="absolute -inset-3 bg-[#D9F3E5]/70 dark:bg-[#14532D]/30 rounded-[36px] -rotate-1 pointer-events-none" />
+
+            {/* Main Photograph Card */}
+            <div className="relative rounded-[32px] overflow-hidden border border-black/5 dark:border-white/10 shadow-2xl bg-slate-900 group">
               <img
-                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=900&auto=format&fit=crop&q=80"
-                alt="Community volunteers organizing winter blankets and food relief packages"
-                className="w-full h-84 sm:h-[420px] object-cover"
+                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1200&auto=format&fit=crop&q=85"
+                alt="Community volunteers packing warm winter blankets and relief supplies for underprivileged families"
+                className="w-full h-[400px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
 
-              {/* Floating Top Badge: Urgent Field Initiative */}
-              <div className="absolute top-4 left-4">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/95 dark:bg-slate-900/95 text-rose-700 dark:text-rose-400 backdrop-blur-md shadow-md border border-rose-500/20">
-                  <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />
-                  Active Winter Appeal
-                </span>
-              </div>
+              {/* Subtle Image Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-transparent pointer-events-none" />
 
-              {/* Floating Top Right: Open Non-Profit Seal */}
-              <div className="absolute top-4 right-4">
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-950/80 text-emerald-300 backdrop-blur-md border border-white/10">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  100% Free & Open
-                </span>
-              </div>
-
-              {/* Overlapping Glass Card at Bottom */}
-              <div className="absolute bottom-4 inset-x-4 p-5 rounded-2xl bg-slate-950/85 backdrop-blur-md border border-white/10 text-white space-y-3">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5" />
-                    Mirpur 10 & Mohammadpur Hub
-                  </span>
-                  <span className="text-[11px] text-slate-300 bg-white/10 px-2.5 py-0.5 rounded-md font-medium">
-                    Dhaka Division
-                  </span>
+              {/* Floating Info Card 1: 18,500+ Lives Touched */}
+              <div className="absolute top-5 right-5 p-3.5 sm:p-4 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xl border border-black/5 dark:border-white/10 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#D9F3E5] dark:bg-[#14532D]/50 text-[#14532D] dark:text-[#D9F3E5] flex items-center justify-center shrink-0">
+                  <Heart className="w-5 h-5 fill-[#159A70] text-[#159A70]" />
                 </div>
-
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white leading-snug">
-                    Winter Warmth & Blanket Distribution Drive
-                  </h3>
-                  <p className="text-xs text-slate-300 mt-1 italic">
-                    &ldquo;Even the smallest act of kindness brings warmth to someone on cold winter nights.&rdquo;
+                  <p className="font-manrope font-extrabold text-sm sm:text-base text-[#101B17] dark:text-white leading-tight">
+                    18,500+ Lives Touched
+                  </p>
+                  <p className="text-[11px] font-medium text-[#101B17]/70 dark:text-slate-400 mt-0.5">
+                    Emergency relief & winter aid
                   </p>
                 </div>
+              </div>
 
-                {/* Progress Meter */}
-                <div className="space-y-1.5 pt-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-300">Volunteer Goal: 50 people</span>
-                    <span className="text-emerald-400 font-bold">42 Enrolled (84%)</span>
+              {/* Floating Info Card 2: Making Every Helping Hand Count */}
+              <div className="absolute bottom-5 inset-x-5 p-4 sm:p-5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-xl border border-black/5 dark:border-white/10 flex items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#14532D] dark:text-emerald-400 uppercase tracking-wider">
+                    <ShieldCheck className="w-4 h-4 text-[#159A70]" />
+                    <span>Grassroots Community Care</span>
                   </div>
-                  <div className="w-full h-1.5 bg-white/20 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full" style={{ width: '84%' }} />
-                  </div>
+                  <p className="font-manrope font-extrabold text-sm sm:text-base text-[#101B17] dark:text-white leading-tight">
+                    Making Every Helping Hand Count
+                  </p>
+                  <p className="text-xs text-[#101B17]/70 dark:text-slate-400">
+                    Direct neighborhood coordination with verified volunteer service records.
+                  </p>
                 </div>
-
-                {/* Action & Volunteer Stack */}
-                <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
-                  <div className="flex items-center gap-2">
-                    <div className="flex -space-x-1.5 overflow-hidden">
-                      <span className="inline-flex h-6 w-6 rounded-full ring-2 ring-slate-950 bg-emerald-600 text-[10px] font-bold text-white items-center justify-center">
-                        AT
-                      </span>
-                      <span className="inline-flex h-6 w-6 rounded-full ring-2 ring-slate-950 bg-teal-600 text-[10px] font-bold text-white items-center justify-center">
-                        MR
-                      </span>
-                      <span className="inline-flex h-6 w-6 rounded-full ring-2 ring-slate-950 bg-blue-600 text-[10px] font-bold text-white items-center justify-center">
-                        FH
-                      </span>
-                    </div>
-                    <span className="text-[11px] text-slate-200 font-medium">
-                      +39 local volunteers
-                    </span>
-                  </div>
-
-                  <Link
-                    href="/events?eventType=Winter+Relief"
-                    className="inline-flex items-center gap-1 font-bold text-emerald-400 hover:text-emerald-300 text-xs hover:underline"
-                  >
-                    <span>View Drive</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                <div className="hidden sm:flex flex-col items-end shrink-0">
+                  <span className="text-xs font-bold text-[#14532D] dark:text-[#D9F3E5] bg-[#D9F3E5] dark:bg-[#14532D]/60 px-3 py-1 rounded-full border border-[#159A70]/20">
+                    100% Non-Profit
+                  </span>
                 </div>
               </div>
             </div>

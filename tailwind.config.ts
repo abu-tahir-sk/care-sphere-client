@@ -12,6 +12,21 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        cream: "#F7F8F0",
+        forest: {
+          DEFAULT: "#14532D",
+          hover: "#0f3f22",
+          dark: "#0b301a",
+        },
+        emeraldGreen: {
+          DEFAULT: "#159A70",
+          hover: "#12825e",
+        },
+        mint: {
+          DEFAULT: "#D9F3E5",
+          dark: "#204b36",
+        },
+        darkText: "#101B17",
         primary: {
           50: "#ecfdf5",
           100: "#d1fae5",
@@ -27,7 +42,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
-        heading: ["var(--font-heading)", "var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-manrope)", "var(--font-inter)", "sans-serif"],
+        manrope: ["var(--font-manrope)", "sans-serif"],
       },
     },
   },
