@@ -209,108 +209,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // Real Google / GitHub Authentication via Better Auth
+  // Direct Native Google / GitHub Authentication via Better Auth
   const socialLogin = async (provider: 'google' | 'github'): Promise<boolean> => {
     try {
-      // 1. Try Better Auth native social OAuth
-      try {
-        const res = await authClient.signIn.social({
-          provider,
-          callbackURL: '/events',
-        });
-        if (res && (res as any).url) {
-          window.location.href = (res as any).url;
-          return true;
-        }
-      } catch (baErr: any) {
-        console.warn('Better Auth social attempt notice:', baErr?.message || baErr);
-      }
-
-      // 2. If OAuth keys need configuration, prompt user for real profile credentials
-      const brandColor = provider === 'google' ? '#4285F4' : '#24292e';
-      const brandName = provider === 'google' ? 'Google' : 'GitHub';
-
-      const { value: formValues } = await Swal.fire({
-        title: `Better Auth: Sign in with ${brandName}`,
-        html: `
-          <div style="text-align: left; font-size: 13px; color: #64748b; margin-bottom: 12px;">
-            Authenticate your account using Better Auth with ${brandName} credentials:
-          </div>
-          <div style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
-            <div>
-              <label style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569;">Full Name</label>
-              <input id="swal-social-name" class="swal2-input" placeholder="e.g. Abutahir Sk" style="margin: 4px 0 0; width: 100%; box-sizing: border-box; height: 38px; font-size: 13px; border-radius: 10px;" required />
-            </div>
-            <div>
-              <label style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569;">${brandName} Email</label>
-              <input id="swal-social-email" type="email" class="swal2-input" placeholder="e.g. user@${provider === 'google' ? 'gmail.com' : 'github.com'}" style="margin: 4px 0 0; width: 100%; box-sizing: border-box; height: 38px; font-size: 13px; border-radius: 10px;" required />
-            </div>
-            <div>
-              <label style="font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569;">Avatar URL (Optional)</label>
-              <input id="swal-social-avatar" type="url" class="swal2-input" placeholder="https://images.unsplash.com/photo-..." style="margin: 4px 0 0; width: 100%; box-sizing: border-box; height: 38px; font-size: 13px; border-radius: 10px;" />
-            </div>
-            <div style="font-size: 11px; color: #94a3b8; margin-top: 4px;">
-              ⚡ Powered by Better Auth with MongoDB Atlas session adapter.
-            </div>
-          </div>
-        `,
-        focusConfirm: false,
-        showCancelButton: true,
-        confirmButtonText: `Continue with ${brandName}`,
-        confirmButtonColor: brandColor,
-        cancelButtonText: 'Cancel',
-        customClass: {
-          popup: 'rounded-2xl dark:bg-slate-900 dark:text-white',
-        },
-        preConfirm: () => {
-          const name = (document.getElementById('swal-social-name') as HTMLInputElement)?.value;
-          const email = (document.getElementById('swal-social-email') as HTMLInputElement)?.value;
-          const photoURL = (document.getElementById('swal-social-avatar') as HTMLInputElement)?.value;
-
-          if (!name || !name.trim()) {
-            Swal.showValidationMessage('Please enter your full name.');
-            return false;
-          }
-          if (!email || !email.trim() || !email.includes('@')) {
-            Swal.showValidationMessage('Please enter a valid email address.');
-            return false;
-          }
-
-          return { name: name.trim(), email: email.trim().toLowerCase(), photoURL: photoURL?.trim() || undefined };
-        },
+      const res = await authClient.signIn.social({
+        provider,
+        callbackURL: '/events',
       });
-
-      if (!formValues) {
-        return false;
-      }
-
-      // 3. Register / Log in via backend API
-      const res = await apiRequest<ApiResponse<{ token: string; user: IUser }>>('/auth/social', {
-        method: 'POST',
-        body: JSON.stringify(formValues),
-      });
-
-      if (res.success && res.token && res.user) {
-        setToken(res.token);
-        setUser(res.user);
-        localStorage.setItem('caresphere_token', res.token);
-        localStorage.setItem('caresphere_user', JSON.stringify(res.user));
-
-        Swal.fire({
-          icon: 'success',
-          title: `Better Auth: ${brandName} Sign-In Successful!`,
-          text: `Welcome to CareSphere, ${res.user.name}!`,
-          timer: 2200,
-          showConfirmButton: false,
-          customClass: {
-            popup: 'rounded-2xl dark:bg-slate-900 dark:text-white',
-          },
-        });
+      if (res && (res as any).url) {
+        window.location.href = (res as any).url;
         return true;
       }
-      return false;
+      return true;
     } catch (err: any) {
-      toast.error(err.message || `${provider === 'google' ? 'Google' : 'GitHub'} sign-in failed.`);
+      console.error(`${provider} sign-in failed:`, err);
+      toast.error(err?.message || `Failed to sign in with ${provider}. Check your OAuth configuration.`);
       return false;
     }
   };

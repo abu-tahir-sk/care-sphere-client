@@ -3,10 +3,10 @@ import { jwtClient } from 'better-auth/client/plugins';
 
 export const authClient = createAuthClient({
   baseURL:
-    process.env.NEXT_PUBLIC_APP_URL ||
-    (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000'),
+    typeof window !== 'undefined'
+      ? window.location.origin
+      : (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   plugins: [jwtClient()],
 });
 
 export const { signIn, signUp, signOut, useSession } = authClient;
-
