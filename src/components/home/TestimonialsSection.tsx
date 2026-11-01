@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Quote, Star, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Star, ShieldCheck } from 'lucide-react';
 
 const testimonials = [
   {
@@ -41,17 +41,18 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-20 bg-slate-50/70 dark:bg-slate-950/40 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <section className="py-24 bg-[#F7F8F0] dark:bg-[#0A130E] border-b border-[#14532D]/10 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-12 space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Volunteer Voices
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
+        <div className="max-w-3xl mb-12 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D9F3E5] dark:bg-[#14532D]/40 border border-[#14532D]/20 text-[#14532D] dark:text-[#D9F3E5] text-xs font-semibold uppercase tracking-wider">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#159A70]" />
+            <span>Volunteer Voices</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101B17] dark:text-[#F7F8F0] tracking-tight">
             Loved by Volunteers & Community Leaders
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+          <p className="text-sm sm:text-base text-[#101B17]/70 dark:text-[#F7F8F0]/70">
             Hear from volunteer doctors, university students, and neighborhood organizers bringing care to their communities.
           </p>
         </div>
@@ -61,43 +62,43 @@ export default function TestimonialsSection() {
           {testimonials.map((item, index) => (
             <div
               key={index}
-              className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-6 shadow-xs hover:shadow-xl hover:-translate-y-1 hover:border-emerald-500/40 dark:hover:border-emerald-500/30 transition-all duration-300"
+              className="p-8 rounded-[32px] bg-white dark:bg-[#0F1E16] border border-[#14532D]/15 dark:border-white/10 flex flex-col justify-between space-y-6 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#159A70] transition-all duration-300"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   {/* Rating stars */}
-                  <div className="flex items-center gap-1 text-amber-500">
+                  <div className="flex items-center gap-1">
                     {Array.from({ length: item.rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-500" />
+                      <Star key={i} className="w-4 h-4 fill-[#159A70] text-[#159A70]" />
                     ))}
                   </div>
 
-                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
-                    <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#14532D] dark:text-[#D9F3E5] bg-[#D9F3E5] dark:bg-[#14532D]/50 px-2.5 py-1 rounded-full border border-[#14532D]/20">
+                    <ShieldCheck className="w-3 h-3 text-[#159A70]" />
                     {item.verifiedBadge}
                   </span>
                 </div>
 
-                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">
+                <p className="text-sm text-[#101B17]/80 dark:text-[#F7F8F0]/80 leading-relaxed italic">
                   &ldquo;{item.content}&rdquo;
                 </p>
               </div>
 
               {/* Author Info */}
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-3 pt-4 border-t border-[#14532D]/10 dark:border-white/10">
                 <img
                   src={item.photo}
                   alt={item.name}
-                  className="w-11 h-11 rounded-full object-cover border-2 border-emerald-500/30"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-[#159A70]"
                 />
                 <div className="min-w-0 flex-1">
-                  <h4 className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                  <h4 className="font-extrabold text-sm text-[#101B17] dark:text-[#F7F8F0] truncate">
                     {item.name}
                   </h4>
-                  <p className="text-xs text-emerald-700 dark:text-emerald-400 font-medium truncate">
+                  <p className="text-xs text-[#14532D] dark:text-[#159A70] font-semibold truncate">
                     {item.role}
                   </p>
-                  <p className="text-[11px] text-slate-400 truncate">
+                  <p className="text-[11px] text-[#101B17]/50 dark:text-[#F7F8F0]/50 truncate">
                     {item.organization} • {item.location}
                   </p>
                 </div>

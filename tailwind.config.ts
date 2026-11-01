@@ -26,6 +26,11 @@ const config: Config = {
           DEFAULT: "#D9F3E5",
           dark: "#204b36",
         },
+        pine: {
+          DEFAULT: "#0F1E16",
+          hover: "#14281e",
+        },
+        darkBg: "#0A130E",
         darkText: "#101B17",
         primary: {
           50: "#ecfdf5",

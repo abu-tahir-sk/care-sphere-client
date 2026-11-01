@@ -96,68 +96,69 @@ export default function DistrictExplorerSection() {
   const [activeHub, setActiveHub] = useState<DistrictHub>(hubs[0]);
 
   return (
-    <section className="py-20 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <section className="py-24 bg-[#F7F8F0] dark:bg-[#0A130E] border-b border-[#14532D]/10 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-10 space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Neighborhood Chapters
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
+        <div className="max-w-3xl mb-10 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D9F3E5] dark:bg-[#14532D]/40 border border-[#14532D]/20 text-[#14532D] dark:text-[#D9F3E5] text-xs font-semibold uppercase tracking-wider">
+            <MapPin className="w-3.5 h-3.5 text-[#159A70]" />
+            <span>Neighborhood Chapters</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101B17] dark:text-[#F7F8F0] tracking-tight">
             Explore Community Initiatives by Neighborhood
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+          <p className="text-sm sm:text-base text-[#101B17]/70 dark:text-[#F7F8F0]/70">
             Select a community chapter below to discover active volunteer teams, emergency relief drives, and local impact milestones.
           </p>
         </div>
 
-        {/* Microsoft Fluent-style Segmented Filter Bar */}
-        <div className="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex-wrap gap-1 mb-8 max-w-full">
+        {/* Segmented Filter Bar */}
+        <div className="inline-flex p-1.5 rounded-2xl bg-white dark:bg-[#0F1E16] border border-[#14532D]/15 dark:border-white/10 flex-wrap gap-1.5 mb-8 max-w-full shadow-xs">
           {hubs.map((hub) => (
             <button
               key={hub.id}
               type="button"
               onClick={() => setActiveHub(hub)}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                 activeHub.id === hub.id
-                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-semibold shadow-xs border border-slate-200/60 dark:border-slate-700'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  ? 'bg-[#14532D] text-white shadow-sm'
+                  : 'text-[#101B17]/70 dark:text-[#F7F8F0]/70 hover:text-[#101B17] dark:hover:text-white hover:bg-[#D9F3E5]/40 dark:hover:bg-[#14532D]/30'
               }`}
             >
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
+              <MapPin className={`w-3.5 h-3.5 ${activeHub.id === hub.id ? 'text-[#D9F3E5]' : 'text-[#159A70]'}`} />
               <span>{hub.name}</span>
             </button>
           ))}
         </div>
 
         {/* Selected Hub Interactive Showcase Card */}
-        <div className="bg-slate-50/70 dark:bg-slate-950/60 rounded-2xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm">
+        <div className="bg-white dark:bg-[#0F1E16] rounded-[32px] p-6 sm:p-10 border border-[#14532D]/15 dark:border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm">
           {/* Left Column: Details */}
-          <div className="lg:col-span-7 space-y-5">
-            <div className="space-y-2">
+          <div className="lg:col-span-7 space-y-6">
+            <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">
+                <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wider bg-[#D9F3E5] dark:bg-[#14532D]/50 text-[#14532D] dark:text-[#D9F3E5] border border-[#14532D]/20">
                   {activeHub.zone} Division
                 </span>
-                <span className="text-xs text-slate-400 dark:text-slate-500">•</span>
-                <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium flex items-center gap-1">
+                <span className="text-xs text-[#101B17]/30 dark:text-[#F7F8F0]/30">•</span>
+                <span className="text-xs text-[#159A70] font-semibold flex items-center gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5" /> Active Volunteer Chapter
                 </span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#101B17] dark:text-[#F7F8F0]">
                 {activeHub.name} Community Chapter
               </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-sm text-[#101B17]/70 dark:text-[#F7F8F0]/70 leading-relaxed">
                 {activeHub.description}
               </p>
             </div>
 
             {/* Featured Drive Information */}
-            <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1 shadow-2xs">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            <div className="p-5 rounded-2xl bg-[#F7F8F0] dark:bg-[#0A130E] border border-[#14532D]/10 dark:border-white/10 space-y-1">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-[#159A70]">
                 Current Priority Initiative
               </p>
-              <p className="font-bold text-sm text-slate-900 dark:text-white">
+              <p className="font-extrabold text-sm text-[#101B17] dark:text-[#F7F8F0]">
                 {activeHub.featuredInitiative}
               </p>
             </div>
@@ -166,7 +167,7 @@ export default function DistrictExplorerSection() {
             <div className="pt-2">
               <Link
                 href={`/events?search=${encodeURIComponent(activeHub.queryParam)}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition-all shadow-md shadow-emerald-700/15 hover:translate-y-[-1px]"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm text-white bg-[#14532D] hover:bg-[#0F3F22] transition-all shadow-md shadow-[#14532D]/20 hover:translate-y-[-1px]"
               >
                 <span>View All Initiatives in {activeHub.name}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -177,52 +178,52 @@ export default function DistrictExplorerSection() {
           {/* Right Column: Visual Photo & Live Hub Metrics */}
           <div className="lg:col-span-5 space-y-4">
             {/* Hub Photo Card */}
-            <div className="relative h-44 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-2xs">
+            <div className="relative h-48 rounded-[24px] overflow-hidden border border-[#14532D]/15 dark:border-white/10 shadow-sm">
               <img
                 src={activeHub.image}
                 alt={activeHub.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 text-white">
-                <p className="text-xs font-bold">{activeHub.name} Field Headquarters</p>
-                <p className="text-[11px] text-emerald-300">Active Volunteer Corps</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#101B17]/90 via-transparent to-transparent" />
+              <div className="absolute bottom-3.5 left-4 text-white">
+                <p className="text-xs font-bold text-[#F7F8F0]">{activeHub.name} Field Headquarters</p>
+                <p className="text-[11px] text-[#D9F3E5]">Active Volunteer Corps</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1 shadow-2xs">
+              <div className="p-4 rounded-2xl bg-[#F7F8F0] dark:bg-[#0A130E] border border-[#14532D]/10 dark:border-white/10 space-y-1">
                 <div className="flex items-center justify-between">
-                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Volunteers</p>
-                  <Users className="w-4 h-4 text-slate-400" />
+                  <p className="text-xs font-medium text-[#101B17]/60 dark:text-[#F7F8F0]/60">Volunteers</p>
+                  <Users className="w-4 h-4 text-[#159A70]" />
                 </div>
-                <p className="text-2xl font-black text-slate-900 dark:text-white">
+                <p className="text-2xl font-black text-[#101B17] dark:text-[#F7F8F0]">
                   {activeHub.volunteersEnrolled}+
                 </p>
-                <p className="text-[10px] text-slate-400">Enrolled members</p>
+                <p className="text-[10px] text-[#101B17]/40 dark:text-[#F7F8F0]/40">Enrolled members</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1 shadow-2xs">
+              <div className="p-4 rounded-2xl bg-[#F7F8F0] dark:bg-[#0A130E] border border-[#14532D]/10 dark:border-white/10 space-y-1">
                 <div className="flex items-center justify-between">
-                  <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Active Drives</p>
-                  <HeartHandshake className="w-4 h-4 text-slate-400" />
+                  <p className="text-xs font-medium text-[#101B17]/60 dark:text-[#F7F8F0]/60">Active Drives</p>
+                  <HeartHandshake className="w-4 h-4 text-[#159A70]" />
                 </div>
-                <p className="text-2xl font-black text-slate-900 dark:text-white">
+                <p className="text-2xl font-black text-[#101B17] dark:text-[#F7F8F0]">
                   {activeHub.activeDrives}
                 </p>
-                <p className="text-[10px] text-slate-400">Open for RSVP</p>
+                <p className="text-[10px] text-[#101B17]/40 dark:text-[#F7F8F0]/40">Open for RSVP</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-900 text-white border border-slate-800 space-y-1">
-              <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span className="font-semibold uppercase tracking-wider text-[10px]">Verified Field Milestone</span>
+            <div className="p-4 rounded-2xl bg-[#14532D] text-white border border-[#159A70]/30 space-y-1 shadow-sm">
+              <div className="flex items-center gap-1.5 text-xs text-[#D9F3E5]">
+                <ShieldCheck className="w-4 h-4 text-[#D9F3E5]" />
+                <span className="font-bold uppercase tracking-wider text-[10px]">Verified Field Milestone</span>
               </div>
-              <p className="text-base font-bold text-white">
+              <p className="text-base font-extrabold text-white">
                 {activeHub.highlightStat}
               </p>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-[#D9F3E5]/80">
                 Monitored and confirmed by CareSphere regional coordinators.
               </p>
             </div>

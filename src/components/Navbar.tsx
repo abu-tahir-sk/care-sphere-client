@@ -48,11 +48,11 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: 'Explore Initiatives', href: '/events', icon: Calendar },
+    { label: 'Upcoming Events', href: '/events', icon: Calendar },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <header className="sticky top-0 z-50 w-full bg-[#F7F8F0]/95 dark:bg-[#0A130E]/95 backdrop-blur-md border-b border-[#14532D]/10 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* App Logo & Name */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -60,11 +60,11 @@ export default function Navbar() {
             <HeartHandshake className="w-5 h-5" />
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="font-manrope text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            <span className="font-manrope text-xl font-extrabold tracking-tight text-[#101B17] dark:text-white">
               Care<span className="text-[#159A70] dark:text-emerald-400">Sphere</span>
             </span>
-            <span className="hidden sm:inline-block text-slate-300 dark:text-slate-700 font-light">|</span>
-            <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
+            <span className="hidden sm:inline-block text-[#14532D]/20 dark:text-white/20 font-light">|</span>
+            <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider text-[#14532D]/70 dark:text-[#D9F3E5]/80 font-bold">
               Community Platform
             </span>
           </div>
@@ -76,8 +76,8 @@ export default function Navbar() {
             href="/"
             className={`text-sm font-medium transition-colors ${
               pathname === '/'
-                ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
-                : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                ? 'text-[#14532D] dark:text-emerald-400 font-bold'
+                : 'text-[#101B17]/70 dark:text-slate-300 hover:text-[#14532D] dark:hover:text-white'
             }`}
           >
             Home
@@ -88,11 +88,11 @@ export default function Navbar() {
               href={item.href}
               className={`text-sm font-medium transition-colors flex items-center gap-1.5 ${
                 pathname === item.href
-                  ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
-                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                  ? 'text-[#14532D] dark:text-emerald-400 font-bold'
+                  : 'text-[#101B17]/70 dark:text-slate-300 hover:text-[#14532D] dark:hover:text-white'
               }`}
             >
-              <item.icon className="w-4 h-4 text-slate-400" />
+              <item.icon className="w-4 h-4 text-[#159A70]" />
               {item.label}
             </Link>
           ))}
@@ -102,8 +102,8 @@ export default function Navbar() {
                 href="/joined-events"
                 className={`text-sm font-medium transition-colors ${
                   pathname === '/joined-events'
-                    ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                    ? 'text-[#14532D] dark:text-emerald-400 font-bold'
+                    : 'text-[#101B17]/70 dark:text-slate-300 hover:text-[#14532D] dark:hover:text-white'
                 }`}
               >
                 My Schedule
@@ -112,8 +112,8 @@ export default function Navbar() {
                 href="/manage-events"
                 className={`text-sm font-medium transition-colors ${
                   pathname === '/manage-events'
-                    ? 'text-emerald-700 dark:text-emerald-400 font-semibold'
-                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
+                    ? 'text-[#14532D] dark:text-emerald-400 font-bold'
+                    : 'text-[#101B17]/70 dark:text-slate-300 hover:text-[#14532D] dark:hover:text-white'
                 }`}
               >
                 Organizer Space
@@ -129,33 +129,36 @@ export default function Navbar() {
           {isLoading ? (
             <div className="w-20 h-8 bg-slate-100 dark:bg-slate-800 rounded-md animate-pulse" />
           ) : user ? (
-            <div className="flex items-center gap-3">
-              {/* Profile Menu Trigger */}
-              <div className="relative" ref={dropdownRef}>
+            <div className="flex items-center gap-2.5">
+              {/* Profile Menu Trigger with Hover Display Name Tooltip */}
+              <div className="relative group/avatar" ref={dropdownRef}>
                 <button
                   type="button"
                   onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="flex items-center gap-2 py-1 px-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors focus:outline-none"
-                  aria-label="User Account"
+                  className="flex items-center gap-2 p-1 rounded-full border-2 border-emerald-600/40 hover:border-emerald-600 dark:border-emerald-500/40 dark:hover:border-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                  aria-label={`User Account: ${user.name}`}
+                  title={user.name}
                 >
                   <UserAvatar
                     src={user.photoURL}
                     name={user.name}
                     size="sm"
                   />
-                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 max-w-[120px] truncate">
-                    {user.name}
-                  </span>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronDown className="w-3 h-3 text-slate-500 mr-1" />
                 </button>
+
+                {/* Floating Tooltip on Hover showing User Display Name */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1.5 px-2.5 py-1 rounded-md bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[11px] font-semibold whitespace-nowrap opacity-0 pointer-events-none group-hover/avatar:opacity-100 transition-opacity duration-200 z-50 shadow-md">
+                  {user.name}
+                </div>
 
                 {/* Dropdown Menu (Fluent Clean Card) */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 py-1.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                     <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
                       <UserAvatar src={user.photoURL} name={user.name} size="sm" />
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                        <p className="text-sm font-bold text-slate-900 dark:text-white truncate">
                           {user.name}
                         </p>
                         <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
@@ -164,35 +167,35 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    <div className="py-1 text-xs">
+                    <div className="py-1.5 text-xs">
                       <Link
                         href="/create-event"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium"
                       >
                         <PlusCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                        Create New Drive
+                        Create Event
                       </Link>
                       <Link
                         href="/manage-events"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium"
                       >
                         <FolderKanban className="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                        Manage My Drives
+                        Manage Events
                       </Link>
                       <Link
                         href="/joined-events"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium"
                       >
                         <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                        Joined Events & Certificates
+                        Joined Events
                       </Link>
                       <Link
                         href="/profile"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-medium"
                       >
                         <User className="w-4 h-4 text-slate-500" />
                         Profile Settings
@@ -203,38 +206,50 @@ export default function Navbar() {
                       <button
                         type="button"
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
+                        className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors font-medium"
                       >
                         <LogOut className="w-4 h-4" />
-                        Sign Out
+                        Logout
                       </button>
                     </div>
                   </div>
                 )}
               </div>
 
+              {/* Explicit Navbar Logout Button */}
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 border border-rose-200 dark:border-rose-900/40 transition-colors shadow-2xs"
+                title="Logout from account"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Logout</span>
+              </button>
+
               {/* Direct Post Button */}
               <Link
                 href="/create-event"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition-all shadow-md shadow-emerald-700/15"
+                className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-[#14532D] hover:bg-[#0f3f22] dark:bg-[#159A70] dark:hover:bg-[#12825e] transition-all shadow-2xs hover:translate-y-[-1px]"
               >
                 <PlusCircle className="w-3.5 h-3.5" />
-                <span>Host Drive</span>
+                <span>Create Event</span>
               </Link>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <Link
                 href="/login"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-[#101B17] dark:text-slate-200 hover:bg-[#D9F3E5]/40 dark:hover:bg-slate-800 border border-[#14532D]/20 dark:border-slate-700 transition-colors shadow-2xs"
               >
-                Sign In
+                <LogIn className="w-3.5 h-3.5 text-[#159A70]" />
+                <span>Login</span>
               </Link>
               <Link
                 href="/register"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-md shadow-emerald-700/15 transition-all"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#14532D] hover:bg-[#0f3f22] dark:bg-[#159A70] dark:hover:bg-[#12825e] shadow-2xs transition-all hover:translate-y-[-1px]"
               >
-                Get Started
+                <span>Register</span>
               </Link>
             </div>
           )}
@@ -269,7 +284,7 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             className="block px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
           >
-            Explore Initiatives
+            Upcoming Events
           </Link>
 
           {user ? (
@@ -283,7 +298,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <PlusCircle className="w-4 h-4 text-emerald-600" />
-                Create Drive
+                Create Event
               </Link>
               <Link
                 href="/manage-events"
@@ -291,7 +306,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <FolderKanban className="w-4 h-4 text-teal-600" />
-                Manage Drives
+                Manage Events
               </Link>
               <Link
                 href="/joined-events"
@@ -307,7 +322,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
                 <User className="w-4 h-4 text-slate-500" />
-                Profile
+                Profile Settings
               </Link>
               <button
                 type="button"
@@ -315,7 +330,7 @@ export default function Navbar() {
                 className="w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30"
               >
                 <LogOut className="w-4 h-4" />
-                Sign Out
+                Logout
               </button>
             </div>
           ) : (
@@ -325,7 +340,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex-1 text-center py-2 rounded-md text-sm font-semibold border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200"
               >
-                Sign In
+                Login
               </Link>
               <Link
                 href="/register"

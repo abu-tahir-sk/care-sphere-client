@@ -15,10 +15,8 @@ import {
   ExternalLink,
   PlusCircle,
   X,
-  Check,
   FolderKanban,
-  Tag,
-  AlertTriangle,
+  Download,
 } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
@@ -78,7 +76,6 @@ function ManageEventsContent() {
     setEditEventType(event.eventType);
     setEditThumbnail(event.thumbnail);
     setEditLocation(event.location);
-    // Format date for datetime-local: YYYY-MM-DDTHH:mm
     try {
       const d = new Date(event.eventDate);
       setEditEventDate(d.toISOString().slice(0, 16));
@@ -98,12 +95,7 @@ function ManageEventsContent() {
 
     const parsedDate = new Date(editEventDate);
     if (isNaN(parsedDate.getTime())) {
-      toast.error('Invalid date format.');
-      return;
-    }
-
-    if (parsedDate <= new Date()) {
-      toast.error('Event date must be in the future.');
+      toast.error('Please specify a valid event date.');
       return;
     }
 
@@ -126,15 +118,13 @@ function ManageEventsContent() {
           prev.map((ev) => (ev._id === editingEvent._id ? res.data! : ev))
         );
         setEditingEvent(null);
-
         Swal.fire({
           icon: 'success',
           title: 'Event Updated!',
-          text: 'The event details have been successfully revised.',
-          timer: 2000,
-          showConfirmButton: false,
+          text: `"${editTitle}" details have been updated successfully.`,
+          confirmButtonColor: '#14532D',
           customClass: {
-            popup: 'rounded-2xl dark:bg-slate-900 dark:text-white',
+            popup: 'rounded-3xl dark:bg-[#0F1E16] dark:text-[#F7F8F0]',
           },
         });
       }
@@ -156,7 +146,7 @@ function ManageEventsContent() {
       confirmButtonText: 'Yes, delete it',
       cancelButtonText: 'Cancel',
       customClass: {
-        popup: 'rounded-2xl dark:bg-slate-900 dark:text-white',
+        popup: 'rounded-3xl dark:bg-[#0F1E16] dark:text-[#F7F8F0]',
       },
     });
 
@@ -175,7 +165,7 @@ function ManageEventsContent() {
             timer: 2000,
             showConfirmButton: false,
             customClass: {
-              popup: 'rounded-2xl dark:bg-slate-900 dark:text-white',
+              popup: 'rounded-3xl dark:bg-[#0F1E16] dark:text-[#F7F8F0]',
             },
           });
         }
@@ -213,37 +203,38 @@ function ManageEventsContent() {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] transition-colors">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-              <FolderKanban className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D9F3E5] dark:bg-[#14532D]/40 text-[#14532D] dark:text-[#D9F3E5] border border-[#14532D]/20">
+              <FolderKanban className="w-3.5 h-3.5 text-[#159A70]" />
               <span>Organizer Console</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#101B17] dark:text-[#F7F8F0] tracking-tight">
               Manage Published Initiatives
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-xs sm:text-sm text-[#101B17]/60 dark:text-[#F7F8F0]/60">
               Audit, update, or remove social welfare events initiated by you ({user?.email}).
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-start">
+          <div className="flex items-center gap-3 self-start">
             {events.length > 0 && (
               <button
                 type="button"
                 onClick={handleExportCSV}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-medium text-xs text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-2xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-2xl font-bold text-xs text-[#101B17] dark:text-[#F7F8F0] bg-white dark:bg-[#0F1E16] border border-[#14532D]/15 dark:border-white/10 hover:bg-[#D9F3E5]/30 shadow-xs transition-colors"
                 title="Download CSV spreadsheet of all your organized events"
               >
+                <Download className="w-3.5 h-3.5 text-[#159A70]" />
                 <span>Export CSV</span>
               </button>
             )}
             <Link
               href="/create-event"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-medium text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-2xs shrink-0 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm text-white bg-[#14532D] hover:bg-[#0F3F22] shadow-md shadow-[#14532D]/20 shrink-0 transition-all hover:translate-y-[-1px]"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Host New Drive</span>
@@ -254,39 +245,39 @@ function ManageEventsContent() {
         {/* Events Table or Empty State */}
         {isLoading ? (
           <div className="min-h-[50vh] flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-[#14532D] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : events.length === 0 ? (
-          <div className="text-center py-20 px-4 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
-            <Calendar className="w-12 h-12 text-slate-300 dark:text-slate-700 mx-auto" />
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+          <div className="text-center py-20 px-4 bg-white dark:bg-[#0F1E16] rounded-[32px] border border-[#14532D]/15 dark:border-white/10 space-y-4 shadow-sm">
+            <Calendar className="w-14 h-14 text-[#159A70] mx-auto opacity-70" />
+            <h3 className="text-xl font-bold text-[#101B17] dark:text-[#F7F8F0]">
               No Events Created Yet
             </h3>
-            <p className="text-sm text-slate-500 max-w-md mx-auto">
+            <p className="text-sm text-[#101B17]/60 dark:text-[#F7F8F0]/60 max-w-md mx-auto">
               You haven&apos;t published any social welfare events. Host a winter relief drive, cleanup, or medical camp today!
             </p>
             <Link
               href="/create-event"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white bg-emerald-600 hover:bg-emerald-500"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-bold text-sm text-white bg-[#14532D] hover:bg-[#0F3F22] shadow-md shadow-[#14532D]/20"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Create Your First Event</span>
             </Link>
           </div>
         ) : (
-          <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md overflow-hidden">
+          <div className="bg-white dark:bg-[#0F1E16] rounded-[32px] border border-[#14532D]/15 dark:border-white/10 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    <th className="py-4 px-6">Event Details</th>
-                    <th className="py-4 px-6">Category</th>
-                    <th className="py-4 px-6">Scheduled Date</th>
-                    <th className="py-4 px-6">Participants</th>
-                    <th className="py-4 px-6 text-right">Actions</th>
+                  <tr className="border-b border-[#14532D]/10 dark:border-white/10 bg-[#F7F8F0]/70 dark:bg-white/5 text-xs font-bold uppercase tracking-wider text-[#101B17]/60 dark:text-[#F7F8F0]/60">
+                    <th className="py-4.5 px-6">Event Details</th>
+                    <th className="py-4.5 px-6">Category</th>
+                    <th className="py-4.5 px-6">Scheduled Date</th>
+                    <th className="py-4.5 px-6">Participants</th>
+                    <th className="py-4.5 px-6 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+                <tbody className="divide-y divide-[#14532D]/10 dark:divide-white/10 text-sm">
                   {events.map((event) => {
                     let formatted = event.eventDate;
                     try {
@@ -296,22 +287,22 @@ function ManageEventsContent() {
                     return (
                       <tr
                         key={event._id}
-                        className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors"
+                        className="hover:bg-[#F7F8F0]/50 dark:hover:bg-white/5 transition-colors"
                       >
                         {/* Event Thumbnail & Title */}
-                        <td className="py-4 px-6">
+                        <td className="py-4.5 px-6">
                           <div className="flex items-center gap-4">
                             <img
                               src={event.thumbnail}
                               alt={event.title}
-                              className="w-16 h-12 rounded-xl object-cover shrink-0 shadow-sm"
+                              className="w-16 h-12 rounded-xl object-cover shrink-0 shadow-xs border border-[#14532D]/10"
                             />
                             <div className="space-y-1">
-                              <h4 className="font-bold text-slate-900 dark:text-white line-clamp-1">
+                              <h4 className="font-extrabold text-[#101B17] dark:text-[#F7F8F0] line-clamp-1">
                                 {event.title}
                               </h4>
-                              <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 line-clamp-1">
-                                <MapPin className="w-3 h-3 text-rose-500 shrink-0" />
+                              <p className="text-xs text-[#101B17]/60 dark:text-[#F7F8F0]/60 flex items-center gap-1 line-clamp-1">
+                                <MapPin className="w-3 h-3 text-[#159A70] shrink-0" />
                                 {event.location}
                               </p>
                             </div>
@@ -319,40 +310,40 @@ function ManageEventsContent() {
                         </td>
 
                         {/* Category */}
-                        <td className="py-4 px-6">
-                          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                        <td className="py-4.5 px-6">
+                          <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#D9F3E5] dark:bg-[#14532D]/50 text-[#14532D] dark:text-[#D9F3E5] border border-[#14532D]/20">
                             {event.eventType}
                           </span>
                         </td>
 
                         {/* Date */}
-                        <td className="py-4 px-6 text-xs text-slate-600 dark:text-slate-300 font-medium whitespace-nowrap">
+                        <td className="py-4.5 px-6 text-xs text-[#101B17]/80 dark:text-[#F7F8F0]/80 font-medium whitespace-nowrap">
                           {formatted}
                         </td>
 
                         {/* Participants */}
-                        <td className="py-4 px-6">
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300">
-                            <Users className="w-3.5 h-3.5 text-emerald-500" />
+                        <td className="py-4.5 px-6">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#F7F8F0] dark:bg-[#0A130E] text-xs font-bold text-[#14532D] dark:text-[#D9F3E5] border border-[#14532D]/10 dark:border-white/10">
+                            <Users className="w-3.5 h-3.5 text-[#159A70]" />
                             {event.participantsCount || 0}
                           </span>
                         </td>
 
                         {/* Actions */}
-                        <td className="py-4 px-6 text-right whitespace-nowrap">
+                        <td className="py-4.5 px-6 text-right whitespace-nowrap">
                           <div className="flex items-center justify-end gap-2">
                             <Link
                               href={`/events/${event._id}`}
-                              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                              className="p-2 rounded-xl text-[#101B17]/70 dark:text-[#F7F8F0]/70 hover:bg-[#D9F3E5]/40 dark:hover:bg-[#14532D]/30 transition-colors"
                               title="View Event Details"
                             >
-                              <ExternalLink className="w-4 h-4" />
+                              <ExternalLink className="w-4 h-4 text-[#159A70]" />
                             </Link>
 
                             <button
                               type="button"
                               onClick={() => openEditModal(event)}
-                              className="p-2 rounded-xl text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors"
+                              className="p-2 rounded-xl text-[#14532D] dark:text-[#D9F3E5] hover:bg-[#D9F3E5]/40 dark:hover:bg-[#14532D]/30 transition-colors"
                               title="Edit Event"
                             >
                               <Edit3 className="w-4 h-4" />
@@ -380,15 +371,15 @@ function ManageEventsContent() {
         {/* Edit Event Modal */}
         {editingEvent && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-            <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+            <div className="bg-white dark:bg-[#0F1E16] w-full max-w-2xl rounded-[32px] p-6 sm:p-8 shadow-2xl border border-[#14532D]/15 dark:border-white/10 max-h-[90vh] overflow-y-auto space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-[#14532D]/10 dark:border-white/10">
+                <h3 className="text-xl font-bold text-[#101B17] dark:text-[#F7F8F0]">
                   Update Event Details
                 </h3>
                 <button
                   type="button"
                   onClick={() => setEditingEvent(null)}
-                  className="p-1.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500"
+                  className="p-1.5 rounded-full hover:bg-[#D9F3E5]/40 text-[#101B17]/50 dark:text-[#F7F8F0]/50"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -396,8 +387,8 @@ function ManageEventsContent() {
 
               <form onSubmit={handleUpdate} className="space-y-4">
                 {/* Title */}
-                <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0]">
                     Event Title
                   </label>
                   <input
@@ -405,20 +396,20 @@ function ManageEventsContent() {
                     required
                     value={editTitle}
                     onChange={(e) => setEditTitle(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                   />
                 </div>
 
                 {/* Event Type & Date */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0]">
                       Category
                     </label>
                     <select
                       value={editEventType}
                       onChange={(e) => setEditEventType(e.target.value as EventType)}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-4 py-2.5 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                     >
                       {eventCategories.map((cat) => (
                         <option key={cat} value={cat}>
@@ -428,8 +419,8 @@ function ManageEventsContent() {
                     </select>
                   </div>
 
-                  <div className="space-y-1">
-                    <label className="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0]">
                       Future Event Date
                     </label>
                     <input
@@ -437,14 +428,14 @@ function ManageEventsContent() {
                       required
                       value={editEventDate}
                       onChange={(e) => setEditEventDate(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-4 py-2.5 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                     />
                   </div>
                 </div>
 
                 {/* Location */}
-                <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0]">
                     Location
                   </label>
                   <input
@@ -452,13 +443,13 @@ function ManageEventsContent() {
                     required
                     value={editLocation}
                     onChange={(e) => setEditLocation(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                   />
                 </div>
 
                 {/* Thumbnail */}
-                <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0]">
                     Thumbnail Image URL
                   </label>
                   <input
@@ -466,13 +457,13 @@ function ManageEventsContent() {
                     required
                     value={editThumbnail}
                     onChange={(e) => setEditThumbnail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                   />
                 </div>
 
                 {/* Description */}
-                <div className="space-y-1">
-                  <label className="text-xs font-bold uppercase text-slate-700 dark:text-slate-300">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0]">
                     Description
                   </label>
                   <textarea
@@ -480,22 +471,22 @@ function ManageEventsContent() {
                     rows={4}
                     value={editDescription}
                     onChange={(e) => setEditDescription(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-2.5 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                   />
                 </div>
 
-                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#14532D]/10 dark:border-white/10">
                   <button
                     type="button"
                     onClick={() => setEditingEvent(null)}
-                    className="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="px-5 py-2.5 rounded-2xl text-sm font-semibold text-[#101B17]/60 dark:text-[#F7F8F0]/60 hover:bg-[#D9F3E5]/40"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isUpdating}
-                    className="px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-500 shadow-md transition-all disabled:opacity-50"
+                    className="px-6 py-2.5 rounded-2xl text-sm font-bold text-white bg-[#14532D] hover:bg-[#0F3F22] shadow-md transition-all disabled:opacity-50"
                   >
                     {isUpdating ? 'Saving Changes...' : 'Save Changes'}
                   </button>
@@ -516,4 +507,3 @@ export default function ManageEventsPage() {
     </ProtectedRoute>
   );
 }
-

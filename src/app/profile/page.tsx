@@ -71,18 +71,18 @@ function ProfileContent() {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] transition-colors">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
-        <div className="space-y-1">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
+        <div className="space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-[#D9F3E5] dark:bg-[#14532D]/40 text-[#14532D] dark:text-[#D9F3E5] border border-[#14532D]/20">
+            <Sparkles className="w-3.5 h-3.5 text-[#159A70]" />
             <span>Volunteer Dashboard</span>
           </div>
-          <h1 className="text-3xl font-black text-slate-950 dark:text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-[#101B17] dark:text-[#F7F8F0] tracking-tight">
             My Profile & Impact Card
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-[#101B17]/60 dark:text-[#F7F8F0]/60">
             Track your volunteer standing, verified certificate status, and update your personal details.
           </p>
         </div>
@@ -91,60 +91,60 @@ function ProfileContent() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Left: Avatar & Badges */}
           <div className="md:col-span-5 space-y-6">
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md text-center space-y-4">
+            <div className="bg-white dark:bg-[#0F1E16] p-6 rounded-[32px] border border-[#14532D]/15 dark:border-white/10 shadow-sm text-center space-y-4">
               <div className="relative inline-block mx-auto">
                 <img
                   src={photoURL || user?.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'}
                   alt={user?.name || 'User Profile'}
                   referrerPolicy="no-referrer"
-                  className="w-28 h-28 rounded-3xl object-cover shadow-lg border-4 border-emerald-500/20"
+                  className="w-28 h-28 rounded-3xl object-cover shadow-md border-4 border-[#14532D]/20"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
                       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80';
                   }}
                 />
-                <span className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-emerald-600 text-white shadow-md">
-                  <ShieldCheck className="w-4 h-4" />
+                <span className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-[#14532D] text-white shadow-md">
+                  <ShieldCheck className="w-4 h-4 text-[#D9F3E5]" />
                 </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                <h3 className="text-xl font-bold text-[#101B17] dark:text-[#F7F8F0]">
                   {user?.name}
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-[#101B17]/60 dark:text-[#F7F8F0]/60">
                   {user?.email}
                 </p>
-                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
-                  <Award className="w-3.5 h-3.5 text-amber-600" />
+                <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#D9F3E5] text-[#14532D] dark:bg-[#14532D]/50 dark:text-[#D9F3E5] border border-[#14532D]/20">
+                  <Award className="w-3.5 h-3.5 text-[#159A70]" />
                   <span>Level 2: Community Changemaker</span>
                 </div>
               </div>
 
               {/* Volunteer Impact Badges */}
-              <div className="grid grid-cols-2 gap-2 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs">
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 text-left">
-                  <p className="font-bold text-slate-900 dark:text-white text-base">24 hrs</p>
-                  <p className="text-[11px] text-slate-400">Volunteered</p>
+              <div className="grid grid-cols-2 gap-2 pt-3 border-t border-[#14532D]/10 dark:border-white/10 text-xs">
+                <div className="p-3.5 rounded-2xl bg-[#F7F8F0] dark:bg-[#0A130E] border border-[#14532D]/10 text-left">
+                  <p className="font-extrabold text-[#101B17] dark:text-[#F7F8F0] text-base">24 hrs</p>
+                  <p className="text-[11px] text-[#101B17]/50 dark:text-[#F7F8F0]/50">Volunteered</p>
                 </div>
-                <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 text-left">
-                  <p className="font-bold text-slate-900 dark:text-white text-base">98 pts</p>
-                  <p className="text-[11px] text-slate-400">Civic Karma</p>
+                <div className="p-3.5 rounded-2xl bg-[#F7F8F0] dark:bg-[#0A130E] border border-[#14532D]/10 text-left">
+                  <p className="font-extrabold text-[#101B17] dark:text-[#F7F8F0] text-base">98 pts</p>
+                  <p className="text-[11px] text-[#101B17]/50 dark:text-[#F7F8F0]/50">Civic Karma</p>
                 </div>
               </div>
 
-              <div className="pt-2 text-left space-y-1.5 text-xs text-slate-600 dark:text-slate-400">
-                <p className="font-semibold text-slate-700 dark:text-slate-300">About Me:</p>
+              <div className="pt-2 text-left space-y-1.5 text-xs text-[#101B17]/70 dark:text-[#F7F8F0]/70">
+                <p className="font-bold text-[#101B17] dark:text-[#F7F8F0]">About Me:</p>
                 <p className="italic">{bio || 'Community volunteer passionate about making a difference in local drives.'}</p>
               </div>
 
               {/* Quick links to certificates & registrations */}
-              <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+              <div className="pt-2 border-t border-[#14532D]/10 dark:border-white/10">
                 <Link
                   href="/joined-events"
-                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 border border-emerald-200 dark:border-emerald-800 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl text-xs font-bold text-white bg-[#14532D] hover:bg-[#0F3F22] shadow-sm transition-colors"
                 >
-                  <Award className="w-4 h-4 text-emerald-600" />
+                  <Award className="w-4 h-4 text-[#D9F3E5]" />
                   <span>View Joined Events & Certificates</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -153,21 +153,21 @@ function ProfileContent() {
           </div>
 
           {/* Right: Update Profile Form */}
-          <div className="md:col-span-7 bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md space-y-6">
+          <div className="md:col-span-7 bg-white dark:bg-[#0F1E16] p-8 rounded-[32px] border border-[#14532D]/15 dark:border-white/10 shadow-sm space-y-6">
             <div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+              <h3 className="text-lg font-bold text-[#101B17] dark:text-[#F7F8F0]">
                 Personal & Public Info
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-[#101B17]/60 dark:text-[#F7F8F0]/60">
                 Update how your name and avatar appear on event organizer rosters and volunteer rosters.
               </p>
             </div>
 
-            <form onSubmit={handleUpdate} className="space-y-5">
+            <form onSubmit={handleUpdate} className="space-y-4">
               {/* Name */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <User className="w-4 h-4 text-emerald-500" />
+                <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0] flex items-center gap-1.5">
+                  <User className="w-4 h-4 text-[#159A70]" />
                   Full Display Name
                 </label>
                 <input
@@ -175,28 +175,28 @@ function ProfileContent() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                 />
               </div>
 
               {/* Email (Readonly) */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Mail className="w-4 h-4 text-slate-400" />
-                  Email Address <span className="text-[10px] text-slate-400">(Linked account - Readonly)</span>
+                <label className="text-xs font-bold uppercase tracking-wider text-[#101B17]/60 dark:text-[#F7F8F0]/60 flex items-center gap-1.5">
+                  <Mail className="w-4 h-4 text-[#101B17]/40 dark:text-[#F7F8F0]/40" />
+                  Email Address <span className="text-[10px] text-[#101B17]/40 dark:text-[#F7F8F0]/40">(Linked account - Readonly)</span>
                 </label>
                 <input
                   type="email"
                   disabled
                   value={user?.email || ''}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800/40 text-slate-500 dark:text-slate-400 text-sm cursor-not-allowed"
+                  className="w-full px-4 py-3 rounded-2xl border border-[#14532D]/10 dark:border-white/10 bg-[#F7F8F0]/50 dark:bg-white/5 text-[#101B17]/50 dark:text-[#F7F8F0]/50 text-sm cursor-not-allowed"
                 />
               </div>
 
               {/* Photo URL */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <ImageIcon className="w-4 h-4 text-blue-500" />
+                <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0] flex items-center gap-1.5">
+                  <ImageIcon className="w-4 h-4 text-[#159A70]" />
                   Avatar Image URL
                 </label>
                 <input
@@ -204,13 +204,13 @@ function ProfileContent() {
                   value={photoURL}
                   onChange={(e) => setPhotoURL(e.target.value)}
                   placeholder="https://images.unsplash.com/..."
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                 />
               </div>
 
               {/* Bio */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#101B17] dark:text-[#F7F8F0]">
                   Community Bio & Interests
                 </label>
                 <textarea
@@ -218,16 +218,16 @@ function ProfileContent() {
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                   placeholder="Share your volunteering background, preferred drives (tree planting, clothing distribution, medical camps)..."
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-3 rounded-2xl border border-[#14532D]/15 dark:border-white/10 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] text-sm focus:outline-none focus:border-[#14532D]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSaving}
-                className="w-full py-3 px-4 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                className="w-full py-3.5 px-4 rounded-2xl font-bold text-white bg-[#14532D] hover:bg-[#0F3F22] shadow-md shadow-[#14532D]/20 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
               >
-                <Save className="w-4 h-4" />
+                <Save className="w-4 h-4 text-[#D9F3E5]" />
                 <span>{isSaving ? 'Updating...' : 'Save Profile Changes'}</span>
               </button>
             </form>

@@ -50,17 +50,18 @@ const galleryPhotos = [
 
 export default function GallerySection() {
   return (
-    <section className="py-16 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <section className="py-24 bg-[#F7F8F0] dark:bg-[#0A130E] border-b border-[#14532D]/10 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-10 space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
-            Moments of Kindness
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white tracking-tight">
+        <div className="max-w-3xl mb-12 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D9F3E5] dark:bg-[#14532D]/40 border border-[#14532D]/20 text-[#14532D] dark:text-[#D9F3E5] text-xs font-semibold uppercase tracking-wider">
+            <Camera className="w-3.5 h-3.5 text-[#159A70]" />
+            <span>Moments of Kindness</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#101B17] dark:text-[#F7F8F0] tracking-tight">
             Stories & Photographs from the Field
           </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-300">
+          <p className="text-sm sm:text-base text-[#101B17]/70 dark:text-[#F7F8F0]/70">
             Real moments of hope, empathy, and community service captured during recent volunteer relief drives.
           </p>
         </div>
@@ -70,7 +71,7 @@ export default function GallerySection() {
           {galleryPhotos.map((item, index) => (
             <div
               key={index}
-              className="group relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col h-72 bg-slate-900 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group relative rounded-[28px] overflow-hidden border border-[#14532D]/15 dark:border-white/10 flex flex-col h-72 bg-[#0F1E16] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <img
                 src={item.image}
@@ -80,25 +81,25 @@ export default function GallerySection() {
               />
 
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A130E]/95 via-[#0A130E]/50 to-transparent" />
 
               {/* Top Tag */}
-              <div className="absolute top-3 left-3">
-                <span className="px-2 py-0.5 text-[11px] font-semibold rounded bg-slate-900/85 backdrop-blur-sm text-emerald-300 border border-emerald-500/30">
+              <div className="absolute top-3.5 left-3.5">
+                <span className="px-3 py-1 text-[11px] font-bold rounded-full bg-[#14532D]/90 backdrop-blur-md text-[#D9F3E5] border border-[#159A70]/30 shadow-xs">
                   {item.category}
                 </span>
               </div>
 
               {/* Bottom Details */}
-              <div className="absolute bottom-0 inset-x-0 p-4 space-y-1 text-white">
-                <div className="flex items-center gap-1.5 text-xs text-slate-300">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+              <div className="absolute bottom-0 inset-x-0 p-5 space-y-1.5 text-white">
+                <div className="flex items-center gap-1.5 text-xs text-[#D9F3E5]">
+                  <MapPin className="w-3.5 h-3.5 text-[#159A70]" />
                   <span>{item.location}</span>
                 </div>
-                <h3 className="text-sm font-bold leading-snug">
+                <h3 className="text-base font-extrabold leading-snug text-[#F7F8F0]">
                   {item.title}
                 </h3>
-                <p className="text-xs text-slate-400 line-clamp-1">
+                <p className="text-xs text-[#F7F8F0]/70 line-clamp-1">
                   {item.description}
                 </p>
               </div>

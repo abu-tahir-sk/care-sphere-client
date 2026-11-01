@@ -15,12 +15,10 @@ import {
   ArrowLeft,
   Share2,
   Clock,
-  Sparkles,
   ShieldCheck,
   Award,
   ExternalLink,
   CalendarPlus,
-  Printer,
   Copy,
   MessageCircle,
 } from 'lucide-react';
@@ -65,7 +63,6 @@ export default function EventDetailsPage() {
   }, [id]);
 
   const handleJoinEvent = async () => {
-    // Rule: Details page is public, but to join user must be logged in
     if (!user) {
       toast.error('You must log in to join this community event.');
       router.push(`/login?redirect=/events/${id}`);
@@ -96,9 +93,9 @@ export default function EventDetailsPage() {
           icon: 'success',
           title: 'You Have Joined!',
           text: `Thank you for stepping up to make a difference in "${event?.title}". Your registration is confirmed!`,
-          confirmButtonColor: '#059669',
+          confirmButtonColor: '#14532D',
           customClass: {
-            popup: 'rounded-2xl dark:bg-slate-900 dark:text-white',
+            popup: 'rounded-3xl dark:bg-[#0F1E16] dark:text-[#F7F8F0]',
           },
         });
       }
@@ -133,10 +130,9 @@ export default function EventDetailsPage() {
     }
   };
 
-  // Google Calendar Link Builder
   const getGoogleCalendarUrl = (ev: IEvent) => {
     const startDate = new Date(ev.eventDate);
-    const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000); // 3 hours duration
+    const endDate = new Date(startDate.getTime() + 3 * 60 * 60 * 1000);
 
     const formatGDate = (d: Date) => d.toISOString().replace(/-|:|\.\d\d\d/g, '');
 
@@ -152,20 +148,20 @@ export default function EventDetailsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-[75vh] flex items-center justify-center p-6">
-        <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-[75vh] flex items-center justify-center p-6 bg-[#F7F8F0] dark:bg-[#0A130E]">
+        <div className="w-12 h-12 border-4 border-[#14532D] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!event) {
     return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center text-center p-6 space-y-4">
-        <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Event Not Found</h2>
-        <p className="text-sm text-slate-500">The requested event could not be found or has been removed.</p>
+      <div className="min-h-[70vh] flex flex-col items-center justify-center text-center p-6 space-y-4 bg-[#F7F8F0] dark:bg-[#0A130E]">
+        <h2 className="text-2xl font-bold text-[#101B17] dark:text-[#F7F8F0]">Event Not Found</h2>
+        <p className="text-sm text-[#101B17]/60 dark:text-[#F7F8F0]/60">The requested event could not be found or has been removed.</p>
         <Link
           href="/events"
-          className="px-5 py-2.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500"
+          className="px-6 py-3 rounded-2xl font-bold text-white bg-[#14532D] hover:bg-[#0F3F22]"
         >
           Back to Upcoming Events
         </Link>
@@ -179,23 +175,23 @@ export default function EventDetailsPage() {
   } catch (err) {}
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950 transition-colors">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-[#F7F8F0] dark:bg-[#0A130E] text-[#101B17] dark:text-[#F7F8F0] transition-colors">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Navigation Breadcrumb */}
         <div>
           <Link
             href="/events"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#101B17]/70 dark:text-[#F7F8F0]/70 hover:text-[#14532D] dark:hover:text-[#159A70] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4 text-[#159A70]" />
             <span>Back to All Upcoming Events</span>
           </Link>
         </div>
 
         {/* Hero Card */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800">
+        <div className="bg-white dark:bg-[#0F1E16] rounded-[32px] overflow-hidden shadow-sm border border-[#14532D]/15 dark:border-white/10">
           {/* Main Visual */}
-          <div className="relative w-full h-80 sm:h-96 md:h-[420px] bg-slate-900">
+          <div className="relative w-full h-80 sm:h-96 md:h-[420px] bg-[#0A130E]">
             <img
               src={event.thumbnail}
               alt={event.title}
@@ -205,15 +201,15 @@ export default function EventDetailsPage() {
                   'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=80';
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A130E] via-[#0A130E]/40 to-transparent" />
 
             {/* Badges on Top */}
             <div className="absolute top-6 left-6 flex items-center gap-3">
-              <span className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500 text-slate-950 shadow-md">
+              <span className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#14532D] text-white shadow-md border border-[#159A70]/30">
                 {event.eventType}
               </span>
-              <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-black/60 backdrop-blur-md text-white border border-white/20">
-                <Users className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#101B17]/60 backdrop-blur-md text-[#D9F3E5] border border-white/20">
+                <Users className="w-3.5 h-3.5 text-[#159A70]" />
                 {event.participantsCount || 0} Registered
               </span>
             </div>
@@ -229,16 +225,16 @@ export default function EventDetailsPage() {
 
             {/* Bottom Overlay Title */}
             <div className="absolute bottom-6 inset-x-6 text-white space-y-2">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black leading-tight text-[#F7F8F0]">
                 {event.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-200 font-medium">
-                <span className="flex items-center gap-1.5 text-emerald-400">
-                  <Calendar className="w-4 h-4" />
+              <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-[#F7F8F0]/80 font-medium">
+                <span className="flex items-center gap-1.5 text-[#D9F3E5]">
+                  <Calendar className="w-4 h-4 text-[#159A70]" />
                   {formattedDate}
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-rose-400" />
+                  <MapPin className="w-4 h-4 text-[#159A70]" />
                   {event.location}
                 </span>
               </div>
@@ -251,21 +247,21 @@ export default function EventDetailsPage() {
             <div className="lg:col-span-8 space-y-8">
               {/* Event Description */}
               <div className="space-y-4">
-                <h2 className="text-xl font-bold text-slate-950 dark:text-white">
+                <h2 className="text-xl font-extrabold text-[#101B17] dark:text-[#F7F8F0]">
                   About This Community Initiative
                 </h2>
-                <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                <p className="text-base text-[#101B17]/70 dark:text-[#F7F8F0]/70 leading-relaxed whitespace-pre-line">
                   {event.description}
                 </p>
               </div>
 
               {/* What to Expect / Guidelines */}
-              <div className="p-6 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/60 space-y-3">
-                <h3 className="text-sm font-bold text-emerald-900 dark:text-emerald-300 flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+              <div className="p-6 rounded-2xl bg-[#D9F3E5]/40 dark:bg-[#14532D]/20 border border-[#14532D]/20 dark:border-[#14532D]/40 space-y-3">
+                <h3 className="text-sm font-bold text-[#14532D] dark:text-[#D9F3E5] flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#159A70]" />
                   Volunteer Guidelines & Support
                 </h3>
-                <ul className="text-xs sm:text-sm text-emerald-800 dark:text-emerald-400 space-y-1.5 list-disc list-inside">
+                <ul className="text-xs sm:text-sm text-[#14532D]/90 dark:text-[#D9F3E5]/90 space-y-1.5 list-disc list-inside">
                   <li>Please arrive 15 minutes before the scheduled start time.</li>
                   <li>Identification tags and volunteer supplies are provided on-site.</li>
                   <li>Clean drinking water and light refreshments will be available for all participants.</li>
@@ -273,20 +269,20 @@ export default function EventDetailsPage() {
               </div>
 
               {/* Organizer Card */}
-              <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 flex items-center gap-4">
+              <div className="p-6 rounded-2xl bg-[#F7F8F0] dark:bg-[#0A130E] border border-[#14532D]/10 dark:border-white/10 flex items-center gap-4">
                 <img
                   src={event.organizerPhoto || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
                   alt={event.organizerName}
-                  className="w-14 h-14 rounded-2xl object-cover shadow-md"
+                  className="w-14 h-14 rounded-2xl object-cover shadow-sm border border-[#14532D]/15"
                 />
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#14532D] dark:text-[#159A70]">
                     Event Organizer
                   </p>
-                  <p className="text-base font-bold text-slate-900 dark:text-white">
+                  <p className="text-base font-bold text-[#101B17] dark:text-[#F7F8F0]">
                     {event.organizerName}
                   </p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                  <p className="text-xs text-[#101B17]/60 dark:text-[#F7F8F0]/60">
                     Contact: {event.organizerEmail}
                   </p>
                 </div>
@@ -295,47 +291,47 @@ export default function EventDetailsPage() {
 
             {/* Right Action Sidebar (4 cols) */}
             <div className="lg:col-span-4 space-y-6">
-              <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-6 shadow-sm">
+              <div className="p-6 rounded-[24px] bg-[#F7F8F0] dark:bg-[#0A130E] border border-[#14532D]/15 dark:border-white/10 space-y-6 shadow-sm">
                 <div className="space-y-1 text-center sm:text-left">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#101B17]/50 dark:text-[#F7F8F0]/50">
                     Registration Status
                   </p>
-                  <p className="text-2xl font-black text-slate-900 dark:text-white">
+                  <p className="text-2xl font-black text-[#101B17] dark:text-[#F7F8F0]">
                     {isJoined ? 'Confirmed Participant' : 'Open for Volunteers'}
                   </p>
                 </div>
 
                 {/* Key Summary */}
-                <div className="space-y-3 text-xs text-slate-600 dark:text-slate-300 border-y border-slate-200 dark:border-slate-700/80 py-4">
+                <div className="space-y-3 text-xs text-[#101B17]/70 dark:text-[#F7F8F0]/70 border-y border-[#14532D]/10 dark:border-white/10 py-4">
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-emerald-500" /> Date
+                      <Clock className="w-3.5 h-3.5 text-[#159A70]" /> Date
                     </span>
-                    <span className="font-semibold text-right">
+                    <span className="font-semibold text-right text-[#101B17] dark:text-[#F7F8F0]">
                       {format(new Date(event.eventDate), 'MMM d, yyyy')}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-rose-500" /> Location
+                      <MapPin className="w-3.5 h-3.5 text-[#159A70]" /> Location
                     </span>
-                    <span className="font-semibold text-right truncate max-w-[150px]">
+                    <span className="font-semibold text-right truncate max-w-[150px] text-[#101B17] dark:text-[#F7F8F0]">
                       {event.location}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
-                      <Award className="w-3.5 h-3.5 text-amber-500" /> Type
+                      <Award className="w-3.5 h-3.5 text-[#159A70]" /> Type
                     </span>
-                    <span className="font-semibold">{event.eventType}</span>
+                    <span className="font-semibold text-[#101B17] dark:text-[#F7F8F0]">{event.eventType}</span>
                   </div>
                 </div>
 
                 {/* Join Action Button */}
                 {isJoined ? (
                   <div className="space-y-3">
-                    <div className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 flex items-center justify-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-emerald-600" />
+                    <div className="w-full py-3 px-4 rounded-2xl font-bold text-sm bg-[#D9F3E5] text-[#14532D] dark:bg-[#14532D]/60 dark:text-[#D9F3E5] border border-[#14532D]/20 flex items-center justify-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-[#159A70]" />
                       <span>You&apos;re Registered!</span>
                     </div>
 
@@ -343,15 +339,15 @@ export default function EventDetailsPage() {
                     <button
                       type="button"
                       onClick={() => setShowCertModal(true)}
-                      className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 hover:bg-amber-200 border border-amber-300 dark:border-amber-800 flex items-center justify-center gap-2 transition-all shadow-sm"
+                      className="w-full py-2.5 px-4 rounded-2xl text-xs font-bold text-[#14532D] dark:text-[#D9F3E5] bg-[#D9F3E5]/60 dark:bg-[#14532D]/40 hover:bg-[#D9F3E5] border border-[#14532D]/20 flex items-center justify-center gap-2 transition-all shadow-sm"
                     >
-                      <Award className="w-4 h-4 text-amber-600" />
+                      <Award className="w-4 h-4 text-[#159A70]" />
                       <span>View Volunteer Certificate</span>
                     </button>
 
-                    <p className="text-center text-[11px] text-slate-400">
+                    <p className="text-center text-[11px] text-[#101B17]/50 dark:text-[#F7F8F0]/50">
                       View all your registrations in{' '}
-                      <Link href="/joined-events" className="text-emerald-600 underline font-semibold">
+                      <Link href="/joined-events" className="text-[#14532D] dark:text-[#159A70] underline font-bold">
                         Joined Events
                       </Link>
                     </p>
@@ -361,9 +357,9 @@ export default function EventDetailsPage() {
                     type="button"
                     onClick={handleJoinEvent}
                     disabled={isSubmitting}
-                    className="w-full py-3 px-4 rounded-xl font-semibold text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
+                    className="w-full py-3.5 px-4 rounded-2xl font-bold text-white bg-[#14532D] hover:bg-[#0F3F22] shadow-md shadow-[#14532D]/20 flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
                   >
-                    <HeartHandshake className="w-5 h-5" />
+                    <HeartHandshake className="w-5 h-5 text-[#D9F3E5]" />
                     <span>{isSubmitting ? 'Registering...' : 'Confirm RSVP & Join'}</span>
                   </button>
                 )}
@@ -373,15 +369,15 @@ export default function EventDetailsPage() {
                   href={getGoogleCalendarUrl(event)}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-300 dark:border-slate-600 flex items-center justify-center gap-2 transition-colors shadow-sm"
+                  className="w-full py-3 px-4 rounded-2xl text-xs font-bold text-[#101B17] dark:text-[#F7F8F0] bg-white dark:bg-[#0F1E16] hover:bg-[#D9F3E5]/30 border border-[#14532D]/15 dark:border-white/10 flex items-center justify-center gap-2 transition-colors shadow-xs"
                 >
-                  <CalendarPlus className="w-4 h-4 text-emerald-500" />
+                  <CalendarPlus className="w-4 h-4 text-[#159A70]" />
                   <span>Add to Google Calendar</span>
-                  <ExternalLink className="w-3 h-3 text-slate-400" />
+                  <ExternalLink className="w-3 h-3 text-[#101B17]/40 dark:text-[#F7F8F0]/40" />
                 </a>
 
                 {!user && (
-                  <p className="text-[11px] text-center text-slate-500 dark:text-slate-400">
+                  <p className="text-[11px] text-center text-[#101B17]/50 dark:text-[#F7F8F0]/50">
                     Signing in is required to register as an active volunteer.
                   </p>
                 )}
@@ -403,35 +399,35 @@ export default function EventDetailsPage() {
       {/* Social Share Modal Fallback */}
       {showShareModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl p-6 shadow-2xl border border-slate-200 dark:border-slate-800 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <Share2 className="w-4 h-4 text-emerald-500" />
+          <div className="bg-white dark:bg-[#0F1E16] w-full max-w-md rounded-[32px] p-6 sm:p-8 shadow-2xl border border-[#14532D]/15 dark:border-white/10 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-[#14532D]/10 dark:border-white/10">
+              <h3 className="text-base font-bold text-[#101B17] dark:text-[#F7F8F0] flex items-center gap-2">
+                <Share2 className="w-4 h-4 text-[#159A70]" />
                 Share Event with Community
               </h3>
               <button
                 type="button"
                 onClick={() => setShowShareModal(false)}
-                className="p-1 rounded-full text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="p-1 rounded-full text-[#101B17]/40 hover:bg-[#D9F3E5]/40"
               >
                 ✕
               </button>
             </div>
 
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-[#101B17]/60 dark:text-[#F7F8F0]/60">
               Spread the word about &ldquo;{event.title}&rdquo; to gather more volunteers!
             </p>
 
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               <a
                 href={`https://api.whatsapp.com/send?text=${encodeURIComponent(
                   `Check out this community volunteer drive: ${event.title} - ${typeof window !== 'undefined' ? window.location.href : ''}`
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center gap-2.5 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-800 dark:text-emerald-300 text-xs font-bold transition-colors"
+                className="w-full flex items-center gap-2.5 p-3 rounded-xl bg-[#D9F3E5] hover:bg-[#D9F3E5]/80 text-[#14532D] text-xs font-bold transition-colors"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-600" />
+                <MessageCircle className="w-4 h-4 text-[#14532D]" />
                 <span>Share via WhatsApp</span>
               </a>
 
@@ -441,7 +437,7 @@ export default function EventDetailsPage() {
                 )}&url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center gap-2.5 p-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-bold transition-colors"
+                className="w-full flex items-center gap-2.5 p-3 rounded-xl bg-[#F7F8F0] dark:bg-[#0A130E] hover:bg-[#D9F3E5]/40 text-[#101B17] dark:text-[#F7F8F0] text-xs font-bold transition-colors border border-[#14532D]/15 dark:border-white/10"
               >
                 <span className="w-4 h-4 font-black text-center">𝕏</span>
                 <span>Broadcast on X</span>
@@ -450,7 +446,7 @@ export default function EventDetailsPage() {
               <button
                 type="button"
                 onClick={copyToClipboard}
-                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-[#14532D]/20 hover:bg-[#D9F3E5]/30 text-xs font-bold text-[#14532D] dark:text-[#D9F3E5]"
               >
                 <Copy className="w-3.5 h-3.5" />
                 <span>Copy Direct Link</span>
