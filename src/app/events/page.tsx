@@ -60,41 +60,42 @@ export default function UpcomingEventsPage() {
   return (
     <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-slate-50/60 dark:bg-slate-950/40 transition-colors">
       <div className="max-w-7xl mx-auto space-y-8">
-        {/* Page Header (Microsoft Fluent Directory Header) */}
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-2xs">
-          <div className="max-w-3xl space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+        {/* Page Header */}
+        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xs relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="max-w-3xl space-y-3 relative z-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Public Directory</span>
+              <span>Verified Community Directory</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-950 dark:text-white">
-              Upcoming Community Relief Drives & Civic Operations
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-950 dark:text-white font-heading">
+              Upcoming Volunteer Drives & Community Initiatives
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Explore verified grassroots initiatives scheduled in your neighborhood. Discover winter clothes distribution drives, cleanups, plantation campaigns, and free health checks.
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Explore verified grassroots initiatives scheduled in your neighborhood. Discover winter clothes distribution drives, cleanups, tree plantation campaigns, and free health checks.
             </p>
           </div>
         </div>
 
         {/* Filter and Search Bar */}
-        <div className="bg-white dark:bg-slate-900 p-4 sm:p-5 rounded-xl shadow-2xs border border-slate-200 dark:border-slate-800 space-y-4">
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-xs border border-slate-200 dark:border-slate-800 space-y-4">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
             {/* Search Input */}
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by event title, location (e.g. Mirpur 10, Mohammadpur), or keyword..."
-                className="w-full pl-9 pr-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-slate-900 dark:text-white placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:border-emerald-700 dark:focus:border-emerald-500"
+                className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 text-slate-900 dark:text-white placeholder:text-slate-400 text-xs sm:text-sm focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500"
               />
             </div>
 
             {/* Create Event CTA */}
             <Link
               href="/create-event"
-              className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg font-medium text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-2xs shrink-0 transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-md shadow-emerald-700/15 shrink-0 transition-all hover:translate-y-[-1px]"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Host an Initiative</span>
@@ -111,9 +112,9 @@ export default function UpcomingEventsPage() {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1 rounded-md text-xs font-medium whitespace-nowrap transition-colors ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                   selectedCategory === cat
-                    ? 'bg-emerald-700 text-white font-semibold shadow-2xs'
+                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-xs'
                     : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700'
                 }`}
               >

@@ -70,7 +70,7 @@ export default function GallerySection() {
           {galleryPhotos.map((item, index) => (
             <div
               key={index}
-              className="group relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col h-72 bg-slate-900 shadow-2xs"
+              className="group relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 flex flex-col h-72 bg-slate-900 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               <img
                 src={item.image}

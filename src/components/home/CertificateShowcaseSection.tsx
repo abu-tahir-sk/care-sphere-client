@@ -68,14 +68,14 @@ export default function CertificateShowcaseSection() {
               <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
                 <Link
                   href="/events"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-emerald-700 hover:bg-emerald-800 shadow-xs transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-md shadow-emerald-700/20 transition-all hover:translate-y-[-1px]"
                 >
                   <span>Join a Drive & Earn Certificate</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/joined-events"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
                 >
                   <Printer className="w-4 h-4 text-slate-500" />
                   <span>My Certificates</span>

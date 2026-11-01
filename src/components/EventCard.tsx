@@ -48,9 +48,10 @@ export default function EventCard({ event }: EventCardProps) {
   const count = event.participantsCount || 0;
   const targetParticipants = Math.max(30, count + 12);
   const percentFilled = Math.min(100, Math.round((count / targetParticipants) * 100));
+  const spotsLeft = Math.max(0, targetParticipants - count);
 
   return (
-    <article className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-2xs hover:shadow-lg hover:border-slate-400 dark:hover:border-slate-600 transition-all duration-300">
+    <article className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1.5 hover:border-emerald-500/40 dark:hover:border-emerald-500/30 transition-all duration-300">
       {/* Thumbnail Container */}
       <div className="relative w-full h-52 overflow-hidden bg-slate-900">
         <img
@@ -65,31 +66,36 @@ export default function EventCard({ event }: EventCardProps) {
         />
 
         {/* Ambient Dark Gradient on Image Bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent pointer-events-none" />
 
-        {/* Calendar Date Block (Fluent date chip) */}
+        {/* Calendar Date Block (Modern glass date chip) */}
         {formattedMonth && formattedDay ? (
-          <div className="absolute top-3 left-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-lg px-2.5 py-1 text-center shadow-xs border border-slate-200/80 dark:border-slate-700">
+          <div className="absolute top-3.5 left-3.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-xl px-2.5 py-1 text-center shadow-md border border-slate-200/80 dark:border-slate-700">
             <span className="block text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 leading-none">
               {formattedMonth}
             </span>
-            <span className="block text-sm font-black text-slate-950 dark:text-white leading-tight">
+            <span className="block text-sm font-black text-slate-950 dark:text-white leading-tight mt-0.5">
               {formattedDay}
             </span>
           </div>
         ) : null}
 
         {/* Category Pill */}
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5">
+          {percentFilled >= 70 && (
+            <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-rose-500/90 text-white shadow-xs backdrop-blur-sm">
+              {spotsLeft} spots left
+            </span>
+          )}
           <span
-            className={`px-2.5 py-1 text-[11px] font-semibold rounded-md border shadow-2xs backdrop-blur-md ${badgeClass}`}
+            className={`px-2.5 py-1 text-[11px] font-semibold rounded-lg border shadow-xs backdrop-blur-md ${badgeClass}`}
           >
             {event.eventType}
           </span>
         </div>
 
         {/* Live Volunteer Community Avatar Stack */}
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
+        <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-white">
           <div className="flex items-center gap-2">
             <div className="flex -space-x-1.5 overflow-hidden">
               <span className="inline-flex h-6 w-6 rounded-full ring-2 ring-slate-900 bg-emerald-600 text-[10px] font-bold text-white items-center justify-center">
@@ -102,8 +108,8 @@ export default function EventCard({ event }: EventCardProps) {
                 FH
               </span>
             </div>
-            <span className="text-[11px] font-semibold text-slate-100 backdrop-blur-sm px-1.5 py-0.5 rounded bg-black/40">
-              {count > 0 ? `${count} volunteers enrolled` : 'First volunteer spot open'}
+            <span className="text-[11px] font-semibold text-slate-100 backdrop-blur-sm px-2 py-0.5 rounded-md bg-black/50">
+              {count > 0 ? `${count} enrolled` : 'First spot open'}
             </span>
           </div>
         </div>
@@ -115,18 +121,18 @@ export default function EventCard({ event }: EventCardProps) {
           {/* Schedule Info */}
           <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
             <span className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+              <Calendar className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>{formattedDate}</span>
             </span>
             {relativeTime && (
-              <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
+              <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded">
                 {relativeTime}
               </span>
             )}
           </div>
 
           {/* Title */}
-          <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 leading-snug group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white line-clamp-2 leading-snug group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors font-heading">
             {event.title}
           </h3>
 
@@ -146,7 +152,7 @@ export default function EventCard({ event }: EventCardProps) {
           </div>
           <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-emerald-600 dark:bg-emerald-500 rounded-full transition-all duration-300"
+              className="h-full bg-gradient-to-r from-emerald-600 to-teal-500 rounded-full transition-all duration-300"
               style={{ width: `${percentFilled}%` }}
             />
           </div>
@@ -161,7 +167,7 @@ export default function EventCard({ event }: EventCardProps) {
 
           <Link
             href={`/events/${event._id}`}
-            className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-white bg-emerald-700 hover:bg-emerald-800 transition-colors shadow-2xs group-hover:bg-emerald-800"
+            className="w-full flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition-all shadow-md shadow-emerald-700/15"
           >
             <span>View Initiative & RSVP</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

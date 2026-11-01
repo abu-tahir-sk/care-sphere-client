@@ -166,7 +166,7 @@ export default function DistrictExplorerSection() {
             <div className="pt-2">
               <Link
                 href={`/events?search=${encodeURIComponent(activeHub.queryParam)}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-xs sm:text-sm text-white bg-emerald-700 hover:bg-emerald-800 transition-colors shadow-xs"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 transition-all shadow-md shadow-emerald-700/15 hover:translate-y-[-1px]"
               >
                 <span>View All Initiatives in {activeHub.name}</span>
                 <ArrowRight className="w-4 h-4" />

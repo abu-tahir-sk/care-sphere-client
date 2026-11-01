@@ -52,9 +52,9 @@ export default function RecentEventsSection() {
 
           <Link
             href="/events"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg font-medium text-xs sm:text-sm text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors shrink-0 shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-all shrink-0 shadow-xs hover:border-emerald-500"
           >
-            <span>View Complete Directory</span>
+            <span>View All Causes</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

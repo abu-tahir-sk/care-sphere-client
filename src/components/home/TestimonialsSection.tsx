@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
           {testimonials.map((item, index) => (
             <div
               key={index}
-              className="p-7 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-6 shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-200"
+              className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-6 shadow-xs hover:shadow-xl hover:-translate-y-1 hover:border-emerald-500/40 dark:hover:border-emerald-500/30 transition-all duration-300"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
