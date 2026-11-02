@@ -59,13 +59,9 @@ export default function Navbar() {
           <div className="w-9 h-9 rounded-xl bg-[#14532D] dark:bg-[#159A70] flex items-center justify-center text-white shadow-xs group-hover:bg-[#0f3f22] transition-colors">
             <HeartHandshake className="w-5 h-5" />
           </div>
-          <div className="flex items-baseline gap-2">
+          <div className="flex items-baseline">
             <span className="font-manrope text-xl font-extrabold tracking-tight text-[#101B17] dark:text-white">
               Care<span className="text-[#159A70] dark:text-emerald-400">Sphere</span>
-            </span>
-            <span className="hidden sm:inline-block text-[#14532D]/20 dark:text-white/20 font-light">|</span>
-            <span className="hidden sm:inline-block text-[11px] uppercase tracking-wider text-[#14532D]/70 dark:text-[#D9F3E5]/80 font-bold">
-              Community Platform
             </span>
           </div>
         </Link>

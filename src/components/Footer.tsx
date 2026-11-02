@@ -37,12 +37,9 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-xl bg-[#14532D] flex items-center justify-center text-white shadow-xs">
                 <HeartHandshake className="w-4 h-4 text-[#D9F3E5]" />
               </div>
-              <div className="flex items-baseline gap-1.5">
+              <div className="flex items-baseline">
                 <span className="text-xl font-extrabold tracking-tight text-white">
                   Care<span className="text-[#159A70]">Sphere</span>
-                </span>
-                <span className="text-[10px] uppercase tracking-wider text-[#D9F3E5]/60 font-bold">
-                  Community Platform
                 </span>
               </div>
             </Link>
