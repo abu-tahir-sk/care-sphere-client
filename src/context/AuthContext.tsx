@@ -27,10 +27,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // Initialize auth state on mount (avoids redirect on page reload)
   useEffect(() => {
+    // 1. Immediately hydrate from localStorage synchronously to eliminate user logo flickering
+    let activeToken: string | null = null;
+    try {
+      activeToken = localStorage.getItem('caresphere_token');
+      const storedUser = localStorage.getItem('caresphere_user');
+      if (storedUser) {
+        const parsed = JSON.parse(storedUser);
+        if (!parsed.photoURL || typeof parsed.photoURL !== 'string' || !parsed.photoURL.trim()) {
+          parsed.photoURL =
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80';
+        }
+        setUser(parsed);
+        if (activeToken) setToken(activeToken);
+        setIsLoading(false);
+      }
+    } catch (e) {
+      // ignore
+    }
+
     const initAuth = async () => {
       try {
-        // 1. Check Better Auth active session
-        let activeToken = localStorage.getItem('caresphere_token');
+        // 2. Check Better Auth active session
+        if (!activeToken) {
+          activeToken = localStorage.getItem('caresphere_token');
+        }
 
         try {
           const session = await authClient.getSession();

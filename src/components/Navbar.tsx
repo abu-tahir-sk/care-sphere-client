@@ -123,7 +123,11 @@ export default function Navbar() {
           <ThemeToggle />
 
           {isLoading ? (
-            <div className="w-20 h-8 bg-slate-100 dark:bg-slate-800 rounded-md animate-pulse" />
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 border border-slate-200 dark:border-slate-700">
+                <User className="w-4 h-4 text-slate-400 animate-pulse" />
+              </div>
+            </div>
           ) : user ? (
             <div className="flex items-center gap-2.5">
               {/* Profile Menu Trigger with Hover Display Name Tooltip */}
@@ -254,6 +258,19 @@ export default function Navbar() {
         {/* Mobile menu button */}
         <div className="flex md:hidden items-center gap-2">
           <ThemeToggle />
+          {user ? (
+            <Link
+              href="/profile"
+              className="p-0.5 rounded-full border border-emerald-600/30 hover:border-emerald-600 transition-colors"
+              aria-label="My Profile"
+            >
+              <UserAvatar src={user.photoURL} name={user.name} size="sm" />
+            </Link>
+          ) : isLoading ? (
+            <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 border border-slate-200 dark:border-slate-700">
+              <User className="w-4 h-4 text-slate-400 animate-pulse" />
+            </div>
+          ) : null}
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
