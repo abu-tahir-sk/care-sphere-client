@@ -1,4 +1,21 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const getApiBaseUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.startsWith('http')) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  if (typeof window !== 'undefined') {
+    // In any browser (Vercel production, localhost, preview domains), relative path /api ALWAYS works
+    return '/api';
+  }
+  if (process.env.NEXT_PUBLIC_APP_URL) {
+    return `${process.env.NEXT_PUBLIC_APP_URL}/api`;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}/api`;
+  }
+  return 'http://localhost:3000/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export const getAuthToken = (): string | null => {
   if (typeof window === 'undefined') return null;
@@ -39,7 +56,7 @@ export async function apiRequest<T = any>(
   } catch (err: any) {
     if (err.name === 'TypeError' && err.message?.includes('Failed to fetch')) {
       throw new Error(
-        `Unable to reach backend server at ${API_BASE_URL}. Please ensure the server is active on port 5000.`
+        `Unable to reach API server at ${API_BASE_URL}. Please check your network connection and try again.`
       );
     }
     throw err;
