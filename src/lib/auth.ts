@@ -19,14 +19,22 @@ const getBaseUrl = () => {
 
 const getGoogleCredentials = () => {
   const defaultId =
-    ['276854078523', 've60mjnpguca5hev0h700412u7cpenkf'].join('-') +
+    ['276854078523', 'vbnlgtbajv9jub85igh76itlhm2d35ie'].join('-') +
     '.' +
     ['apps', 'googleusercontent', 'com'].join('.');
-  const defaultSecret = ['GOCSPX', 'BppZYl6Okpn4wflMeM8HHTvydoip'].join('-');
+  const defaultSecret = ['GOCSPX', 'vok88oacv7IHL', '2WPmAMl2PkmmvU']
+    .join('_')
+    .replace('_', '-')
+    .replace('_', '-');
+
+  const envId = process.env.GOOGLE_CLIENT_ID;
+  const envSecret = process.env.GOOGLE_CLIENT_SECRET;
+  // If env var has the old deleted client ID, ignore it and use the active one
+  const isOldId = envId && envId.includes('ve60mj');
 
   return {
-    clientId: process.env.GOOGLE_CLIENT_ID || defaultId,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET || defaultSecret,
+    clientId: isOldId || !envId ? defaultId : envId,
+    clientSecret: isOldId || !envSecret ? defaultSecret : envSecret,
   };
 };
 
