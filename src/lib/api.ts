@@ -1,14 +1,20 @@
 export function getApiBaseUrl(): string {
-  // If running in browser: ALWAYS use relative '/api' path. It routes directly to the current origin (Vercel, custom domain, or localhost)!
+  // 1. If explicit backend API URL is configured (e.g. https://care-sphere-server.vercel.app/api), use it in both browser and server!
+  if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.startsWith('http')) {
+    return process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '');
+  }
+
+  // 2. Production browser execution defaults to the deployed Express backend
   if (typeof window !== 'undefined') {
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      return 'https://care-sphere-server.vercel.app/api';
+    }
     return '/api';
   }
-  // Server-side execution
-  if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.startsWith('http')) {
-    return process.env.NEXT_PUBLIC_API_URL;
-  }
+
+  // 3. Server-side execution fallbacks
   if (process.env.NEXT_PUBLIC_APP_URL && process.env.NEXT_PUBLIC_APP_URL.startsWith('http')) {
-    return `${process.env.NEXT_PUBLIC_APP_URL}/api`;
+    return `${process.env.NEXT_PUBLIC_APP_URL.replace(/\/+$/, '')}/api`;
   }
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/api`;
@@ -16,7 +22,7 @@ export function getApiBaseUrl(): string {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}/api`;
   }
-  return '/api';
+  return 'https://care-sphere-server.vercel.app/api';
 }
 
 export const getAuthToken = (): string | null => {
