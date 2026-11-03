@@ -127,7 +127,7 @@ function LoginForm() {
             ) : (
               <>
                 <LogIn className="w-4 h-4 text-[#D9F3E5]" />
-                <span>Log In with Better Auth</span>
+                <span>Log In</span>
               </>
             )}
           </button>
@@ -135,6 +135,7 @@ function LoginForm() {
 
         {/* Divider */}
         <div className="relative">
+
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-[#14532D]/10 dark:border-white/10" />
           </div>

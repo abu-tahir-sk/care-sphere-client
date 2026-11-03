@@ -237,6 +237,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         provider,
         callbackURL: '/events',
       });
+      if (res?.error) {
+        console.error(`${provider} sign-in error:`, res.error);
+        toast.error(res.error.message || `Failed to sign in with ${provider}.`);
+        return false;
+      }
       if (res?.data?.url) {
         window.location.href = res.data.url;
         return true;

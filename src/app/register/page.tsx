@@ -176,9 +176,8 @@ export default function RegisterPage() {
             {/* Visual validation checklist */}
             <div className="pt-2 grid grid-cols-1 gap-1 text-[11px] text-[#101B17]/60 dark:text-[#F7F8F0]/60">
               <div
-                className={`flex items-center gap-1.5 ${
-                  hasMinLength ? 'text-[#14532D] dark:text-[#159A70] font-bold' : ''
-                }`}
+                className={`flex items-center gap-1.5 ${hasMinLength ? 'text-[#14532D] dark:text-[#159A70] font-bold' : ''
+                  }`}
               >
                 {hasMinLength ? (
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#159A70]" />
@@ -188,9 +187,8 @@ export default function RegisterPage() {
                 <span>At least 6 characters</span>
               </div>
               <div
-                className={`flex items-center gap-1.5 ${
-                  hasUppercase ? 'text-[#14532D] dark:text-[#159A70] font-bold' : ''
-                }`}
+                className={`flex items-center gap-1.5 ${hasUppercase ? 'text-[#14532D] dark:text-[#159A70] font-bold' : ''
+                  }`}
               >
                 {hasUppercase ? (
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#159A70]" />
@@ -200,9 +198,8 @@ export default function RegisterPage() {
                 <span>At least one uppercase letter (A-Z)</span>
               </div>
               <div
-                className={`flex items-center gap-1.5 ${
-                  hasLowercase ? 'text-[#14532D] dark:text-[#159A70] font-bold' : ''
-                }`}
+                className={`flex items-center gap-1.5 ${hasLowercase ? 'text-[#14532D] dark:text-[#159A70] font-bold' : ''
+                  }`}
               >
                 {hasLowercase ? (
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#159A70]" />
@@ -225,7 +222,7 @@ export default function RegisterPage() {
             ) : (
               <>
                 <UserPlus className="w-4 h-4 text-[#D9F3E5]" />
-                <span>Register with Better Auth</span>
+                <span>Register Now</span>
               </>
             )}
           </button>

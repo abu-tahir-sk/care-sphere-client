@@ -11,10 +11,8 @@ const client = new MongoClient(uri);
 const db = client.db('caresphere_db');
 
 const getBaseUrl = () => {
-  if (process.env.BETTER_AUTH_URL) return process.env.BETTER_AUTH_URL;
-  if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL;
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  if (process.env.BETTER_AUTH_URL && process.env.BETTER_AUTH_URL.startsWith('http')) return process.env.BETTER_AUTH_URL;
+  if (process.env.NEXT_PUBLIC_APP_URL && process.env.NEXT_PUBLIC_APP_URL.startsWith('http')) return process.env.NEXT_PUBLIC_APP_URL;
   if (process.env.NODE_ENV === 'production') return 'https://care-sphere-kappa.vercel.app';
   return 'http://localhost:3000';
 };
