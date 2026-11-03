@@ -233,12 +233,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Direct Native Google / GitHub Authentication via Better Auth
   const socialLogin = async (provider: 'google' | 'github'): Promise<boolean> => {
     try {
-      const res = await authClient.signIn.social({
+      const res: any = await authClient.signIn.social({
         provider,
         callbackURL: '/events',
       });
-      if (res && (res as any).url) {
-        window.location.href = (res as any).url;
+      if (res?.data?.url) {
+        window.location.href = res.data.url;
+        return true;
+      }
+      if (res && res.url) {
+        window.location.href = res.url;
         return true;
       }
       return true;

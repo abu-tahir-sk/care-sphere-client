@@ -1,21 +1,23 @@
-const getApiBaseUrl = (): string => {
+export function getApiBaseUrl(): string {
+  // If running in browser: ALWAYS use relative '/api' path. It routes directly to the current origin (Vercel, custom domain, or localhost)!
+  if (typeof window !== 'undefined') {
+    return '/api';
+  }
+  // Server-side execution
   if (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.startsWith('http')) {
     return process.env.NEXT_PUBLIC_API_URL;
   }
-  if (typeof window !== 'undefined') {
-    // In any browser (Vercel production, localhost, preview domains), relative path /api ALWAYS works
-    return '/api';
-  }
-  if (process.env.NEXT_PUBLIC_APP_URL) {
+  if (process.env.NEXT_PUBLIC_APP_URL && process.env.NEXT_PUBLIC_APP_URL.startsWith('http')) {
     return `${process.env.NEXT_PUBLIC_APP_URL}/api`;
+  }
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/api`;
   }
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}/api`;
   }
-  return 'http://localhost:3000/api';
-};
-
-const API_BASE_URL = getApiBaseUrl();
+  return '/api';
+}
 
 export const getAuthToken = (): string | null => {
   if (typeof window === 'undefined') return null;
@@ -26,6 +28,10 @@ export async function apiRequest<T = any>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
+  const baseUrl = getApiBaseUrl();
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const targetUrl = `${baseUrl}${cleanEndpoint}`;
+
   const token = getAuthToken();
   const headers = new Headers(options.headers || {});
 
@@ -38,7 +44,7 @@ export async function apiRequest<T = any>(
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(targetUrl, {
       ...options,
       headers,
     });
@@ -56,7 +62,7 @@ export async function apiRequest<T = any>(
   } catch (err: any) {
     if (err.name === 'TypeError' && err.message?.includes('Failed to fetch')) {
       throw new Error(
-        `Unable to reach API server at ${API_BASE_URL}. Please check your network connection and try again.`
+        `Unable to reach API server at ${targetUrl}. Please check your network connection and try again.`
       );
     }
     throw err;

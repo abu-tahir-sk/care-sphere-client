@@ -15,11 +15,22 @@ const getBaseUrl = () => {
   if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL;
   if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  if (process.env.NODE_ENV === 'production') return 'https://care-sphere-kappa.vercel.app';
   return 'http://localhost:3000';
 };
 
 export const auth = betterAuth({
   baseURL: getBaseUrl(),
+  trustedOrigins: [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'https://care-sphere-kappa.vercel.app',
+    'https://care-sphere-git-main-abu-tahir-sks-projects.vercel.app',
+  ],
+  account: {
+    storeStateStrategy: 'database',
+    skipStateCookieCheck: true,
+  },
   secret: process.env.BETTER_AUTH_SECRET || 'CareSphere_BetterAuth_Secret_Key_2026_SecureKey',
   database: mongodbAdapter(db),
   emailAndPassword: {
