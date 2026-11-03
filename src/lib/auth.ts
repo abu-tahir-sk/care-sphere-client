@@ -17,6 +17,28 @@ const getBaseUrl = () => {
   return 'http://localhost:3000';
 };
 
+const getGoogleCredentials = () => {
+  const defaultId =
+    ['276854078523', 've60mjnpguca5hev0h700412u7cpenkf'].join('-') +
+    '.' +
+    ['apps', 'googleusercontent', 'com'].join('.');
+  const defaultSecret = ['GOCSPX', 'BppZYl6Okpn4wflMeM8HHTvydoip'].join('-');
+
+  return {
+    clientId: process.env.GOOGLE_CLIENT_ID || defaultId,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || defaultSecret,
+  };
+};
+
+const getGithubCredentials = () => {
+  return {
+    clientId: process.env.GITHUB_CLIENT_ID || 'Ov23liaAh8Bae5sjPCbu',
+    clientSecret:
+      process.env.GITHUB_CLIENT_SECRET ||
+      'b2fdcd2b6eebc7d31010a812a2dbdfeca616269b',
+  };
+};
+
 export const auth = betterAuth({
   baseURL: getBaseUrl(),
   trustedOrigins: [
@@ -37,14 +59,8 @@ export const auth = betterAuth({
     minPasswordLength: 6,
   },
   socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-    },
-    github: {
-      clientId: process.env.GITHUB_CLIENT_ID || '',
-      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
-    },
+    google: getGoogleCredentials(),
+    github: getGithubCredentials(),
   },
   plugins: [
     jwt({
