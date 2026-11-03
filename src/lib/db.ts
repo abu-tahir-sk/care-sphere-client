@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI =
   process.env.MONGODB_URI ||
-  'mongodb://docu-craft:lDnJChGxidvj3kxg@ac-lgfpfea-shard-00-00.2ggt5ir.mongodb.net:27017,ac-lgfpfea-shard-00-01.2ggt5ir.mongodb.net:27017,ac-lgfpfea-shard-00-02.2ggt5ir.mongodb.net:27017/caresphere_db?ssl=true&replicaSet=atlas-13rvzw-shard-0&authSource=admin&appName=Cluster0';
+  'mongodb://care-sphere:SkR8tpsy3NwvOzjZ@ac-tpl1w1w-shard-00-00.qha6rup.mongodb.net:27017,ac-tpl1w1w-shard-00-01.qha6rup.mongodb.net:27017,ac-tpl1w1w-shard-00-02.qha6rup.mongodb.net:27017/caresphere_db?ssl=true&replicaSet=atlas-542sdc-shard-0&authSource=admin&compressors=zlib';
 
 interface MongooseCache {
   conn: typeof mongoose | null;

@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb';
 
 const uri =
   process.env.MONGODB_URI ||
-  'mongodb://docu-craft:lDnJChGxidvj3kxg@ac-lgfpfea-shard-00-00.2ggt5ir.mongodb.net:27017,ac-lgfpfea-shard-00-01.2ggt5ir.mongodb.net:27017,ac-lgfpfea-shard-00-02.2ggt5ir.mongodb.net:27017/caresphere_db?ssl=true&replicaSet=atlas-13rvzw-shard-0&authSource=admin&appName=Cluster0';
+  'mongodb://care-sphere:SkR8tpsy3NwvOzjZ@ac-tpl1w1w-shard-00-00.qha6rup.mongodb.net:27017,ac-tpl1w1w-shard-00-01.qha6rup.mongodb.net:27017,ac-tpl1w1w-shard-00-02.qha6rup.mongodb.net:27017/caresphere_db?ssl=true&replicaSet=atlas-542sdc-shard-0&authSource=admin&compressors=zlib';
 
 const client = new MongoClient(uri);
 const db = client.db('caresphere_db');
