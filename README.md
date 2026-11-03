@@ -1,7 +1,7 @@
 # CareSphere - Social Development Events Platform
 
 > **Live Website:** [https://care-sphere-kappa.vercel.app](https://care-sphere-kappa.vercel.app)  
-> **API Server:** [https://care-sphere-api.onrender.com](https://care-sphere-api.onrender.com)
+> **API Server:** https://care-sphere-server.vercel.app
 
 **CareSphere** is a modern, community-driven event management platform built for grassroots social service initiatives. It enables residents, youth volunteers, and local organizers to create, discover, join, and manage social development events across Dhaka and other regions of Bangladesh—such as **Winter Clothes Distribution in Mirpur 10**, **Blanket Distribution for the Needy in Mohammadpur**, and **Lakeside Tree Plantation at Dhanmondi Lake**.
 
