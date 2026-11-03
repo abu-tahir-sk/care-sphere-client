@@ -360,7 +360,7 @@ export default function EventDetailsPage() {
                     className="w-full py-3.5 px-4 rounded-2xl font-bold text-white bg-[#14532D] hover:bg-[#0F3F22] shadow-md shadow-[#14532D]/20 flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
                   >
                     <HeartHandshake className="w-5 h-5 text-[#D9F3E5]" />
-                    <span>{isSubmitting ? 'Registering...' : 'Confirm RSVP & Join'}</span>
+                    <span>{isSubmitting ? 'Joining...' : 'Join Event'}</span>
                   </button>
                 )}
 

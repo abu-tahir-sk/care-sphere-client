@@ -169,7 +169,7 @@ export default function EventCard({ event }: EventCardProps) {
             href={`/events/${event._id}`}
             className="w-full flex items-center justify-center gap-1.5 py-3 px-4 rounded-2xl text-xs sm:text-sm font-bold text-white bg-[#14532D] hover:bg-[#0f3f22] dark:bg-[#159A70] dark:hover:bg-[#12825e] transition-all shadow-xs"
           >
-            <span>View Initiative & RSVP</span>
+            <span>View Event</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
